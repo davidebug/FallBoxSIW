@@ -1,15 +1,5 @@
-h1 {
-  text-align:center;
-  padding:0px;
-  margin:15px;
-}
-
-h2 {
-  text-align:left;
-}
-
 .login-clean {
-  background:#3c9f40;
+  background:#f1f7fc;
   padding:80px 0;
 }
 
@@ -22,6 +12,13 @@ h2 {
   border-radius:4px;
   color:#505e6c;
   box-shadow:1px 1px 5px rgba(0,0,0,0.1);
+}
+
+.login-clean .illustration {
+  text-align:center;
+  padding:0 0 20px;
+  font-size:100px;
+  color:rgb(244,71,107);
 }
 
 .login-clean form .form-control {
@@ -37,7 +34,7 @@ h2 {
 }
 
 .login-clean form .btn-primary {
-  background:#4a47f4;
+  background:#f4476b;
   border:none;
   border-radius:4px;
   padding:11px;
@@ -48,7 +45,7 @@ h2 {
 }
 
 .login-clean form .btn-primary:hover, .login-clean form .btn-primary:active {
-  background:#3a2296;
+  background:#eb3b60;
 }
 
 .login-clean form .btn-primary:active {
