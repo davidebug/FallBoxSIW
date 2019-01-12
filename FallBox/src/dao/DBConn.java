@@ -8,11 +8,11 @@ public class DBConn {  //Classe che crea la connessione con il database
 
 	private static Connection con;
 	
-	private final static String  url = "jdbc:mysql://localhost/Users";
+	private final static String  url = "jdbc:mysql://cadiscatola.cki9ctegjpnd.eu-west-3.rds.amazonaws.com/cadiscatola";
 	
-	private final static String user = "root";
+	private final static String user = "cadiscatola";
 	
-	private final static String password = "PassWordSQL";
+	private final static String password = "cadiscatola";
 	
 	public DBConn() {
 		

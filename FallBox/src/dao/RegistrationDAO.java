@@ -17,7 +17,7 @@ public class RegistrationDAO {
 		
 		connection = DBConn.getConnection();
 		
-		if (!checkUserName(u.getEmail())) {   //SE LO USERNAME E' GIA' IN USO
+		if (!checkEmail(u.getEmail())) {   //SE LO USERNAME E' GIA' IN USO
 			return -1;
 		}
 
@@ -35,13 +35,13 @@ public class RegistrationDAO {
 		return status;
 	}
 
-	private static boolean checkUserName(String userName) {
+	private static boolean checkEmail(String email) {
 		
-		String getStatement = "select * from User where Username = ?";
+		String getStatement = "select * from User where Email = ?";
 		
 		try {
 			PreparedStatement pStatement = connection.prepareStatement(getStatement);
-			pStatement.setString(1, userName);
+			pStatement.setString(1, email);
 			ResultSet result = pStatement.executeQuery();
 			if (result.next()) {   //SE IL RESULTSET NON E' VUOTO VUOL DIRE CHE LO USERNAME E' IN USO
 				return false;

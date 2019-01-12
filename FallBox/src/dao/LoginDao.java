@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class LoginDao {
 
 	private static Connection connection;
-	private static String queryString = "select * from User where Username = ? and Password = ?";
+	private static String queryString = "select * from User where Email = ? and Password = ?";
 	
 	public static boolean logIn(String email, String password) {
 		

@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-@WebFilter (filterName = "LoginFilter", urlPatterns = {"/MainPage.html"})
+@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.html"})
 public class LoginFilter implements Filter {
 
 
@@ -31,7 +31,7 @@ public class LoginFilter implements Filter {
 		//SE NON C'E' UNA SESSIONE ATTIVA E NON C'E' IL MIO COOKIE DI SESSIONE
 		//CREI UNA NUOVA SESSIONE, AGGIUNGI IL COOKIE --> QUESTO VA FATTO NELLA SERVLET!!
 		if (req.getSession(false) == null && existsSessionCookie(req) == "0") {
-			req.getRequestDispatcher("/LoginPage.html").forward(request, response);
+			req.getRequestDispatcher("/login.html").forward(request, response);
 		}
 		//SE C'E' UNA SESSIONE
 		else if (req.getSession(false) != null) {
