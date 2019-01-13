@@ -29,9 +29,7 @@ public class RegistrationValidation extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-	
-		System.out.println(request.getParameter("password") + "\n" + request.getParameter("password-repeat"));
-		
+			
 		//CONTROLLO CHE L'INPUT SIA CORRETTO
 		if (checkData(request)) {
 			

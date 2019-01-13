@@ -21,7 +21,6 @@ public class DBConn {  //Classe che crea la connessione con il database
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
-	//		DriverManager.drivers();
 			con = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
