@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.*;
 
-
 //FARLA COME SINGLETON?
 public class DBConn {  //Classe che crea la connessione con il database
 
@@ -22,7 +21,7 @@ public class DBConn {  //Classe che crea la connessione con il database
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
-			DriverManager.drivers();
+	//		DriverManager.drivers();
 			con = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
