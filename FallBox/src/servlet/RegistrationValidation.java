@@ -43,7 +43,7 @@ public class RegistrationValidation extends HttpServlet {
 			
 			//SE LA REGISTRAZIONE E' OK MANDO ALLA PAGINA DI SUCCESSO
 			if (regStatus > 0) {
-				request.getRequestDispatcher("/registrationSuccess.html").forward(request, response);
+				response.sendRedirect("http://localhost:8080/FallBox/registrationSuccess.html");
 			}
 			else if (regStatus == -1) {
 				//EMAIL GIA' IN USO
