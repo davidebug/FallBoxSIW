@@ -7,9 +7,9 @@ public class DBConn {  //Classe che crea la connessione con il database
 
 	private static Connection con;
 	
-	private final static String  url = "jdbc:mysql://cadiscatola.cki9ctegjpnd.eu-west-3.rds.amazonaws.com/cadiscatola";
+	private final static String  url = "jdbc:mysql://fallbox.cqlxx6nhtkcr.eu-central-1.rds.amazonaws.com/cadiscatola";
 	
-	private final static String user = "cadiscatola";
+	private final static String user = "fallbox";
 	
 	private final static String password = "cadiscatola";
 	
