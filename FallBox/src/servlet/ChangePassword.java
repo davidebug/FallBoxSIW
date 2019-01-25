@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -17,14 +16,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import dao.UserDao;
 import logic.User;
 
-@WebServlet(urlPatterns={"/RegistrationValidation/*"})
-public class RegistrationValidation extends HttpServlet {
+@WebServlet(urlPatterns={"/ChangePassword/*"})
+public class ChangePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public RegistrationValidation() 
+    public ChangePassword() 
     {
         super();
     }
@@ -32,49 +33,39 @@ public class RegistrationValidation extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		doPost(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		//CONTROLLO CHE L'INPUT SIA CORRETTO
-		if (checkData(request)) {
-			
-			User user = new User();
-			user.setEmail((String) request.getParameter("email"));
-			user.setPassword((String) request.getParameter("password"));
-						
-			int regStatus = UserDao.register(user);
-			
-			//SE LA REGISTRAZIONE E' OK MANDO ALLA PAGINA DI SUCCESSO
-			if (regStatus > 0) {
-				sendEmail(request.getParameter("email"));
-				response.sendRedirect("http://localhost:8080/FallBox/registrationSuccess.html");
-			}
-			else if (regStatus == -1) {
-				//EMAIL GIA' IN USO
-			}
-			else {
-				;//ALTRI ERRORI
-			}
+		String newPassword = generatePassword();
+		String email = request.getParameter("email");
+		
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(newPassword);
+		
+		if (UserDao.updatePassword(user))
+		{
+			sendEmail(email, newPassword);
 		}
-		else {
-			returnError(response);
+		else
+		{
+			//PAGINA DI ERRORE
 		}
 	}
 	
-	private boolean checkData(HttpServletRequest request) 
+	private String generatePassword()
 	{
-		if (!request.getParameter("password").isEmpty() && (request.getParameter("password").equals(request.getParameter("password-repeat"))))  {
-			return true;
-		}
-		return false;
+		return RandomStringUtils.random(32, 0, 20, true, true, 
+				"abcdefghilmnopqrstuzABCDEFGHILMNOPQRSTUVZ1234567890!@#?^|!.<>-_".toCharArray());
 	}
 	
-	
-	private void sendEmail (String email)
+	//
+	//PENSARE SE METTERE QUESTO METODO IN UNA CLASSE A PARTE VISTO CHE E' UGUALE A QUELLO DI REGISTRATIONVAL.
+	//MAGARI PASSARGLI, OLTRE ALL'EMAIL, IL TESTO E L'OGGETTO DA INVIARE
+	//
+	private void sendEmail(String email, String newPassword)
 	{
 		String username = "cadiscatola@virgilio.it";
 		String password = "fallboxcadiscatola";
@@ -98,24 +89,14 @@ public class RegistrationValidation extends HttpServlet {
 			message.setFrom(new InternetAddress("cadiscatola@virgilio.it"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(email));
-			message.setSubject("Successfully registered!");
-			message.setText("Benvenuto su Fallbox!");
+			message.setSubject("Password Changed");
+			message.setText("Your new password is " + newPassword);
 
 			Transport.send(message);
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
-		
-	}
-	
-	
-	//SE ABBIAMO UNA PAGINA DI ERRORE QUESTO METODO LA CHIAMERA' --> FARE LA PAGINA DI ERRORE
-	private void returnError(HttpServletResponse response) throws IOException 
-	{
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("Invalid Username or Password");
 	}
 
 }

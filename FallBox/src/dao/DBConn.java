@@ -5,7 +5,7 @@ import java.sql.*;
 //FARLA COME SINGLETON?
 public class DBConn {  //Classe che crea la connessione con il database
 
-	private static Connection con;
+	private static Connection con = null;
 	
 	private final static String  url = "jdbc:mysql://fallbox.cqlxx6nhtkcr.eu-central-1.rds.amazonaws.com/cadiscatola";
 	
@@ -13,19 +13,30 @@ public class DBConn {  //Classe che crea la connessione con il database
 	
 	private final static String password = "cadiscatola";
 	
-	public DBConn() {
-		
+	private DBConn() 
+	{	
 	}
 	
-	public static Connection getConnection()  {
+	public static Connection getConnection()  
+	{
 		
-		try {
+		if (con != null)
+		{
+			return con;
+		}
+		
+		try 
+		{
 			Class.forName("com.mysql.jdbc.Driver"); 
 			con = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} 
+		catch (ClassNotFoundException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

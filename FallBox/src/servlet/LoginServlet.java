@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.LoginDao;
+import dao.UserDao;
+import logic.User;
 
 //SE ARRIVO NELLA SERVLET, VUOL DIRE CHE LE CREDENZIALI VANNO CONTROLLATE PERCHE' NON ESISTE UNA SESSION
 
@@ -19,21 +20,26 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-    public LoginServlet() {
+    public LoginServlet() 
+    {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+			throws ServletException, IOException 
+	{
 		doPost(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		if (LoginDao.logIn(email, password)) {   //SE LE CREDENZIALI SONO OK
+			throws ServletException, IOException 
+	{
+		User user = new User();
+		user.setEmail((String) request.getParameter("email"));
+		user.setPassword((String) request.getParameter("password"));
+		if (UserDao.logIn(user)) 					//SE LE CREDENZIALI SONO OK
+		{   
 			HttpSession session = request.getSession();			//CREO UNA NUOVA SESSIONE;
 			Cookie sessionCookie = new Cookie("SessionID", session.getId());
 			sessionCookie.setPath("/");
@@ -41,7 +47,8 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(sessionCookie); //STESSA SCADENZA DELLA SESSION?
 			response.sendRedirect(request.getContextPath() + "/main.html");	//MANDO L'UTENTE ALLA PAGINA PRINCIPALE
 		}
-		else {
+		else 
+		{
 			;
 			//PAGINA DI ERRORE PER IL LOGIN
 		}
