@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 
 import dao.UserDao;
 import logic.User;
@@ -41,15 +44,25 @@ public class LoginServlet extends HttpServlet {
 		if (UserDao.logIn(user)) 					//SE LE CREDENZIALI SONO OK
 		{   
 			HttpSession session = request.getSession();			//CREO UNA NUOVA SESSIONE;
+			session.setAttribute("User", user);
 			Cookie sessionCookie = new Cookie("SessionID", session.getId());
 			sessionCookie.setPath("/");
 			sessionCookie.setMaxAge(60*60*60);;
 			response.addCookie(sessionCookie); //STESSA SCADENZA DELLA SESSION?
-			response.sendRedirect(request.getContextPath() + "/main.html");	//MANDO L'UTENTE ALLA PAGINA PRINCIPALE
+			
+			/*//CREO IL JSON, LO AGGIUNGO ALLA RISPOSTA
+			JSONObject idUser = new JSONObject();
+			idUser.put("Email", user.getEmail());
+			
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			out.print(idUser);*/
+			//MANDO L'UTENTE ALLA PAGINA PRINCIPALE
 		}
 		else 
 		{
-			;
+			request.setAttribute("wrongPassword", "Mammata");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 			//PAGINA DI ERRORE PER IL LOGIN
 		}
 		
