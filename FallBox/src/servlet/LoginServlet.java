@@ -49,21 +49,12 @@ public class LoginServlet extends HttpServlet {
 			sessionCookie.setPath("/");
 			sessionCookie.setMaxAge(60*60*60);;
 			response.addCookie(sessionCookie); //STESSA SCADENZA DELLA SESSION?
-			
-			/*//CREO IL JSON, LO AGGIUNGO ALLA RISPOSTA
-			JSONObject idUser = new JSONObject();
-			idUser.put("Email", user.getEmail());
-			
-			PrintWriter out = response.getWriter();
-			response.setContentType("application/json");
-			out.print(idUser);*/
-			//MANDO L'UTENTE ALLA PAGINA PRINCIPALE
+			request.getRequestDispatcher("/main.html").forward(request, response);
 		}
 		else 
 		{
-			request.setAttribute("wrongPassword", "Mammata");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			//PAGINA DI ERRORE PER IL LOGIN
+			PrintWriter out = response.getWriter();
+			out.print("Password errata");
 		}
 		
 	}

@@ -40,7 +40,7 @@
             <div class="illustration"><img src="<%=request.getContextPath()%>/assets/img/officialIcona2018Best.png" style="width:128px;margin:8px;padding:0px;"></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-            <div>${wrongPassword}</div>
+            <div id = ""></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:rgb(58,157,63);">Log In</button></div>
             <a href="forgotPassword.html" class="forgot" style="font-size:15px;">Forgot password? Click here</a>
             <div class="heading" style="font-size:15px; margin: 10px;text-align: center"> OR </div>
@@ -51,6 +51,9 @@
     <script src="<%=request.getContextPath()%>/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    
+    
+    
 </body>
 
 </html>
