@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -49,11 +48,13 @@ public class LoginServlet extends HttpServlet {
 			sessionCookie.setPath("/");
 			sessionCookie.setMaxAge(60*60*60);;
 			response.addCookie(sessionCookie); //STESSA SCADENZA DELLA SESSION?
-			response.sendRedirect("http://localhost:8080/FallBox/main.html");
+//			response.sendRedirect("http://localhost:8080/FallBox/main.html");
 		}
 		else 
 		{
-			
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			response.getWriter().println("minchiuni");
+			response.setContentType("text/plain; charset=UTF-8");
 		}
 		
 	}
