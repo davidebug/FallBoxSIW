@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDao;
-import logic.User;
+import model.User;
 
 @WebServlet(urlPatterns={"/RegistrationValidation/*"})
 public class RegistrationValidation extends HttpServlet {

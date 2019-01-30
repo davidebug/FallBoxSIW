@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import dao.UserDao;
-import logic.User;
+import model.User;
 
 @WebServlet(urlPatterns={"/ChangePassword/*"})
 public class ChangePassword extends HttpServlet {

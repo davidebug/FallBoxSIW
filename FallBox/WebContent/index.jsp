@@ -2,12 +2,11 @@
 	pageEncoding="utf-8"%>
 <%@ page import="model.User"%>
 <%
-	User utente = new User();
-
-	if (request != null && request.getSession().getAttribute("email") != null) {
-		utente = (User) request.getSession().getAttribute("email");
+	String username = new String();
+	if (request != null && request.getSession().getAttribute("User") != null) {
+		username = (String) request.getSession().getAttribute("User");
 	} else {
-		
+		username = "";
 	}
 %>
 
@@ -15,8 +14,9 @@
 
 
 <!DOCTYPE html>
-<html>
 
+<html>
+<script src="assets/js/jquery.min.js"></script>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +39,16 @@
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
 </head>
 
+  <script>
+     $(function(){
+    	 	var username = "<%=username%>";
+    		if(username != ""){
+    			$('#navcol-1').replaceWith('<div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a class="login" > Log Out </a> <a class="btn btn-light action-button" role="button" href="login.html" style="background-color:rgb(59,158,64);"><%=username%></a></span></div>');
+    		}	
+    	});
+    </script>
+
+
 <body>
     <div>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;">
@@ -47,16 +57,7 @@
                     class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href="login.html" class="login"> Log In </a><a class="btn btn-light action-button" role="button" href="registrationForm.html" style="background-color:rgb(59,158,64);">Sign Up</a></span></div>
     </div>
     
-     <script>
-    	$(function(){
-    		if(<%utente.getEmail();%> != null){
-    			$("#navcol-1").load("<div
-                        class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> 
-                        <a class="btn btn-light action-button" role="button" href="main.html" style="background-color:rgb(59,158,64);"><%utente.getEmail();%></a></span>
-                        </div>");
-    		}	
-    	});
-    </script>
+   
     
     </nav>
     </div>
@@ -157,7 +158,7 @@
     </div>
     <h1 style="font-family:'Bungee Inline', cursive;color:rgb(0,0,0);font-size:28px;margin:12px;">&nbsp; &nbsp; Fall Box&nbsp;</h1>
     <h1 style="font-family:Aldrich, sans-serif;font-size:12px;margin:11px;">&nbsp; &nbsp; &nbsp; &nbsp;2019 All Rights Reserved.</h1>
-    <script src="assets/js/jquery.min.js"></script>
+
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>

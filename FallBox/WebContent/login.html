@@ -26,7 +26,7 @@
 <body>
     <div>
         <nav class="navbar navbar-light navbar-expand navigation-clean">
-            <div class="container"><a class="navbar-brand" href="index.html" style="font-family:'Bungee Shade', cursive;font-size:30px;">Fall Box</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container"><a class="navbar-brand" href="index.jsp" style="font-family:'Bungee Shade', cursive;font-size:30px;">Fall Box</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div
                     class="collapse navbar-collapse" id="navcol-1"></div>
     </div>
@@ -39,7 +39,7 @@
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
             
-            <div id = "errorMessage"><p>ciao</p></div>
+            <div id = "errorMessage"></div>
             
             <div class="form-group"><button onclick = "checkPassword()" class="btn btn-primary btn-block" type="submit" style="background-color:rgb(58,157,63);">Log In</button></div>
             <a href="forgotPassword.html" class="forgot" style="font-size:15px;">Forgot password? Click here</a>
@@ -47,33 +47,13 @@
             <a href="registrationForm.html" class="forgot" style="font-size:15px; margin: 10px">Register now</a></form>
             
     </div>
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     
-    <script>
-   		
-		    function checkPassword ()
-			{
-				var xhttp = new XMLHttpRequest();
-				
-				xhttp.onreadystatechange = function()
-				{
-					
-					if (this.readyState == 4 && this.status == 200)
-					{
-						document.getElementById("errorMessage").innerHTML = this.responseText;
-					}
-				};
-			
-				xhttp.open("post", "LoginServlet", true);
-				xhttp.send();
-			}
-    
-    
-    
-    </script>
+   	
     
 </body>
 
