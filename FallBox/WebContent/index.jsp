@@ -1,3 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ page import="model.User"%>
+<%
+	User utente = new User();
+
+	if (request != null && request.getSession().getAttribute("email") != null) {
+		utente = (User) request.getSession().getAttribute("email");
+	} else {
+		
+	}
+%>
+
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -28,8 +44,20 @@
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;">
             <div class="container"><a class="navbar-brand" href="#" style="font-size:30px;font-family:'Bungee Shade', cursive;">Fall Box</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div
-                    class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href="login.html" class="login">Log In</a><a class="btn btn-light action-button" role="button" href="registrationForm.html" style="background-color:rgb(59,158,64);">Sign Up</a></span></div>
+                    class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href="login.html" class="login"> Log In </a><a class="btn btn-light action-button" role="button" href="registrationForm.html" style="background-color:rgb(59,158,64);">Sign Up</a></span></div>
     </div>
+    
+     <script>
+    	$(function(){
+    		if(<%utente.getEmail();%> != null){
+    			$("#navcol-1").load("<div
+                        class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> 
+                        <a class="btn btn-light action-button" role="button" href="main.html" style="background-color:rgb(59,158,64);"><%utente.getEmail();%></a></span>
+                        </div>");
+    		}	
+    	});
+    </script>
+    
     </nav>
     </div>
     <div class="features-boxed">
@@ -43,8 +71,7 @@
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="zoom-in" data-aos-delay="800" data-aos-once="true">
                     <div class="box"><i class="fa fa-cloud-upload icon" style="color:rgb(52,140,56);"></i>
                         <h3 class="name">Upload any content</h3>
-                        <p class="text-left description">Upload and share any content you like, single files or entire folders. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                        <p class="text-left description">Upload and share any content you like, single files or entire folders. </p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="zoom-in" data-aos-delay="900" data-aos-once="true">
@@ -56,7 +83,7 @@
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="zoom-in" data-aos-delay="1000" data-aos-once="true">
                     <div class="box"><i class="fa fa-clock-o icon" style="color:rgb(51,137,55);"></i>
                         <h3 class="name">Versioning system</h3>
-                        <p class="text-left description">Manage versions of your data,keep control of your team's uploads. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                        <p class="text-left description">Manage versions of your data,keep control of your team's uploads. </p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="zoom-in" data-aos-delay="800" data-aos-once="true">
@@ -122,7 +149,7 @@
                     <div class="box"><img class="rounded-circle" src="assets/img/you.jpg">
                         <h3 class="name">You</h3>
                         <p class="title">What you want</p>
-                        <p class="description">Do you want to join the team? Sorry you can't. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                        <p class="description">Do you want to join the team? Sorry you can't.</p>
                     </div>
                 </div>
             </div>
