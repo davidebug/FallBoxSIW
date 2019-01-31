@@ -9,13 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import servlet.SessionListener;
 
-@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.jsp"})
+@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.jsp", "/userPage.jsp", "/index.jsp"})
 public class LoginFilter implements Filter {
 
     public LoginFilter() 
@@ -42,7 +43,6 @@ public class LoginFilter implements Filter {
 		//SE C'E' UNA SESSIONE
 		else if (req.getSession(false) != null) 
 		{
-			System.out.println("La sessione c'è");
 			chain.doFilter(request, response);
 		}
 		//}
@@ -58,8 +58,26 @@ public class LoginFilter implements Filter {
 				chain.doFilter(request, response);
 			}
 			//ALTRIMENTI NON E' PIU' ATTIVA --> RIMUOVIAMO IL COOKIE
-			else {
+			else 
+			{
 				//RIMUOVI IL COOKIE
+				Cookie[] cookies = ((HttpServletRequest) request).getCookies();
+				if(cookies!=null)
+				{
+					
+					for (int i = 0; i < cookies.length; i++) 
+					{
+						if (cookies[i].getName() == "SessionID")
+						{
+							Cookie cookie = new Cookie("SessionID", "");
+
+							cookie.setMaxAge(0); 
+
+							res.addCookie(cookie);
+						}
+					}
+				}
+				
 			}
 		}
 	}

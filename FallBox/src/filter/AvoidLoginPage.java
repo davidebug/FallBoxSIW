@@ -32,12 +32,11 @@ public class AvoidLoginPage implements Filter {
 	{
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		
-		System.out.println("ENTRATO NEL FILTRO");
+				
+		System.out.println(SessionIDChecker.existsSessionCookie(req));
 		
 		if (req.getSession(false) == null && SessionIDChecker.existsSessionCookie(req) == "0")
 		{
-			System.out.println("SONO QUI");
 			chain.doFilter(request, response);
 		}
 		else
