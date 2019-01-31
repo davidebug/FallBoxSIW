@@ -57,7 +57,10 @@ public class RegistrationValidation extends HttpServlet {
 				response.setContentType("text/plain; charset=UTF-8");
 			}
 			else {
-				;//ALTRI ERRORI
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				response.getWriter().println("An error has occurred with your registration, please retry.");
+				response.setContentType("text/plain; charset=UTF-8");
+				//ALTRI ERRORI
 			}
 	}
 	

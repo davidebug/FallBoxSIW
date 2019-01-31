@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     
     <script src="assets/js/jquery.min.js"></script>
-
+	<script src="assets/js/jquery-ui.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
 </head>
 
 <body>
@@ -66,6 +69,8 @@
        				    },
        				    error: function(response){
        				    	$('#errorMessage').text(response.responseText);
+       				    	$('#loginForm').effect("shake");
+       				    	
        				    }
        				});
        			});
@@ -79,7 +84,5 @@
    	
     
 </body>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-animation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+
 </html>

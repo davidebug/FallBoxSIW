@@ -122,7 +122,7 @@
                         <div class="social"><a href="https://www.facebook.com/davide.bagnato97"><i class="fa fa-facebook-official"></i></a><a href="#"></a><a href="https://instagram.com/davide.bug"><i class="fa fa-instagram"></i></a></div>
                     </div>
                     <div class="box"><img class="rounded-circle img-fluid" src="assets/img/dass.jpg" style="width:161px;height:161px;">
-                        <h3 class="name" style="width:245px;">Riccardo Giordano</h3>
+                        <h3 class="name">Riccardo Giordano</h3>
                         <p class="title">Musician - Programmer</p>
                         <p class="description">Born in a rich Sicilian family, Riccardo left his country for his passions : Music and Mafia</p>
                     </div>
