@@ -39,12 +39,12 @@
         <form method="post" id= "loginForm"  data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="width:340px;padding:19px;">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><img src="assets/img/officialIcona2018Best.png" style="width:128px;margin:8px;padding:0px;"></div>
-            <div class="form-group"><input id="email" class="form-control" type="email" name="email" placeholder="Email"></div>
-            <div class="form-group"><input id="password" class="form-control" type="password" name="password" placeholder="Password"></div>
+            <div class="form-group"><input id="email" class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" required=""> </div>
+            <div class="form-group"><input id="password" class="form-control" type="password" name="password" placeholder="Password" autocomplete="off" required=""></div>
             
             <div id = "errorMessage"></div>
             
-            <div class="form-group"><button onclick = "checkPassword()" class="btn btn-primary btn-block" type="submit" style="background-color:rgb(58,157,63);">Log In</button></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:rgb(58,157,63);">Log In</button></div>
             <a href="forgotPassword.html" class="forgot" style="font-size:15px;">Forgot password? Click here</a>
             <div class="heading" style="font-size:15px; margin: 10px;text-align: center"> OR </div>
             <a href="registrationForm.html" class="forgot" style="font-size:15px; margin: 10px">Register now</a></form>

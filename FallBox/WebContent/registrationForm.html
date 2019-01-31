@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
+    
+    <script src="assets/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -34,18 +36,54 @@
     </div>
     </nav>
     </div>
+    
+    
     <div class="register-photo" style="background-color:rgb(108,176,110);">
         <div data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" class="form-container">
-            <form method="post" action = "http://localhost:8080/FallBox/RegistrationValidation/*"><img class="img-fluid d-block" src="assets/img/officialIcona2018Best.png" style="height:144px;width:151px;margin-left:auto;margin-right:auto;">
+            <form id = "registrationForm" method="post" ><img class="img-fluid d-block" src="assets/img/officialIcona2018Best.png" style="height:144px;width:151px;margin-left:auto;margin-right:auto;">
                 <h2 class="text-center"><strong>Create</strong> an account.</h2>
-                <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"></div>
+                <div class="form-group"><input class="form-control" id= "email" type="email" name="email" placeholder="Email" autocomplete="off" required=""></div>
+                <div id = "errorMessage"></div>
+                <div class="form-group"><input class="form-control" id="password" type="password" name="password" placeholder="Password" autocomplete="off" required=""></div>
+                <div class="form-group"><input class="form-control" id="password-repeat" type="password" name="password-repeat" placeholder="Password (repeat)" autocomplete="off" required=""></div>
+                <div id = "passwordError"></div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:rgb(45,160,58);">Sign Up</button></div>
                 <a href="login.html" class="already" style="font-size:14px;">You already have an account? Login here.</a></form>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
+    
+    
+    
+     <script>
+       			$('#registrationForm').on('submit', function(event){
+       				event.preventDefault();
+       				event.stopPropagation();
+       				$('#passwordError').html('');
+       				$('#errorMessage').html('');
+       				if($("#password").val() == $("#password-repeat").val()){
+	       				$.ajax({
+	       				    url: "http://localhost:8080/FallBox/RegistrationValidation/*",
+	       				    type: "POST",
+	       				    data: {
+	       				        email: $("#email").val(),
+	       				        password: $("#password").val(),
+	       				        passwordRepeat: $("#password-repeat").val()
+	       				    },
+	       				    success: function(response){
+	       				        window.location.replace("http://localhost:8080/FallBox/registrationSuccess.html");
+	       				        
+	       				    },
+	       				    error: function(response){
+	       				    	$('#errorMessage').text(response.responseText);
+	       				    }
+	       				});
+       				}
+       				else{
+       					$('#passwordError').html('<p>Password does not match, retry.</p>');
+       				}
+       			});
+     </script>
+       
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>

@@ -40,7 +40,6 @@ public class RegistrationValidation extends HttpServlet {
 			throws ServletException, IOException 
 	{
 		//CONTROLLO CHE L'INPUT SIA CORRETTO
-		if (checkData(request)) {
 			
 			User user = new User();
 			user.setEmail((String) request.getParameter("email"));
@@ -51,26 +50,15 @@ public class RegistrationValidation extends HttpServlet {
 			//SE LA REGISTRAZIONE E' OK MANDO ALLA PAGINA DI SUCCESSO
 			if (regStatus > 0) {
 				sendEmail(request.getParameter("email"));
-				response.sendRedirect("http://localhost:8080/FallBox/registrationSuccess.html");
 			}
 			else if (regStatus == -1) {
-				//EMAIL GIA' IN USO
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				response.getWriter().println("Email already registered, please retry.");
+				response.setContentType("text/plain; charset=UTF-8");
 			}
 			else {
 				;//ALTRI ERRORI
 			}
-		}
-		else {
-			returnError(response);
-		}
-	}
-	
-	private boolean checkData(HttpServletRequest request) 
-	{
-		if (!request.getParameter("password").isEmpty() && (request.getParameter("password").equals(request.getParameter("password-repeat"))))  {
-			return true;
-		}
-		return false;
 	}
 	
 	
