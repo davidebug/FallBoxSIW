@@ -13,6 +13,7 @@ public class UserDao {
 	private static String registrationString = "insert into User values(?,?)";
 	private static String logInString = "select * from User where Email = ? and Password = ?";
 	private static String updatePasswordString = "update User set Password = ? where Email = ?";
+	private static String updateEmailString = "update User set Email = ? where Email = ? and Password = ?";
 	
 	private static void initConnection()
 	{
@@ -55,9 +56,14 @@ public class UserDao {
 			PreparedStatement pStatement = connection.prepareStatement(logInString);
 			pStatement.setString(1, user.getEmail());
 			pStatement.setString(2, user.getPassword());
+			
+			System.out.println("Email --> " + user.getEmail());
+			System.out.println("Password --> " + user.getPassword());
+			
 			ResultSet result = pStatement.executeQuery();
 			if (result.next()) 
 			{
+				System.out.println("TROVATO");
 				return true;
 			}
 			
@@ -70,6 +76,7 @@ public class UserDao {
 	
 	public static boolean updatePassword(User user)
 	{
+		System.out.println("AGGIORNO");
 		initConnection();
 		
 		try 
@@ -77,6 +84,10 @@ public class UserDao {
 			PreparedStatement pStatement = connection.prepareStatement(updatePasswordString);
 			pStatement.setString(1, user.getPassword());
 			pStatement.setString(2, user.getEmail());
+			
+			System.out.println("Email --> " + user.getEmail());
+			System.out.println("Password -->" + user.getPassword());
+			
 			int result = pStatement.executeUpdate();
 			if (result != 0)
 			{
@@ -89,11 +100,39 @@ public class UserDao {
 		return false;
 	}
 	
+	public static int updateEmail(User user, String newEmail)
+	{
+		initConnection();
+					
+		if (!checkEmail(newEmail)) 
+		{   //SE LO USERNAME E' GIA' IN USO
+			return -1;
+		}
+		
+		
+		try 
+		{
+			PreparedStatement pStatement = connection.prepareStatement(updateEmailString);
+			pStatement.setString(1, newEmail);
+			pStatement.setString(2, user.getEmail());
+			pStatement.setString(3,  user.getPassword());
+			int result = pStatement.executeUpdate();
+			if (result != 0)
+			{
+				return 1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	
 	//
 	//METODO DI UTILITA'
 	//
-	private static boolean checkEmail(String email) 
+	public static boolean checkEmail(String email) 
 	{
 		
 		String getStatement = "select * from User where Email = ?";

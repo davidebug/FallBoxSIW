@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 		{   
 			HttpSession session = request.getSession();			//CREO UNA NUOVA SESSIONE;
 			session.setAttribute("User", user.getEmail());
-			System.out.println("Creata sessione");
 		}
 		else 
 		{

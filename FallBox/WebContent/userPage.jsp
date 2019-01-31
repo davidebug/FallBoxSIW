@@ -105,7 +105,7 @@
        				}
        				else{
 	       				$.ajax({
-	       				  //  url: "http://localhost:8080/FallBox/RegistrationValidation/*", --> servlet
+	       				    url: "http://localhost:8080/FallBox/UserPageServlet/*",
 	       				    type: "POST",
 	       				    data: {
 	       				        email: $("#email").val(),
