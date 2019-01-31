@@ -44,6 +44,8 @@
     
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.js"></script>
+   
+   
 </head>
 
 <body style="background-color:rgb(108,176,110);background-repeat:no-repeat;background-size:auto;background-position:bottom;">
@@ -71,8 +73,9 @@
                             <div
                                 class="form-group"><label style="font-family:Aldrich, sans-serif;margin:3px;">Confirm new password</label><input id="confirmPass" class="form-control" type="password" name="confirmpass" ></div>
                     </div>
-                	<div id = "passwordMatch"></div>
+                	
                 </div>
+                <div id = "passwordMatch"></div>
                 <div class="form-row">
                     <div class="col-md-12 content-right"><button class="btn btn-primary form-btn" type="submit" style="background-color:rgb(10,156,51);font-family:Aldrich, sans-serif;border:none;">SAVE </button></div>
                     <div id="Success" ></div>
@@ -83,48 +86,7 @@
     <hr>
     </div>
     
-     <script>
-       			$('#userForm').on('submit', function(event){
-       				event.preventDefault();
-       				event.stopPropagation();
-       				$('#emailError').html('');
-       				$('#currentPasswordError').html('');
-       				$('#passwordMatch').html('');
-       				$('#Success').html('');
-       				if($("#password").val() != $("#confirmPass").val()){
-       					
-       					$('#passwordMatch').html('<p>Password does not match, retry.</p>');
-       					$('#regForm').effect("shake");
-       					
-       				}	
-       				else if($("#password").val() == $("#currentPassword").val()){
-       					
-       					$('#passwordMatch').html('<p>Current password matches with the new one, retry.</p>');
-       					$('#regForm').effect("shake");
-       					
-       				}
-       				else{
-	       				$.ajax({
-	       				    url: "http://localhost:8080/FallBox/UserPageServlet/*",
-	       				    type: "POST",
-	       				    data: {
-	       				        email: $("#email").val(),
-	       				        newPassword: $("#password").val(),
-	       				        currentPassword: $("#currentPassword").val()
-	       				    },
-	       				    success: function(response){
-	       				    	$('#Success').html('<p>Modifiche salvate con successo.</p>');;
-	       				        
-	       				    },
-	       				    error: function(response){
-	       				    	$('#emailError').text(response.responseText);
-	       				    	$('#currentPasswordError').text(response.responseText);
-	       				    	$('#regForm').effect("shake");
-	       				    }
-	       				});
-       				}
-       			});
-     </script>
+     <script type="text/javascript" src = "assets/js/userPage.js"  ></script>
     
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>

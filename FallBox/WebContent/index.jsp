@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ page import="model.User"%>
 <%
 	String username = new String();
 	if (request != null && request.getSession().getAttribute("User") != null) {
