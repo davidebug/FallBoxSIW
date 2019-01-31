@@ -68,11 +68,9 @@ public class UserPageServlet extends HttpServlet {
 			user.setEmail((String)request.getSession().getAttribute("User"));
 			user.setPassword(request.getParameter("currentPassword"));
 
-			System.out.println("SONO QUI");
 			
 			if (dao.UserDao.logIn(user))
 			{
-				System.out.println("TROVATO UTENTE");
 				user.setPassword(newPassword);
 				if (!dao.UserDao.updatePassword(user))
 				{

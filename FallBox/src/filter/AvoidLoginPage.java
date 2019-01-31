@@ -33,13 +33,12 @@ public class AvoidLoginPage implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 						
-		if (req.getSession(false) == null)
+		if (req.getSession(false) == null || req.getSession(false).getAttribute("User") == "")
 		{
 			chain.doFilter(request, response);
 		}
 		else
 		{
-			System.out.println("RIDIREZIONO");
 			res.sendRedirect(req.getContextPath() + "/main.jsp");
 		}
 		

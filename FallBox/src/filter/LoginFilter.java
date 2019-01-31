@@ -37,7 +37,7 @@ public class LoginFilter implements Filter {
 			res.sendRedirect("login.html");
 		}
 		//SE C'E' UNA SESSIONE
-		else if (req.getSession(false) != null) 
+		else if (req.getSession(false) != null && req.getSession(false).getAttribute("User") != "") 
 		{
 			chain.doFilter(request, response);
 		}

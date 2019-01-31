@@ -56,10 +56,7 @@ public class UserDao {
 			PreparedStatement pStatement = connection.prepareStatement(logInString);
 			pStatement.setString(1, user.getEmail());
 			pStatement.setString(2, user.getPassword());
-			
-			System.out.println("Email --> " + user.getEmail());
-			System.out.println("Password --> " + user.getPassword());
-			
+						
 			ResultSet result = pStatement.executeQuery();
 			if (result.next()) 
 			{
@@ -76,7 +73,6 @@ public class UserDao {
 	
 	public static boolean updatePassword(User user)
 	{
-		System.out.println("AGGIORNO");
 		initConnection();
 		
 		try 
@@ -84,10 +80,7 @@ public class UserDao {
 			PreparedStatement pStatement = connection.prepareStatement(updatePasswordString);
 			pStatement.setString(1, user.getPassword());
 			pStatement.setString(2, user.getEmail());
-			
-			System.out.println("Email --> " + user.getEmail());
-			System.out.println("Password -->" + user.getPassword());
-			
+						
 			int result = pStatement.executeUpdate();
 			if (result != 0)
 			{
