@@ -1,7 +1,6 @@
 package filter;
 
 import java.io.IOException;
-import servlet.SessionListener;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,7 +10,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import servlet.SessionListener;
 
 @WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.jsp"})
 public class LoginFilter implements Filter {
@@ -30,11 +32,12 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException 
 	{
 		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
 		//SE NON C'E' UNA SESSIONE ATTIVA E NON C'E' IL MIO COOKIE DI SESSIONE
 		//CREI UNA NUOVA SESSIONE, AGGIUNGI IL COOKIE --> QUESTO VA FATTO NELLA SERVLET!!
 		if (req.getSession(false) == null && SessionIDChecker.existsSessionCookie(req) == "0") 
 		{
-			req.getRequestDispatcher("/login.html").forward(request, response);
+			res.sendRedirect("login.html");
 		}
 		//SE C'E' UNA SESSIONE
 		else if (req.getSession(false) != null) 

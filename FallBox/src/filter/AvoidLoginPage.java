@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebFilter (filterName = "AvoidLoginPage", urlPatterns = {"/login.html"})
+@WebFilter (filterName = "AvoidLoginPage", urlPatterns = {"/login.html"})
 public class AvoidLoginPage implements Filter {
 
 
@@ -33,8 +33,11 @@ public class AvoidLoginPage implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
+		System.out.println("ENTRATO NEL FILTRO");
+		
 		if (req.getSession(false) == null && SessionIDChecker.existsSessionCookie(req) == "0")
 		{
+			System.out.println("SONO QUI");
 			chain.doFilter(request, response);
 		}
 		else
