@@ -41,6 +41,9 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/User-Information-Panel---Lite--Secondary-User-Panel-Footer.css">
+    
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
 </head>
 
 <body style="background-color:rgb(108,176,110);background-repeat:no-repeat;background-size:auto;background-position:bottom;">
@@ -54,28 +57,75 @@
     <div class="container profile profile-view" id="profile" style="background-color:transparent;">
         <h1 data-aos="fade" data-aos-delay="450" data-aos-once="true" style="font-size:29px;font-family:Aldrich, sans-serif;padding:0px;margin:8px;"><i class="icon ion-android-settings" style="margin:14px;width:0px;height:0px;"></i><%=username%></h1>
         <hr>
-        <form>
+        <form id ="userForm">
             <div class="form-row profile-row" data-aos="fade-up" data-aos-delay="600" data-aos-once="true" style="background-color:transparent;margin:3px;">
                 <div class="col-md-8">
-                    <div class="form-group"><label style="font-family:Aldrich, sans-serif;margin:9px;"><i class="material-icons" style="width:29px;height:23px;padding:-21px;margin:4px;">mail</i>New Email</label><input class="form-control" type="email" 
+                    <div class="form-group"><label style="font-family:Aldrich, sans-serif;margin:9px;"><i class="material-icons" style="width:29px;height:23px;padding:-21px;margin:4px;">mail</i>New Email</label><input id = "email" class="form-control" type="email" 
                             name="email"></div>
+                    <div id = "emailError"></div>
                     <div class="form-row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label style="font-family:Aldrich, sans-serif;margin:5px;">Current Password</label><input class="form-control" type="password" name="password" autocomplete="off" required=""></div>
-                            <div class="form-group"><label style="font-family:Aldrich, sans-serif;"><i class="material-icons" style="margin:8px;">rotate_right</i>New Password</label><input class="form-control" type="password" name="password" ></div>
+                            <div class="form-group"><label style="font-family:Aldrich, sans-serif;margin:5px;">Current Password</label><input class="form-control" id="currentPassword" type="password" name="password" autocomplete="off" required=""></div>
+                            <div id = "currentPasswordError"></div>
+                            <div class="form-group"><label style="font-family:Aldrich, sans-serif;"><i class="material-icons" style="margin:8px;">rotate_right</i>New Password</label><input id="password" class="form-control" type="password" name="password" ></div>
                             <div
-                                class="form-group"><label style="font-family:Aldrich, sans-serif;margin:3px;">Confirm new password</label><input class="form-control" type="password" name="confirmpass" ></div>
+                                class="form-group"><label style="font-family:Aldrich, sans-serif;margin:3px;">Confirm new password</label><input id="confirmPass" class="form-control" type="password" name="confirmpass" ></div>
                     </div>
+                	<div id = "passwordMatch"></div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 content-right"><button class="btn btn-primary form-btn" type="submit" style="background-color:rgb(10,156,51);font-family:Aldrich, sans-serif;border:none;">SAVE </button></div>
+                    <div id="Success" ></div>
                 </div>
             </div>
     </div>
     </form>
     <hr>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
+    
+     <script>
+       			$('#userForm').on('submit', function(event){
+       				event.preventDefault();
+       				event.stopPropagation();
+       				$('#emailError').html('');
+       				$('#currentPasswordError').html('');
+       				$('#passwordMatch').html('');
+       				$('#Success').html('');
+       				if($("#password").val() != $("#confirmPass").val()){
+       					
+       					$('#passwordMatch').html('<p>Password does not match, retry.</p>');
+       					$('#regForm').effect("shake");
+       					
+       				}	
+       				else if($("#password").val() == $("#currentPassword").val()){
+       					
+       					$('#passwordMatch').html('<p>Current password matches with the new one, retry.</p>');
+       					$('#regForm').effect("shake");
+       					
+       				}
+       				else{
+	       				$.ajax({
+	       				  //  url: "http://localhost:8080/FallBox/RegistrationValidation/*", --> servlet
+	       				    type: "POST",
+	       				    data: {
+	       				        email: $("#email").val(),
+	       				        newPassword: $("#password").val(),
+	       				        currentPassword: $("#currentPassword").val()
+	       				    },
+	       				    success: function(response){
+	       				    	$('#Success').html('<p>Modifiche salvate con successo.</p>');;
+	       				        
+	       				    },
+	       				    error: function(response){
+	       				    	$('#emailError').text(response.responseText);
+	       				    	$('#currentPasswordError').text(response.responseText);
+	       				    	$('#regForm').effect("shake");
+	       				    }
+	       				});
+       				}
+       			});
+     </script>
+    
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
