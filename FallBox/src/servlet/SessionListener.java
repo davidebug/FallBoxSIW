@@ -14,22 +14,31 @@ public class SessionListener implements HttpSessionListener {
 
 static Map<String, HttpSession> map = new HashMap<String, HttpSession>();
 	
-    public SessionListener() {
+    public SessionListener() 
+    {
         // TODO Auto-generated constructor stub
     }
 
 
-    public void sessionCreated(HttpSessionEvent se)  { 
+    public void sessionCreated(HttpSessionEvent se)  
+    { 
     	map.put(se.getSession().getId(), se.getSession());
     }
 
-    public void sessionDestroyed(HttpSessionEvent se)  { 
+    public void sessionDestroyed(HttpSessionEvent se)  
+    { 
          map.remove(se.getSession().getId());
     }
     
-    public static boolean check(String cookie) {
-    	System.out.println("Sto Controllando");
-    	if (map.containsKey(cookie)) {
+    public static String getEmail(String id)
+    {
+    	return (String) map.get(id).getAttribute("User");
+    }
+    
+    public static boolean check(String cookie) 
+    {
+    	if (map.containsKey(cookie)) 
+    	{
     		return true;
     	}
     	return false;

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-${User.email}
+${User}
 
 </body>
 </html>

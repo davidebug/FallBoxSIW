@@ -12,10 +12,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.html"})
+@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.jsp" , "/userPage.jsp"})
 public class LoginFilter implements Filter {
-
 
     public LoginFilter() {
         // TODO Auto-generated constructor stub
@@ -42,7 +42,10 @@ public class LoginFilter implements Filter {
 		else {
 			//SE QUESTO STESSO COOKIE SI TROVA NELLA MAPPA CONTENUTA NEL LISTENER VUOL DIRE CHE LA SESSIONE
 			//E' ATTIVA
+			String id = existsSessionCookie(req);
 			if (SessionListener.check(existsSessionCookie(req))) {
+				HttpSession session = req.getSession();
+				session.setAttribute("User", SessionListener.getEmail(id));
 				chain.doFilter(request, response);
 			}
 			//ALTRIMENTI NON E' PIU' ATTIVA --> RIMUOVIAMO IL COOKIE

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -98,15 +97,6 @@ public class RegistrationValidation extends HttpServlet {
 			throw new RuntimeException(e);
 		}
 		
-	}
-	
-	
-	//SE ABBIAMO UNA PAGINA DI ERRORE QUESTO METODO LA CHIAMERA' --> FARE LA PAGINA DI ERRORE
-	private void returnError(HttpServletResponse response) throws IOException 
-	{
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("Invalid Username or Password");
 	}
 
 }

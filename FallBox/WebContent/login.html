@@ -64,7 +64,8 @@
        				        password: $("#password").val()
        				    },
        				    success: function(response){
-       				        window.location.replace("http://localhost:8080/FallBox/main.html");
+       				        window.location.replace("http://localhost:8080/FallBox/main.jsp");
+       				        location.reload(true);
        				        
        				    },
        				    error: function(response){

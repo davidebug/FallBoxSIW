@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 		{   
 			HttpSession session = request.getSession();			//CREO UNA NUOVA SESSIONE;
 			session.setAttribute("User", user.getEmail());
+			System.out.println("Sessione creata");
 			Cookie sessionCookie = new Cookie("SessionID", session.getId());
 			sessionCookie.setPath("/");
 			sessionCookie.setMaxAge(60*60*60);;
