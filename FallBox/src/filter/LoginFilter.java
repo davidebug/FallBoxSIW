@@ -39,6 +39,7 @@ public class LoginFilter implements Filter {
 		//SE C'E' UNA SESSIONE
 		else if (req.getSession(false) != null) 
 		{
+			System.out.println("La sessione c'è");
 			chain.doFilter(request, response);
 		}
 		//}

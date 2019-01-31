@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter (filterName = "AvoidLoginPage", urlPatterns = {"/login.html"})
+//@WebFilter (filterName = "AvoidLoginPage", urlPatterns = {"/login.html"})
 public class AvoidLoginPage implements Filter {
 
 
