@@ -32,15 +32,14 @@ public class AvoidLoginPage implements Filter {
 	{
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-				
-		System.out.println(SessionIDChecker.existsSessionCookie(req));
-		
-		if (req.getSession(false) == null && SessionIDChecker.existsSessionCookie(req) == "0")
+						
+		if (req.getSession(false) == null)
 		{
 			chain.doFilter(request, response);
 		}
 		else
 		{
+			System.out.println("RIDIREZIONO");
 			res.sendRedirect(req.getContextPath() + "/main.jsp");
 		}
 		
