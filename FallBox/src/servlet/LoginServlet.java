@@ -19,12 +19,6 @@ import model.User;
 @WebServlet(urlPatterns={"/LoginServlet/*"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	static
-	{
-		model.GitBlitInit.init();
-	}
-	
 	
     public LoginServlet() 
     {
@@ -41,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		
+		System.out.println("SONO QUI");
 		
 		User user = new User();
 		user.setEmail((String) request.getParameter("email"));

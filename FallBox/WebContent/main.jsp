@@ -10,5 +10,21 @@
 
 ${User}
 
+	<form action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
+	
+		<input type = "file" name = "File">
+		
+		<input type = "submit" value = "Upload File">
+	</form>
+	
+	<form action = "http://localhost:8080/FallBox/PermissionServlet/*" method = "POST" enctype = "multipart/form-data">
+	
+		<input type = "file" name = "File">
+	
+		<input type = "text" name = "Utente">
+		
+		<input type = "submit" value = "sharePermission">
+	</form>
+
 </body>
 </html>

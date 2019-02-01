@@ -60,14 +60,14 @@
        				event.preventDefault();
        				event.stopPropagation();
        				$.ajax({
-       				    url: "http://localhost:8182/FallBox/LoginServlet/*",
+       				    url: "http://localhost:8080/FallBox/LoginServlet/*",
        				    type: "POST",
        				    data: {
        				        email: $("#email").val(),
        				        password: $("#password").val()
        				    },
        				    success: function(response){
-       				        window.location.replace("http://localhost:8182/FallBox/main.jsp");
+       				        window.location.replace("http://localhost:8080/FallBox/main.jsp");
        				    },
        				    error: function(response){
        				    	$('#errorMessage').text(response.responseText);
