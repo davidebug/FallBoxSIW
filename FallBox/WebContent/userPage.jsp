@@ -83,10 +83,11 @@
             </div>
     </div>
     </form>
+    <script src = "assets/js/userPage.js"></script>
+    
     <hr>
     </div>
     
-     <script type="text/javascript" src = "assets/js/userPage.js"  ></script>
     
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>

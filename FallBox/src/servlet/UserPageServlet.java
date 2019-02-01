@@ -79,6 +79,13 @@ public class UserPageServlet extends HttpServlet {
 					response.setContentType("text/plain; charset=UTF-8");
 				}
 			}
+			
+			else
+			{ 
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				response.getWriter().println("Wrong password");
+				response.setContentType("text/plain; charset=UTF-8");
+			}
 		}
 	}
 
