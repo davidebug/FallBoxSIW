@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cadiscatola.utils.CloudStorageUtils;
+import com.cadiscatola.utils.exceptions.UserAlreadyExistsException;
+import com.cadiscatola.wrapper.exceptions.InternalException;
+
 import dao.UserDao;
 import model.User;
 
@@ -23,6 +27,11 @@ import model.User;
 public class RegistrationValidation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	static
+	{
+		model.GitBlitInit.init();
+	}
+	
     public RegistrationValidation() 
     {
         super();
@@ -48,6 +57,15 @@ public class RegistrationValidation extends HttpServlet {
 			
 			//SE LA REGISTRAZIONE E' OK MANDO ALLA PAGINA DI SUCCESSO
 			if (regStatus > 0) {
+				try {
+					CloudStorageUtils.createUser(user.getEmail(), user.getPassword());
+				} catch (UserAlreadyExistsException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InternalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				sendEmail(request.getParameter("email"));
 			}
 			else if (regStatus == -1) {

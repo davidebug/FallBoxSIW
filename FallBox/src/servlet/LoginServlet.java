@@ -20,7 +20,12 @@ import model.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
+	static
+	{
+		model.GitBlitInit.init();
+	}
+	
+	
     public LoginServlet() 
     {
         super();
@@ -36,6 +41,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
+		
+		
 		User user = new User();
 		user.setEmail((String) request.getParameter("email"));
 		user.setPassword((String) request.getParameter("password"));

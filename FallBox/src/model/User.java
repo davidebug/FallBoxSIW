@@ -1,6 +1,6 @@
 package model;
 
-public class User {
+public class User extends com.cadiscatola.model.User {
 
 	private String email;
 	private String password;
