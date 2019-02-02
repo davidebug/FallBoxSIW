@@ -14,6 +14,13 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+
 @WebServlet(urlPatterns={"/UploadServlet/*"})
 public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,8 +49,15 @@ public class UploadServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-    	filePath = "/home/gaetano/Scrivania/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
+    	filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
 		
+//		S3uploader s3 = new S3uploader();
+//        String result = s3.fileUploader(items);
+//        System.out.println(result);
+		
+		FileCreator file = new FileCreator();
+		
+        
 		//se non c'è un file da caricare
 		if( !ServletFileUpload.isMultipartContent(request) ) {
 	        
@@ -52,7 +66,17 @@ public class UploadServlet extends HttpServlet {
 	         return;
 	      }
 		
-		 FileCreator.createFile(filePath, items);
+		 file.createFile(filePath, items);
+		 
+		 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
+		 		"");
+		 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
+			try {
+			    s3.putObject("fallbox/"+ request.getSession(false).getAttribute("User"), file.getFile().getName(), file.getFile());
+			} catch (AmazonServiceException e) {
+			    System.err.println(e.getErrorMessage());
+			    System.exit(1);
+			}
 		
 	}
 }

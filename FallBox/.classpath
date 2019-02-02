@@ -24,7 +24,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/gaetano/Scrivania/uploadJars/commons-fileupload-1.3.jar"/>
-	<classpathentry kind="lib" path="/home/gaetano/Scrivania/uploadJars/commons-io-2.6-bin(1)/commons-io-2.6/commons-io-2.6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

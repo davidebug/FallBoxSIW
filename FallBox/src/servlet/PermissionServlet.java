@@ -57,7 +57,7 @@ public class PermissionServlet extends HttpServlet {
 		
 		String owner = (String)request.getSession(false).getAttribute("User");
 		
-		String ownerPath = "/home/gaetano/Scrivania/FallBoxFiles/" + utente + "/" + owner;
+		String ownerPath = "/Users/davide/Desktop/FallBoxFiles/" + utente + "/" + owner;
 				
 		//SE NON ESISTE LA CARTELLA COL NOME DELL'OWNER ALL'INTERNO DEL SUO SPAZIO, LA CREO
 		if (!checkDir(utente, owner))
@@ -66,14 +66,14 @@ public class PermissionServlet extends HttpServlet {
 			File userDirectory = new File(ownerPath);
 			userDirectory.mkdir();
 		}
-		
-		FileCreator.createFile(ownerPath, items);
+		FileCreator file = new FileCreator();
+		file.createFile(ownerPath, items);
 	}
 	
 	
 	private boolean checkDir(String collaboratore, String owner)
 	{
-		return new File("/home/gaetano/Scrivania/FallBoxFiles/" + collaboratore, owner).exists();
+		return new File("/Users/davide/Desktop/FallBoxFiles/" + collaboratore, owner).exists();
 	}
 
 }

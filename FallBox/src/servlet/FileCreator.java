@@ -10,15 +10,17 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class FileCreator 
 {
-	public static void createFile(String path, List<FileItem> fileItems)
+	File file = null;
+	
+	DiskFileItemFactory factory = new DiskFileItemFactory();
+	
+	
+	
+	ServletFileUpload upload = new ServletFileUpload(factory);
+	
+	public void createFile(String path, List<FileItem> fileItems)
 	{
-		File file = null;
-		
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		
 		String pathName = path + "/";
-		
-		ServletFileUpload upload = new ServletFileUpload(factory);
 		
 		try {
 						
@@ -51,6 +53,32 @@ public class FileCreator
             System.out.println(ex);
          }
 	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public DiskFileItemFactory getFactory() {
+		return factory;
+	}
+
+	public void setFactory(DiskFileItemFactory factory) {
+		this.factory = factory;
+	}
+
+	public ServletFileUpload getUpload() {
+		return upload;
+	}
+
+	public void setUpload(ServletFileUpload upload) {
+		this.upload = upload;
+	}
+	
+	
 	
 	
 }

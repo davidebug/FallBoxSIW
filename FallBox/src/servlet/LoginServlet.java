@@ -40,9 +40,10 @@ public class LoginServlet extends HttpServlet {
 		User user = new User();
 		user.setEmail((String) request.getParameter("email"));
 		user.setPassword((String) request.getParameter("password"));
+		HttpSession session = null;
 		if (UserDao.logIn(user)) 					//SE LE CREDENZIALI SONO OK
 		{   
-			HttpSession session = request.getSession();			//CREO UNA NUOVA SESSIONE;
+			 session = request.getSession();			//CREO UNA NUOVA SESSIONE;
 			session.setAttribute("User", user.getEmail());
 		}
 		else 

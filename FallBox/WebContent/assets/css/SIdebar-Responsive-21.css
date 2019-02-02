@@ -85,7 +85,7 @@ nav:hover .forAnimate {
 
 @media (min-width: 768px) {
   .container-main {
-    position:absolute;
+    
     width:calc(100% - 40px);
     margin-left:40px;
     float:right;
@@ -122,7 +122,7 @@ nav:hover .forAnimate {
 
 @media (min-width: 768px) {
   nav.sidebar .navbar-nav .open .dropdown-menu {
-    position:static;
+    
     float:none;
     width:auto;
     margin-top:0;

@@ -39,7 +39,7 @@ public class AvoidLoginPage implements Filter {
 		}
 		else
 		{
-			res.sendRedirect(req.getContextPath() + "/main.jsp");
+			res.sendRedirect(req.getContextPath() + "/main.html");
 		}
 		
 	}
