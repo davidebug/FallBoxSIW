@@ -50,9 +50,6 @@ public class UploadServlet extends HttpServlet {
 		
     	filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
 		
-//		S3uploader s3 = new S3uploader();
-//        String result = s3.fileUploader(items);
-//        System.out.println(result);
 		
 		FileCreator file = new FileCreator();
 		
@@ -66,6 +63,7 @@ public class UploadServlet extends HttpServlet {
 	      }
 		
 		 file.createFile(filePath, items);
+		 
 		 
 		 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
 		 		"");
