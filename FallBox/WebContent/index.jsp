@@ -42,7 +42,7 @@
      $(function(){
     	 	var username = "<%=username%>";
     		if(username != ""){
-    			$('#navcol-1').replaceWith('<div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href = "LogoutServlet" class="login" > Log Out </a> <a class="btn btn-light action-button" role="button" href="/main.html" style="background-color:rgb(59,158,64);"><%=username%></a></span></div>');
+    			$('#navcol-1').replaceWith('<div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href = "LogoutServlet" class="login" > Log Out </a> <a class="btn btn-light action-button" role="button" href="/main.jsp" style="background-color:rgb(59,158,64);"><%=username%></a></span></div>');
     		}	
     	});
     </script>

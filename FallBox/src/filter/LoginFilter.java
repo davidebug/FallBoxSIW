@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.html", "/userPage.jsp"})
+@WebFilter (filterName = "LoginFilter", urlPatterns = {"/main.jsp", "/userPage.jsp"})
 public class LoginFilter implements Filter {
 
     public LoginFilter() 

@@ -20,7 +20,7 @@
 			}
 			else if($("#password").val() != "" || $("#email").val() != ""){
    				$.ajax({
-   				    url: "http://localhost:8182/FallBox/UserPageServlet/*",
+   				    url: "http://localhost:8080/FallBox/UserPageServlet/*",
    				    type: "POST",
    				    data: {
    				        email: $("#email").val(),
