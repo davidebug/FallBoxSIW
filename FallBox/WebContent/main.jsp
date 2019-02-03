@@ -89,6 +89,8 @@
 						</div>
 						
 					</form>
+					<input  type="submit" value="+ Create Folder"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+                					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;">
                 </h1>
                         <div class="row">
                             <div class="col-md-8">
