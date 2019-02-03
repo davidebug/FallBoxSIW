@@ -23,7 +23,7 @@ public class FileCreator
 		
 		try {
 						
-			Iterator i = fileItems.iterator();
+			Iterator<FileItem> i = fileItems.iterator();
 	         
 	         while (i.hasNext()) 
 	         {
