@@ -66,7 +66,7 @@
 	        <div class="container"><a class="navbar-brand" href="index.jsp" style="font-size:25px;font-family:'Bungee Shade', cursive;padding:0px;"><img class="img-fluid" src="assets/img/officialIcona2018Best.png" data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="/*display:block;*/width:56px;/*margin:0px;*//*margin-left:auto;*//*margin-right:auto;*//*height:37px;*//*padding:0px;*/font-size:30px;">&nbsp; Fall Box</a>
 	            <button
 	                class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-	                <div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"><a class="login">Log out</a> <a class="btn btn-light action-button" role="button" href="main.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);"><%=username%> &nbsp;<i class="fa fa-user"></i> &nbsp;</a></span></div>
+	                <div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"><a class="login">Log out</a> <a class="btn btn-light action-button" role="button" href="userPage.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);"><%=username%> &nbsp;<i class="fa fa-cog"></i> &nbsp;</a></span></div>
 	        </div>    
     	</nav>
     <div id="wrapper">
