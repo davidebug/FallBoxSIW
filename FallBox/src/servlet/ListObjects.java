@@ -19,9 +19,12 @@ import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.google.gson.Gson;
 
 import model.Component;
 import model.Container;
+import model.File;
+import model.Folder;
 
 @WebServlet(urlPatterns={"/ListObjects/*"})
 public class ListObjects extends HttpServlet {
@@ -37,41 +40,6 @@ public class ListObjects extends HttpServlet {
 			throws ServletException, IOException 
 	{
 		
-		String user =(String) request.getSession().getAttribute("User");
-		
-		String path = user + "/" + request.getParameter("currentFolder");
-		
-		Container c = new Container();
-	//	Container.refreshAll();
-	//	System.out.println( Container.getContainer().getContent().size());
-		for(Component comp : Container.getContainer().getContent()) {
-			//System.out.println(comp.getName());
-		}
-//		 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + "");
-//		 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
-//		 
-//		 
-//		 
-//		 
-//		 ListObjectsRequest listObjectsRequest = 
-//                 new ListObjectsRequest()
-//                       .withBucketName("fallbox").withPrefix(path);
-//
-//		List<String> keys = new ArrayList<>();
-//		
-//		ObjectListing objects = s3.listObjects(listObjectsRequest);
-//		for (;;) {
-//			List<S3ObjectSummary> summaries = objects.getObjectSummaries();
-//			if (summaries.size() < 1) {
-//				break;
-//			}
-//			summaries.forEach(s -> keys.add(s.getKey()));
-//			objects = s3.listNextBatchOfObjects(objects);
-//		}
-//		for (String file: keys) {
-//				System.out.println(file);
-//		}
-//		request.getSession(false).setAttribute("Files", keys);
 		
 		
 	}
@@ -79,6 +47,65 @@ public class ListObjects extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{		
+		//RICEVE MYSHAREDSPACE O SHARED WITH ME
+		String kindOfFiles = request.getParameter("SharedSpace");
+		
+		ArrayList<File> userFiles = new ArrayList<File>();
+	
+		String user = (String)request.getSession(false).getAttribute("User");
+		
+		List<Component> fallBox = Container.getContainer().getContent();
+		
+		for (Component c : fallBox)
+		{
+			if (c.getName().equals(user + "/"))
+			{
+				if (kindOfFiles.equals("MySharedSpace"))
+				{
+					getFiles(userFiles, user, (Folder) c, true);
+				}
+				else
+				{
+					getFiles(userFiles, user, (Folder) c, false);
+				}
+			}
+		}
+		
+		List<String> files = new ArrayList<String>(); 
+		
+		for (File file : userFiles)
+			files.add(file.getName());
+		
+		
+		String json = new Gson().toJson(files);
+		
+		response.getWriter().println(json);
+		response.setContentType("text/plain; charset=UTF-8");
+	}
+	
+	
+	private void getFiles(ArrayList<File> files, String user, Folder folder, boolean owner)
+	{
+		List<Component> content = folder.getContent();
+		
+		for (Component c : content)
+		{
+			if (c instanceof File)
+			{
+				if (owner == true && (((File)c).getOwner()).equals(user))
+				{
+					files.add((File) c);
+				}
+				else if (owner == false && !(((File)c).getOwner()).equals(user))
+				{
+					files.add((File) c);
+				}
+			}
+			else if (c instanceof Folder)
+			{
+				getFiles(files, user, (Folder)c, owner);
+			}
+		}
 		
 	}
 
