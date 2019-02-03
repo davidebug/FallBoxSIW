@@ -14,13 +14,12 @@ public class FileCreator
 	
 	DiskFileItemFactory factory = new DiskFileItemFactory();
 	
-	
-	
 	ServletFileUpload upload = new ServletFileUpload(factory);
 	
 	public void createFile(String path, List<FileItem> fileItems)
 	{
 		String pathName = path + "/";
+		
 		
 		try {
 						

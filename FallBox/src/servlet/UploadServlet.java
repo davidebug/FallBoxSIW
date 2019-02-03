@@ -40,6 +40,7 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
+		System.out.println("SONO NELLA SERVLET DI UPLOAD");
 		List<FileItem> items = null;
 		try {
 			items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -63,8 +64,8 @@ public class UploadServlet extends HttpServlet {
 	      }
 		
 		 file.createFile(filePath, items);
-		 
-		 
+
+
 		 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
 		 		"");
 		 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
