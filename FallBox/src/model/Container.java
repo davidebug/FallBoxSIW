@@ -1,8 +1,5 @@
 package model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,13 +41,14 @@ public class Container {
 		if(main.getName()!="fallbox")
 			path = new String(main.getName());
 		
-		System.out.println("mi sposto su" + main.getName()); 
+		System.out.println("mi sposto su " + main.getName()); 
 		ListObjectsRequest listObjectsRequest = 
                 new ListObjectsRequest()
                       .withBucketName("fallbox").withPrefix(path);
 		
 		ObjectListing objects = s3.listObjects(listObjectsRequest);
 		List<S3ObjectSummary> summaries = objects.getObjectSummaries();
+		
 		for(S3ObjectSummary s : summaries) {
 			String tmp = s.getKey();
 			int dimension = (int) s3.getObjectMetadata("fallbox", s.getKey()).getInstanceLength();
@@ -80,9 +78,8 @@ public class Container {
 			if(tmp.endsWith("/") && !name.equals(main.getName())) {
 				if(main.getName().equals("fallbox")) {
 					if(name.equals(owner +"/")) {
-						
 						f = new Folder(name,dimension,lastChange,owner);
-						System.out.println("aggiungo cartella "+ f.getName()+ " a "+ main.getName());
+						System.out.println("aggiungo cartella "+ f.getName()+ " a "+ main.getName() + "\n");
 						main.add(f);
 						
 						refreshContainer(f);
@@ -90,7 +87,7 @@ public class Container {
 				}
 				else {
 					f = new Folder(name,dimension,lastChange,owner);
-					System.out.println("aggiungo cartella "+ f.getName()+ " a "+ main.getName());
+					System.out.println("aggiungo cartella "+ f.getName()+ " a "+ main.getName() + "\n");
 					main.add(f);
 				
 					refreshContainer(f);
@@ -98,7 +95,7 @@ public class Container {
 			}
 			else if(!name.equals(main.getName()) && !main.getName().equals("fallbox")){
 				f = new File(name,dimension,lastChange,owner);
-				System.out.println(" aggiungo file " + f.getName()+" a "+ main.getName());
+				System.out.println(" aggiungo file " + f.getName()+" a "+ main.getName() + "\n");
 				main.add(f);
 			}
 			
@@ -112,6 +109,17 @@ public class Container {
 		
 		
 	}
+	
+	private static String fileName (String path)
+	{
+		String [] folders = path.split("/");
+		
+		if (path.lastIndexOf("/") == path.length()-1)
+			return folders[folders.length-1] + "/";
+		return folders[folders.length-1];
+	}
+	
+	
 	public static void createUserFolder(User u) {
 
 		Date date = new Date();

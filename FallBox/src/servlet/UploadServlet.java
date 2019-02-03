@@ -40,7 +40,6 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		System.out.println("SONO NELLA SERVLET DI UPLOAD");
 		List<FileItem> items = null;
 		try {
 			items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
