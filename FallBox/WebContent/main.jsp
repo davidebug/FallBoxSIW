@@ -70,10 +70,10 @@
 	        </div>    
     	</nav>
     <div id="wrapper">
-        <div id="sidebar-wrapper" style="background-color:rgba(0,0,0,0);">
+        <div id="sidebar-wrapper" style="background-color:rgb(255,255,255);">
             <ul class="sidebar-nav">
-                <li style="font-family:'Bungee Inline', cursive; "> <a href="#" style="color:rgb(59,158,64);font-size:18px;padding:0px;margin:8px">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
-                <li> <a href="#" style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
+                <li style="font-family:'Bungee Inline', cursive; "> <a id="mySharedSpace" onclick='get_details("gpsapia@gmail.com/tombola.txt")' href='#' style="color:rgb(59,158,64);font-size:18px;padding:0px;margin:8px">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
+                <li> <a id="sharedWithMe" href="" style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
             </ul>
         </div>
         <div class="page-content-wrapper">
@@ -121,18 +121,21 @@
                 						<input class="btn btn-light action-button" type="submit" value="Delete X" role="button" action="" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 							style="background-color:rgb(255, 102, 102);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;margin:10px">
                 						</input>
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i>  Owner :</p>
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type :</p>
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change :</p>
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-users" aria-hidden="true" style="margin:6px"></i> permissions :</p>
+                                        <p id="owner" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i>  Owner :</p>
+                                        <p  id="type" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type :</p>
+                                        <p id="lastChange" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change :</p>
+                                        <p id="dimensions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-dice-d6" aria-hidden="true" style="margin:6px"></i> size :  </p>
+                                        <p id="permissions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-users" aria-hidden="true" style="margin:6px"></i> permissions :
+                                        	
+                                        </p>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-plus" style="margin:6px"></i>Share with : </p>
-                                        <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
-                                            <input style="margin:4px" type="checkbox" /> 
-                                            <a class="btn btn-light action-button" role="button" href="main.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i></a>
+                                        <div class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
+                                            <input id="canEdit" style="margin:4px" type="checkbox" /> 
+                                            <a id="share" class="btn btn-light action-button" role="button" href="main.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i></a>
                                         </p></div>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Upload Inside : </p>
                                         <p>
-                                        	<form action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
+                                        	<form id="uploadInside" action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
 												<div class="btn btn-light action-button" 
 													style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
@@ -143,7 +146,7 @@
                 									</input>
 												</div>
 						
-					</form>
+											</form>
                                         </p>
 
                                     </div>

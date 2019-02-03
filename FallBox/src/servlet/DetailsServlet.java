@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
 
 import model.Component;
 import model.Container;
@@ -42,7 +45,7 @@ public class DetailsServlet extends HttpServlet {
 		for (Component dir : mainFolder)
 		{
 			//HO TROVATO LA CARTELLA DELL'UTENTE ALL'INTERNO DELLA CARTELLONA
-			if (dir.getName().equals(user) && dir instanceof Folder)	 
+			if (dir.getName().equals(user + "/") && dir instanceof Folder)	 
 			{
 				List<Component> userFiles = ((Folder)dir).getContent();
 				
@@ -51,16 +54,18 @@ public class DetailsServlet extends HttpServlet {
 					//HO TROVATO IL FILE CHE CERCAVO
 					if (file.getName().equals(fileName))
 					{
-						JSONObject jSonFile = new JSONObject();
-						jSonFile.put("name", file.getName());
-						jSonFile.put("dimension", file.getDimension());
-						jSonFile.put("lastChange", file.getLastChange().toString());//cambio la data in stringa?
-						jSonFile.put("owner", file.getOwner());
+						List<String> foo = new ArrayList<String>();
+						foo.add(file.getName());
+						foo.add(file.getDimension().toString());
+						foo.add(file.getLastChange().toString());
+						foo.add(file.getOwner());
 						
-						response.setContentType("application/json");
-						PrintWriter out = response.getWriter();
-						out.print(jSonFile);
-						out.flush();
+						String json = new Gson().toJson(foo );
+						
+						response.getWriter().println(json);
+						response.setContentType("text/plain; charset=UTF-8");
+						
+						//out.flush();
 					}
 				}
 			}

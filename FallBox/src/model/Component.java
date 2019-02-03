@@ -8,7 +8,7 @@ import java.util.List;
 public abstract class Component {
 
 	String name;
-	int dimension;
+	Integer dimension;
 	Date lastChange;
 	String owner;
 	List<String> can_view = new ArrayList<String>();
@@ -25,7 +25,7 @@ public abstract class Component {
 		this.name = name;
 	}
 
-	public int getDimension() {
+	public Integer getDimension() {
 		return dimension;
 	}
 
