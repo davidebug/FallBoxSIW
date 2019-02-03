@@ -52,20 +52,39 @@ public class Container {
 		ObjectListing objects = s3.listObjects(listObjectsRequest);
 		List<S3ObjectSummary> summaries = objects.getObjectSummaries();
 		for(S3ObjectSummary s : summaries) {
-			String name = s.getKey();
+			String tmp = s.getKey();
 			int dimension = (int) s3.getObjectMetadata("fallbox", s.getKey()).getInstanceLength();
 			Date lastChange = s3.getObjectMetadata("fallbox", s.getKey()).getLastModified();
-			String owner = s.getKey().substring(0,s.getKey().indexOf('/'));
+			String owner = "";
+			String name = "";
+				
+				String sharespace = tmp.substring(0,tmp.indexOf('/'));
+				owner = sharespace;
+				if(tmp.contains(sharespace + "_")) {
+					String t = tmp.substring(tmp.indexOf('_')+1);
+
+					owner = t.substring(0,t.indexOf('/'));
+				}	
+			
+			
+			if((!tmp.equals(sharespace +"/") && !tmp.equals(sharespace + "/" + sharespace +"_" + owner +"/"))) {
+				
+				name = tmp.replace( tmp.substring(0,main.getName().lastIndexOf('/')+1),"");
+			}
+			else name = tmp;
+			
 			Component f = null;
 
-			if(s.getKey().endsWith("/") && !name.equals(main.getName())) {
+			
+			
+			if(tmp.endsWith("/") && !name.equals(main.getName())) {
 				if(main.getName().equals("fallbox")) {
 					if(name.equals(owner +"/")) {
-					
+						
 						f = new Folder(name,dimension,lastChange,owner);
 						System.out.println("aggiungo cartella "+ f.getName()+ " a "+ main.getName());
 						main.add(f);
-					
+						
 						refreshContainer(f);
 					}	
 				}
@@ -82,7 +101,16 @@ public class Container {
 				System.out.println(" aggiungo file " + f.getName()+" a "+ main.getName());
 				main.add(f);
 			}
+			
+			if(main.getName().equals("can_edit")) {
+				f.share(sharespace, true);
+			}
+			else if(main.getName().equals(owner) && !owner.equals(sharespace) && !f.getName().equals("can_edit")){
+				f.share(sharespace,false);
+			}
 		}
+		
+		
 	}
 	public static void createUserFolder(User u) {
 

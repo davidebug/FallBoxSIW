@@ -11,8 +11,8 @@ public abstract class Component {
 	int dimension;
 	Date lastChange;
 	String owner;
-	List<User> can_view = new ArrayList<User>();
-	List<User> can_edit = new ArrayList<User>();
+	List<String> can_view = new ArrayList<String>();
+	List<String> can_edit = new ArrayList<String>();
 	
 	public Component() {
 	}
@@ -49,24 +49,24 @@ public abstract class Component {
 		this.owner = owner;
 	}
 
-	public List<User> getCan_view() {
+	public List<String> getCan_view() {
 		return can_view;
 	}
 
-	public void setCan_view(List<User> can_view) {
+	public void setCan_view(List<String> can_view) {
 		this.can_view = can_view;
 	}
 
-	public List<User> getCan_edit() {
+	public List<String> getCan_edit() {
 		return can_edit;
 	}
 
-	public void setCan_edit(List<User> can_edit) {
+	public void setCan_edit(List<String> can_edit) {
 		this.can_edit = can_edit;
 	}
 	
 	
-	public void share(User u,boolean canEdit) {
+	public void share(String u,boolean canEdit) {
 		if(canEdit) {
 			can_edit.add(u);
 		}
