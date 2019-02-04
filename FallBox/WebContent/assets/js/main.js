@@ -4,15 +4,16 @@ $(document).ready(function(){
 });
 
 $('#mySharedSpace').on('click', function(){
-    get_files("mySharedSpace")
+    get_files("mySharedSpace");
 });
 
 $('#sharedWithMe').on('click', function(){
-    get_files("sharedWithMe")
+    get_files("sharedWithMe");
 });
 
 function get_files(currentFolder) {
-	$('#listBody').html('');
+	$('#fileBody').html('<tr></tr>');
+	var username = $('#username').text();
 	$.ajax({
 		type: "GET",
 		url: "http://localhost:8080/FallBox/ListObjects/*", //servlet per la lista dei file
@@ -22,12 +23,14 @@ function get_files(currentFolder) {
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
-					
-					var row = "<tr>"
-						row += "<td><a onclick='get_details(" + file_list[i] + ")' class='btn primary-btn'>" + file_list[i] + "</td>"				
-						row += "</tr>"
+				
+					currentFile = file_list[i].replace(username,"");
+					var row = "<tr>";
+						row += "<td><a onclick=get_details('" + file_list[i] + "') class='btn primary-btn'>" + currentFile + "</td>";				
+						row += "</tr>";
 						
-						$('#fileList tr:last').after(row);		
+						$('#fileList tr:last').after(row);
+					console.log(row);
 				}
 
 		},
@@ -39,13 +42,11 @@ function get_files(currentFolder) {
 
 function get_details(selected) {
 	
-	alert("ni");
 	$.ajax({
 		type: "GET",
 		url: "http://localhost:8080/FallBox/DetailsServlet/*", //servlet per la lista dei file
 		data: {FILE: selected},
 		success: function(response) {
-			alert('bra');
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_details = files.trim().split(",");
 			var tmp = file_details[0].split(".");
