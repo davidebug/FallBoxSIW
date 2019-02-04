@@ -1,11 +1,13 @@
 
 var username = $('#username').text();
-var fileSelected = 0;
-var section = 0;
+var fileSelected = username + "/";
+var section = "";
+
 $(document).ready(function(){
 
 	get_files("mySharedSpace");
 	section = "mySharedSpace";
+	setStartDirectory();
 	
 });
 
@@ -60,6 +62,8 @@ function get_files(currentFolder) {
 function get_details(selected) {
 	
 	fileSelected = selected;
+	setCurrentDirectory(fileSelected);
+	
 	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
 	$.ajax({
 		type: "GET",
@@ -88,44 +92,46 @@ function get_details(selected) {
 	});
 }
 
-$('#uploadMain').on('submit',function(){
+function setCurrentDirectory(fileSelected){
 	
-	currDirectory = "fallbox/" + user + "/";; 
-	$.ajax({
-		type: "POST",
-		url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
-		
-		data: {
-				currDirectory : currDirectory,
-			},
-		success: function(response) {
-			get_files(section);
+	var currDirectory = fileSelected;
+	if(fileSelected.endsWith("/")){
+		$.ajax({
+			type: "POST",
+			url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
 			
-		},
-		error: function(response) {
-			console.log("Error");
-		}
-	});
-});
+			data: {
+					currDirectory : currDirectory,
+				},
+			success: function(response) {
+				//get_files(section);
+				alert(currDirectory);
+			},
+			error: function(response) {
+				console.log("Error");
+			}
+		});
+	}	
+}	
 
+function setStartDirectory(){
+	var currDirectory = username + "/";
 
-$('#uploadInside').on('submit',function(){
-	if(fileSelected.endsWith("/"))
-		currDirectory = "fallbox/" + user + "/"+fileSelected; 
+		$.ajax({
+			type: "POST",
+			url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
+			
+			data: {
+					currDirectory : currDirectory,
+				},
+			success: function(response) {
+				//get_files(section);
+				alert(currDirectory);
+			},
+			error: function(response) {
+				console.log("Error");
+			}
+		});
+}	
+
 	
-	$.ajax({
-		type: "POST",
-		url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
-		
-		data: {
-				currDirectory : currDirectory,
-			},
-		success: function(response) {
-			get_files(section);
-			
-		},
-		error: function(response) {
-			console.log("Error");
-		}
-	});
-});

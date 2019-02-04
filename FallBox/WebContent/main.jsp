@@ -87,12 +87,12 @@
 
                				<input id="inputFile1" type="file" name = "FILE" webkitdirectory directory multiple> 
 				
-							<input  type="submit" value="+ Upload"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+							<input  id = "upload" type="submit" value="+ Upload"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;">
 						</div>
 						
 					</form>
-					<input  type="submit" value="+ Create Folder"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+					<input  type="submit" onclick="setStartDirectory();" value="+ Create Folder"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;">
                 </h1>
                         <div class="row">
@@ -154,8 +154,8 @@
 													style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
                										<input class="file" type="file" name="FILE" webkitdirectory directory multiple/>
-		
-													<input class="btn btn-light action-button" type="submit" value="+ Upload" role="button" action=""
+					
+													<input id = "upload2" class="btn btn-light action-button" type="submit" value="+ Upload" role="button" action=""
                 											style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:8px;border-radius:20px;font-family:'Bungee Inline', cursive;">
                 									</input>
 												</div>

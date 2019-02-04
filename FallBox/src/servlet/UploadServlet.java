@@ -24,8 +24,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private String filePath;
-	private String currDirectory;
+	private String filePath = new String("");
+	private String currDirectory = new String("");
 	
     public UploadServlet() 
     {
@@ -39,11 +39,12 @@ public class UploadServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
-	{
-		currDirectory = request.getParameter("currDirectory");
+	{	
 		
+		if(request.getParameter("currDirectory")!= null)
+			currDirectory = request.getParameter("currDirectory");
 		
-		if (currDirectory != null && !currDirectory.equals(""))
+		else if (currDirectory != null && !currDirectory.equals(""))
 		{
 			List<FileItem> items = null;
 			try {
@@ -74,7 +75,7 @@ public class UploadServlet extends HttpServlet {
 			 		"");
 			 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
 				try {
-				    s3.putObject(currDirectory, file.getFile().getName(), file.getFile());
+				    s3.putObject("fallbox", currDirectory + file.getFile().getName(), file.getFile());
 				} catch (AmazonServiceException e) {
 				    System.err.println(e.getErrorMessage());
 				    System.exit(1);

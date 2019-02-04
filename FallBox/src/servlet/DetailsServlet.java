@@ -67,7 +67,7 @@ public class DetailsServlet extends HttpServlet {
 						
 					}
 					
-					
+					//aggiungere condizione per l'uscita dal for
 					
 				}
 			}
