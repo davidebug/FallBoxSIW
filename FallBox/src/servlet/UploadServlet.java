@@ -70,8 +70,9 @@ public class UploadServlet extends HttpServlet {
 			
 			 file.createFile(filePath, items);
 
-
-			 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
+			 ServerHandler.uploadFile(file.getFile(), currDirectory);
+			 
+			 /*BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
 			 		"");
 			 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
 				try {
@@ -79,7 +80,7 @@ public class UploadServlet extends HttpServlet {
 				} catch (AmazonServiceException e) {
 				    System.err.println(e.getErrorMessage());
 				    System.exit(1);
-				}
+				}*/
 		}
         
 		

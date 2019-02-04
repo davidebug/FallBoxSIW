@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 
 import com.amazonaws.AmazonServiceException;
@@ -36,6 +37,14 @@ public class ServerHandler {
     				folderName + "/", emptyContent, metadata);
     	// send request to S3 to create folder
     	s3.putObject(putObjectRequest);
+    }
+    
+
+    public static void uploadFile(File file, String folderName)
+    {
+    	String filePath = folderName + "/" + file.getName();
+    	
+    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
     }
     
     
