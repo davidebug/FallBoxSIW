@@ -90,14 +90,13 @@ function get_details(selected) {
 
 $('#uploadMain').on('submit',function(){
 	
-	var filePath = $('#uploadMain').find('input[name="FILE"]').val();
-	var currDirectory = "fallbox/"+user+"/"; 
+	currDirectory = "fallbox/" + user + "/";; 
 	$.ajax({
 		type: "POST",
 		url: "http://localhost:8080/FallBox/UploadServlet/*", //servlet per la lista dei file
+		
 		data: {
 				currDirectory : currDirectory,
-				filePath : filePath
 			},
 		success: function(response) {
 			get_files(section);
@@ -109,16 +108,16 @@ $('#uploadMain').on('submit',function(){
 	});
 });
 
+
 $('#uploadInside').on('submit',function(){
 	
-	var filePath = $('#uploadInside').find('input[name="FILE"]').val(); 
 	currDirectory = "fallbox/" + user + "/"+fileSelected; 
 	$.ajax({
 		type: "POST",
 		url: "http://localhost:8080/FallBox/UploadServlet/*", //servlet per la lista dei file
+		
 		data: {
 				currDirectory : currDirectory,
-				filePath : filePath
 			},
 		success: function(response) {
 			get_files(section);

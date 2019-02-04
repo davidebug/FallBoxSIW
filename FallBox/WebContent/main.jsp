@@ -85,7 +85,7 @@
                 	<form id = "uploadMain" action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
 						<div class="btn btn-light action-button" style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:10px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
-               				<input type="file" name = "FILE" webkitdirectory directory multiple> 
+               				<input id="inputFile1" type="file" name = "FILE" webkitdirectory directory multiple> 
 				
 							<input  type="submit" value="+ Upload"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;">
