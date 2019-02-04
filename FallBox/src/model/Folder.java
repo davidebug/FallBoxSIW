@@ -14,7 +14,16 @@ public class Folder extends Component {
 		this.lastChange = lastChange;
 		this.owner = owner;
 	}
-	
+	@Override
+	public Integer getDimension() {
+		Integer dim = 0;
+		
+		for(Component c: content) {
+			dim+= c.getDimension();
+		}
+		return dim;
+		
+	}
 	public List<Component> getContent() {
 		return content;
 	}

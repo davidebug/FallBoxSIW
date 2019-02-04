@@ -62,6 +62,9 @@
 </head>
 
 <body>
+
+		<script src="assets/js/main.js"></script>
+		
 	    <nav class="navbar fixed-top navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;height:93px">
 	        <div class="container"><a class="navbar-brand" href="index.jsp" style="font-size:25px;font-family:'Bungee Shade', cursive;padding:0px;"><img class="img-fluid" src="assets/img/officialIcona2018Best.png" data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="/*display:block;*/width:56px;/*margin:0px;*//*margin-left:auto;*//*margin-right:auto;*//*height:37px;*//*padding:0px;*/font-size:30px;">&nbsp; Fall Box</a>
 	            <button
@@ -101,14 +104,14 @@
                                                 <th>Name</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="listBody">
                                           
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div id="sidebar-wrapper2" style="background-color:rgba(0,0,0,0);right:0px;left:auto;/*visibility:hidden;*/width:300px;margin:30px;">
+                                <div id="sidebar-wrapper2" style="background-color:rgba(0,0,0,0);right:0px;left:auto;visibility:hidden;width:300px;margin:30px;">
                                     <div>
                                         <p style="font-family:'Bungee Inline', cursive;color:rgb(59,158,64);font-size:22px;margin:10px">Details</p>
                                         <p></p>

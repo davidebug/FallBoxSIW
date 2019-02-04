@@ -21,6 +21,7 @@ import model.Folder;
 public class ListObjects extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	
     public ListObjects() 
     {
         super();
@@ -30,8 +31,8 @@ public class ListObjects extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		
-		
+		Container c = new Container();
+		doPost(request,response);
 		
 	}
 
@@ -39,7 +40,7 @@ public class ListObjects extends HttpServlet {
 			throws ServletException, IOException 
 	{		
 		//RICEVE MYSHAREDSPACE O SHARED WITH ME
-		String kindOfFiles = request.getParameter("SharedSpace");
+		String kindOfFiles = request.getParameter("currentFolder");
 		
 		ArrayList<File> userFiles = new ArrayList<File>();
 	
@@ -51,7 +52,7 @@ public class ListObjects extends HttpServlet {
 		{
 			if (c.getName().equals(user + "/"))
 			{
-				if (kindOfFiles.equals("MySharedSpace"))
+				if (kindOfFiles.equals("mySharedSpace"))
 				{
 					getFiles(userFiles, user, (Folder) c, true);
 				}
@@ -62,8 +63,8 @@ public class ListObjects extends HttpServlet {
 			}
 		}
 		
-		List<String> files = new ArrayList<String>(); 
-		
+		 
+		List<String> files = new ArrayList<String>();
 		for (File file : userFiles)
 			files.add(file.getName());
 		
@@ -71,12 +72,14 @@ public class ListObjects extends HttpServlet {
 		String json = new Gson().toJson(files);
 		
 		response.getWriter().println(json);
+		System.out.println(json);
 		response.setContentType("text/plain; charset=UTF-8");
 	}
 	
 	
 	private void getFiles(ArrayList<File> files, String user, Folder folder, boolean owner)
 	{
+		
 		List<Component> content = folder.getContent();
 		
 		for (Component c : content)
