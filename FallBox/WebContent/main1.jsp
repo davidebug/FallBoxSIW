@@ -10,14 +10,14 @@
 
 ${User}
 
-	<form action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
+	<form action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
 	
 		<input type = "file" name = "File">
 		
 		<input type = "submit" value = "Upload File">
 	</form>
 	
-	<form action = "http://localhost:8080/FallBox/PermissionServlet/*" method = "POST" enctype = "multipart/form-data">
+	<form action = "/FallBox/PermissionServlet/*" method = "POST" enctype = "multipart/form-data">
 	
 		<input type = "file" name = "File">
 	

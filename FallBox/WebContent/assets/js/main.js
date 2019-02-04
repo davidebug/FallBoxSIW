@@ -28,7 +28,7 @@ function get_files(currentFolder) {
 
 	$.ajax({
 		type: "GET",
-		url: "http://localhost:8080/FallBox/ListObjects/*", //servlet per la lista dei file
+		url: "/FallBox/ListObjects/*", //servlet per la lista dei file
 		contentType: "json",
 		data: {currentFolder: currentFolder},
 		beforeSend: function(){
@@ -63,7 +63,7 @@ function get_details(selected) {
 	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
 	$.ajax({
 		type: "GET",
-		url: "http://localhost:8080/FallBox/DetailsServlet/*", //servlet per la lista dei file
+		url: "/FallBox/DetailsServlet/*", //servlet per la lista dei file
 		data: {FILE: selected},
 		success: function(response) {
 			$('#sidebar-wrapper2').css('visibility','visible')
@@ -93,7 +93,7 @@ $('#uploadMain').on('submit',function(){
 	currDirectory = "fallbox/" + user + "/";; 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8080/FallBox/UploadServlet/*", //servlet per la lista dei file
+		url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
 		
 		data: {
 				currDirectory : currDirectory,
@@ -110,11 +110,12 @@ $('#uploadMain').on('submit',function(){
 
 
 $('#uploadInside').on('submit',function(){
+	if(fileSelected.endsWith("/"))
+		currDirectory = "fallbox/" + user + "/"+fileSelected; 
 	
-	currDirectory = "fallbox/" + user + "/"+fileSelected; 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8080/FallBox/UploadServlet/*", //servlet per la lista dei file
+		url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
 		
 		data: {
 				currDirectory : currDirectory,

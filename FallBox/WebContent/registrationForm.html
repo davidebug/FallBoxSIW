@@ -63,7 +63,7 @@
        				$('#errorMessage').html('');
        				if($("#password").val() == $("#password-repeat").val()){
 	       				$.ajax({
-	       				    url: "http://localhost:8080/FallBox/RegistrationValidation/*",
+	       				    url: "/FallBox/RegistrationValidation/*",
 	       				    type: "POST",
 	       				    data: {
 	       				        email: $("#email").val(),
@@ -71,7 +71,7 @@
 	       				        passwordRepeat: $("#password-repeat").val()
 	       				    },
 	       				    success: function(response){
-	       				        window.location.replace("http://localhost:8080/FallBox/registrationSuccess.html");
+	       				        window.location.replace("/FallBox/registrationSuccess.html");
 	       				        
 	       				    },
 	       				    error: function(response){

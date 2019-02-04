@@ -82,7 +82,7 @@
         <div class="page-content-wrapper">
             <div class="container-fluid"><a class="btn btn-link" role="button" href="#menu-toggle" id="menu-toggle" style="color:rgb(59,158,64);"><i class="fa fa-bars"></i></a>
                 <h1 style="font-size:19px; ">
-                	<form id = "uploadMain" action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
+                	<form id = "uploadMain" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
 						<div class="btn btn-light action-button" style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:10px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
                				<input id="inputFile1" type="file" name = "FILE" webkitdirectory directory multiple> 
@@ -149,7 +149,7 @@
                                         </p></div>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Upload Inside : </p>
                                         <p>
-                                        	<form id="uploadInside" action = "http://localhost:8080/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
+                                        	<form id="uploadInside" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
 												<div class="btn btn-light action-button" 
 													style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
