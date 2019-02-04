@@ -76,7 +76,7 @@
         <div id="sidebar-wrapper" style="background-color:rgb(255,255,255);">
             <ul class="sidebar-nav">
                 <li style="font-family:'Bungee Inline', cursive; "> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-size:18px;padding:0px;margin:8px">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
-                <li> <a id="sharedWithMe" href="" style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
+                <li> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
             </ul>
         </div>
         <div class="page-content-wrapper">
@@ -118,7 +118,7 @@
                                                                       
                                         </tbody>
                                     </table>
-                                     <div id="loader" class="loader"></div>
+                                     <div id='loader' class="loader"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">

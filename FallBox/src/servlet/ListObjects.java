@@ -21,7 +21,7 @@ import model.Folder;
 public class ListObjects extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	
+	ArrayList<Component> userFiles = new ArrayList<Component>();
     public ListObjects() 
     {
         super();
@@ -41,8 +41,8 @@ public class ListObjects extends HttpServlet {
 	{		
 		//RICEVE MYSHAREDSPACE O SHARED WITH ME
 		String kindOfFiles = request.getParameter("currentFolder");
-		
-		ArrayList<File> userFiles = new ArrayList<File>();
+		System.out.println(kindOfFiles);
+		userFiles = new ArrayList<Component>();
 	
 		String user = (String)request.getSession(false).getAttribute("User");
 		
@@ -54,18 +54,18 @@ public class ListObjects extends HttpServlet {
 			{
 				if (kindOfFiles.equals("mySharedSpace"))
 				{
-					getFiles(userFiles, user, (Folder) c, true);
+					getFiles(user,c, true);
 				}
 				else
 				{
-					getFiles(userFiles, user, (Folder) c, false);
+					getFiles(user, c, false);
 				}
 			}
 		}
 		
 		 
 		List<String> files = new ArrayList<String>();
-		for (File file : userFiles)
+		for (Component file : userFiles)
 			files.add(file.getName());
 		
 		
@@ -77,7 +77,7 @@ public class ListObjects extends HttpServlet {
 	}
 	
 	
-	private void getFiles(ArrayList<File> files, String user, Folder folder, boolean owner)
+	private void getFiles(String user, Component folder, boolean owner)
 	{
 		
 		List<Component> content = folder.getContent();
@@ -86,18 +86,27 @@ public class ListObjects extends HttpServlet {
 		{
 			if (c instanceof File)
 			{
-				if (owner == true && (((File)c).getOwner()).equals(user))
+				if (owner == true && (c.getOwner()).equals(user))
 				{
-					files.add((File) c);
+					userFiles.add( c);
 				}
-				else if (owner == false && !(((File)c).getOwner()).equals(user))
+				else if (owner == false && !(c.getOwner().equals(user)))
 				{
-					files.add((File) c);
+					userFiles.add( c);
 				}
 			}
 			else if (c instanceof Folder)
 			{
-				getFiles(files, user, (Folder)c, owner);
+				
+				getFiles(user, c, owner);
+				if (owner == true && (c.getOwner()).equals(user))
+				{
+					userFiles.add( c);
+				}
+				else if (owner == false && !(c.getOwner().equals(user)))
+				{
+					userFiles.add( c);
+				}
 			}
 		}
 		

@@ -36,9 +36,9 @@ function get_files(currentFolder) {
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
 				
-					currentFile = file_list[i].replace(username,"");
-					var row = "<tr>";
-						row += "<td><a onclick=get_details('" + file_list[i] + "') class='btn primary-btn'>" + currentFile + "</td>";				
+					currentFile = file_list[i].replace(username+"/","");
+					var row = "<tr >";
+						row += "<td  ><a   onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
 						row += "</tr>";
 						
 						$('#fileList tr:last').after(row);
@@ -55,6 +55,7 @@ function get_files(currentFolder) {
 
 function get_details(selected) {
 	
+	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
 	$.ajax({
 		type: "GET",
 		url: "http://localhost:8080/FallBox/DetailsServlet/*", //servlet per la lista dei file
@@ -63,10 +64,11 @@ function get_details(selected) {
 			$('#sidebar-wrapper2').css('visibility','visible')
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_details = files.trim().split(",");
-			var tmp = file_details[0].split(".");
-			var type = tmp[2];
-			if(type.length > 4)
+			if(file_details[0].endsWith("/"))
 				type = "folder";
+			else{
+				type = file_details[0].substring(file_details[0].lastIndexOf("."));
+			}
 			$('#owner').html('<i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i> Owner: &nbsp;' + file_details[3]);
 			$('#type').html('<i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type : &nbsp;'+ type);
 			$('#lastChange').html('<i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change : &nbsp;' + file_details[2]);

@@ -76,5 +76,6 @@ public abstract class Component {
 	}
 	
 	public void add(Component c) {}
+	public  List<Component> getContent(){return null;}
 	
 }

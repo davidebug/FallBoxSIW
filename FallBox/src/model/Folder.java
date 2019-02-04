@@ -24,6 +24,7 @@ public class Folder extends Component {
 		return dim;
 		
 	}
+	@Override
 	public List<Component> getContent() {
 		return content;
 	}
