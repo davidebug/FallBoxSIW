@@ -52,8 +52,7 @@ public class RegistrationValidation extends HttpServlet {
 				
 				//Codice per creare la cartella personale
 				
-				File userDirectory = new File("/Users/davide/Desktop/FallBoxFiles/" + user.getEmail());
-				userDirectory.mkdir();
+				ServerHandler.createFolder(user.getEmail());
 				
 				sendEmail(request.getParameter("email"));
 			}
