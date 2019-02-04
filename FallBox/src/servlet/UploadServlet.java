@@ -25,7 +25,7 @@ public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private String filePath;
-	
+	private String currDirectory;
 	
     public UploadServlet() 
     {
@@ -40,40 +40,48 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		List<FileItem> items = null;
-		try {
-			items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-    	filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
+		currDirectory = request.getParameter("currDirectory");
 		
 		
-		FileCreator file = new FileCreator();
-		
-        
-		//se non c'è un file da caricare
-		if( !ServletFileUpload.isMultipartContent(request) ) {
-	        
-			 //SE PER CASO L'UTENTE NON HA SELEZIONATO UN FILE DA CARICARE. FORSE QUESTO CONTROLLO E' INUTILE
-			//SE SI PUO' FARE DIRETTAMENTE CON JS
-	         return;
-	      }
-		
-		 file.createFile(filePath, items);
-
-
-		 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
-		 		"");
-		 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
+		if (currDirectory != null && !currDirectory.equals(""))
+		{
+			List<FileItem> items = null;
 			try {
-			    s3.putObject("fallbox/"+ request.getSession(false).getAttribute("User"), file.getFile().getName(), file.getFile());
-			} catch (AmazonServiceException e) {
-			    System.err.println(e.getErrorMessage());
-			    System.exit(1);
+				items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+			} catch (FileUploadException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
+	    	filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
+			
+	    	FileCreator file;
+			
+			file = new FileCreator();
+			
+			//se non c'è un file da caricare
+			if( !ServletFileUpload.isMultipartContent(request) ) {
+		        
+				 //SE PER CASO L'UTENTE NON HA SELEZIONATO UN FILE DA CARICARE. FORSE QUESTO CONTROLLO E' INUTILE
+				//SE SI PUO' FARE DIRETTAMENTE CON JS
+		         return;
+		      }
+			
+			 file.createFile(filePath, items);
+
+
+			 BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
+			 		"");
+			 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
+				try {
+				    s3.putObject(currDirectory, file.getFile().getName(), file.getFile());
+				} catch (AmazonServiceException e) {
+				    System.err.println(e.getErrorMessage());
+				    System.exit(1);
+				}
+		}
+        
+		
 		
 	}
 }
