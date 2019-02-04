@@ -54,7 +54,9 @@ public class UploadServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-	    	filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
+	    	//filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
+			
+			filePath = "/home/gaetano/Scrivania";
 			
 	    	FileCreator file;
 			
@@ -71,16 +73,6 @@ public class UploadServlet extends HttpServlet {
 			 file.createFile(filePath, items);
 
 			 ServerHandler.uploadFile(file.getFile(), currDirectory);
-			 
-			 /*BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
-			 		"");
-			 final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
-				try {
-				    s3.putObject("fallbox", currDirectory + file.getFile().getName(), file.getFile());
-				} catch (AmazonServiceException e) {
-				    System.err.println(e.getErrorMessage());
-				    System.exit(1);
-				}*/
 		}
         
 		

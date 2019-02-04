@@ -42,7 +42,7 @@ public class ServerHandler {
 
     public static void uploadFile(File file, String folderName)
     {
-    	String filePath = folderName + "/" + file.getName();
+    	String filePath = folderName + file.getName();
     	
     	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
     }
