@@ -58,6 +58,8 @@
     <link rel="stylesheet" href="assets/css/User-Information-Panel---Lite--Secondary-User-Panel-Footer.css">
      <script src="assets/js/jquery.min.js"></script>
      <script src="assets/js/jquery-ui.js"></script>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     
 </head>
 
 <body>
@@ -100,15 +102,23 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                
                                             </tr>
+                                            <tr>
+                                            	
+                                            </tr>
+                                           
                                         </thead>
+                                        
                                         <tbody id="fileBody">
+                                        	
                                           <tr>
                                           </tr>
                                           
                                                                       
                                         </tbody>
                                     </table>
+                                     <div id="loader" class="loader"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -161,6 +171,10 @@
             </div>
         </div>
     </div>
+   
+   
+  
+   
    
    	<script src="assets/js/main.js"></script>
    	
