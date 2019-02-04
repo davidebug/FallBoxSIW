@@ -34,9 +34,9 @@ public class PermissionServlet extends HttpServlet {
 		String canEdit = request.getParameter("canEdit");
 		
 		if (canEdit == "true")
-			ServerHandler.copyFile(path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/");
+			ServerHandler.shareFile(path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/");
 		else
-			ServerHandler.copyFile(path, otherUser + "/" + otherUser+"_"+user+"/");
+			ServerHandler.shareFile(path, otherUser + "/" + otherUser+"_"+user+"/");
 		
 	}
 

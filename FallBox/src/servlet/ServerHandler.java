@@ -48,7 +48,7 @@ public class ServerHandler {
     }
     
     
-    public static void copyFile(String filePath, String destinationPath)
+    public static void shareFile(String filePath, String destinationPath)
     {
     	try {
     	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);

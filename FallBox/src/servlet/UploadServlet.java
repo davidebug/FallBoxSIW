@@ -73,6 +73,8 @@ public class UploadServlet extends HttpServlet {
 			 file.createFile(filePath, items);
 
 			 ServerHandler.uploadFile(file.getFile(), currDirectory);
+			 
+			 response.sendRedirect(request.getContextPath() + "/main.jsp");
 		}
         
 		
