@@ -1,27 +1,31 @@
+
+var username = $('#username').text();
+var fileSelected = 0;
+var section = 0;
 $(document).ready(function(){
 
 	get_files("mySharedSpace");
-
+	section = "mySharedSpace";
 	
 });
 
 $('#mySharedSpace').on('click', function(){
 
     get_files("mySharedSpace");
-
+    section= "mySharedSpace";
 	
 });
 
 $('#sharedWithMe').on('click', function(){
     get_files("sharedWithMe");
-    
+    section= "mySharedSpace";
     
 });
 
 function get_files(currentFolder) {
 	$('#fileBody').html('<tr></tr>');
 	
-	var username = $('#username').text();
+
 	$.ajax({
 		type: "GET",
 		url: "http://localhost:8080/FallBox/ListObjects/*", //servlet per la lista dei file
@@ -38,7 +42,7 @@ function get_files(currentFolder) {
 				
 					currentFile = file_list[i].replace(username+"/","");
 					var row = "<tr >";
-						row += "<td  ><a   onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
+						row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
 						row += "</tr>";
 						
 						$('#fileList tr:last').after(row);
@@ -55,6 +59,7 @@ function get_files(currentFolder) {
 
 function get_details(selected) {
 	
+	fileSelected = selected;
 	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
 	$.ajax({
 		type: "GET",
@@ -83,4 +88,44 @@ function get_details(selected) {
 	});
 }
 
+$('#uploadMain').on('submit',function(){
+	
+	var filePath = $('#uploadMain').find('input[name="FILE"]').val();
+	var currDirectory = "fallbox/"+user+"/"; 
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:8080/FallBox/UploadServlet/*", //servlet per la lista dei file
+		data: {
+				currDirectory : currDirectory,
+				filePath : filePath
+			},
+		success: function(response) {
+			get_files(section);
+			
+		},
+		error: function(response) {
+			console.log("Error");
+		}
+	});
+});
 
+$('#uploadInside').on('submit',function(){
+	
+	var filePath = $('#uploadInside').find('input[name="FILE"]').val(); 
+	currDirectory = "fallbox/" + user + "/"+fileSelected; 
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:8080/FallBox/UploadServlet/*", //servlet per la lista dei file
+		data: {
+				currDirectory : currDirectory,
+				filePath : filePath
+			},
+		success: function(response) {
+			get_files(section);
+			
+		},
+		error: function(response) {
+			console.log("Error");
+		}
+	});
+});
