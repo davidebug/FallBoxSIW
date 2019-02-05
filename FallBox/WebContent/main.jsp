@@ -76,7 +76,17 @@
         <div id="sidebar-wrapper" style="background-color:rgb(255,255,255);">
             <ul class="sidebar-nav">
                 <li style="font-family:'Bungee Inline', cursive; "> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-size:18px;padding:0px;margin:8px">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
+               
                 <li> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
+            	<li> 
+            		<form id = "createFolder">
+						<div class="btn btn-light action-button" style="border-radius:30px;">
+						<input id = "folderName" class="form-control" style="border-radius:15px;font-size:14px" type="text" placeholder="Folder name"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true">
+                		<input  type="submit" onclick="setStartDirectory();" value="+ Create Folder"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+                					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;margin:8px;font-family:'Bungee Inline', cursive;">
+                		</div>
+                	</form>	
+                </li>
             </ul>
         </div>
         <div class="page-content-wrapper">
@@ -92,8 +102,7 @@
 						</div>
 						
 					</form>
-					<input  type="submit" onclick="setStartDirectory();" value="+ Create Folder"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
-                					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;">
+					
                 </h1>
                         <div class="row">
                             <div class="col-md-8">
@@ -127,12 +136,12 @@
                                         <p style="font-family:'Bungee Inline', cursive;color:rgb(59,158,64);font-size:22px;margin:10px">Details</p>
                                         <p></p>
                                        
-                                       <form action="" method = "post">
-                                       <input class="btn btn-light action-button" type="submit" value="Download ->" role="button" action="" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+                                       <form  action="" method = "post">
+                                       <input  id="download" class="btn btn-light action-button" type="submit" value="Download ->" role="button"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 							style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;margin:10px">
                 						</input>
                 						</form>
-                						<input class="btn btn-light action-button" type="submit" value="Delete X" role="button" action="" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+                						<input id="delete" class="btn btn-light action-button" type="submit" value="Delete X" role="button"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 							style="background-color:rgb(255, 102, 102);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;margin:10px">
                 						</input>
                                         <p id="owner" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i>  Owner :</p>
@@ -143,10 +152,12 @@
                                         	
                                         </p>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-plus" style="margin:6px"></i>Share with : </p>
-                                        <div class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
+                                        <form id="shareForm" class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
                                             <input id="canEdit" style="margin:4px" type="checkbox" /> 
-                                            <a id="share" class="btn btn-light action-button" role="button" href="main.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i></a>
-                                        </p></div>
+                                            <input type="submit" id="share" class="btn btn-light action-button" role="button" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+                                            	style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i>
+                                            </input>
+                                        </p></form>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Upload Inside : </p>
                                         <p>
                                         	<form id="uploadInside" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >

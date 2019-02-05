@@ -32,15 +32,14 @@ public class DeleteServlet extends HttpServlet {
 			throws ServletException, IOException 
 	{
 		String path = request.getParameter("filePath");
-		String fileName = path.substring(path.lastIndexOf("/")+1); //CI VA IL +1?
-		String bucket = path.substring(0, path.lastIndexOf("/"));
+
 		
 		BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIQ4MJIXDJXQ2YTHA", "zQKT7bggJHZD4vaU9y41mlc7piYC14E/n9XhQclf\n" + 
 		 		"");
 		final AmazonS3 s3 = AmazonS3Client.builder().withRegion("eu-central-1").withCredentials(new AWSStaticCredentialsProvider(creds)).build();
 	
 		try {
-		    s3.deleteObject(bucket, fileName);
+		    s3.deleteObject("fallbox", path);
 		} catch (AmazonServiceException e) {
 		    System.err.println(e.getErrorMessage());
 		    System.exit(1);

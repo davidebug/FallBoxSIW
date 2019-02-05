@@ -105,7 +105,6 @@ function setCurrentDirectory(fileSelected){
 				},
 			success: function(response) {
 				//get_files(section);
-				alert(currDirectory);
 			},
 			error: function(response) {
 				console.log("Error");
@@ -126,7 +125,6 @@ function setStartDirectory(){
 				},
 			success: function(response) {
 				//get_files(section);
-				alert(currDirectory);
 			},
 			error: function(response) {
 				console.log("Error");
@@ -134,4 +132,105 @@ function setStartDirectory(){
 		});
 }	
 
+$('#download').on('click',function(){
+	var filePath = fileSelected;
+	if(filePath.endsWith("/")){
+		$.ajax({
+			type: "POST",
+			url: "/FallBox/DownloadServlet/*", //servlet per la lista dei file
+			
+			data: {
+					filePath : filePath,
+				},
+			success: function(response) {
+				//get_files(section);
+				alert("Folder created on your Desktop");
+			},
+			error: function(response) {
+				console.log("Error");
+				alert("Not found, please reload.")
+			}
+		});
+
+	}
+	else{
+		window.open("http://fallbox.s3.amazonaws.com/" + filePath);
+	}
+	return false;
 	
+})	;
+
+$('#delete').on('click',function(){
+	var filePath = fileSelected;
+	if(confirm("Do you want to delete" + filePath + "?")){
+		$.ajax({
+			type: "POST",
+			url: "/FallBox/DeleteServlet/*", //servlet per la lista dei file
+			
+			data: {
+					filePath : filePath,
+				},
+			success: function(response) {
+				alert(filePath + " deleted !")
+				
+			},
+			error: function(response) {
+				console.log("Error");
+				alert("Not found, please reload.")
+			}
+		});
+	}
+	
+	return false;
+	
+})	;
+
+$('#createFolder').on('submit', function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$.ajax({
+		    url: "/FallBox/CreateFolderServlet/*",
+		    type: "POST",
+		    data: {
+		        folderName: $("#folderName").val()
+		    },
+		    success: function(response){
+		        alert("Folder successfully created.")
+		    },
+		    error: function(response){
+		    	alert("ERROR");
+		    	
+		    }
+		});
+	});
+
+$('#shareForm').on('submit', function(event){
+	var filePath = fileSelected;
+	alert(filePath);
+	if ($('#canEdit').is(":checked"))
+	{
+	  var canEdit = "true";
+	}
+	else{
+		var canEdit = "false";
+	}
+	event.preventDefault();
+	event.stopPropagation();
+	$.ajax({
+	    url: "/FallBox/PermissionServlet/*",
+	    type: "POST",
+	    data: {
+	        otherUser: $("#emailShared").val(),
+	        canEdit : canEdit,
+	        filePath: filePath
+	        
+	    },
+	    success: function(response){
+	        alert("Content successfully shared.")
+	    },
+	    error: function(response){
+	    	alert("Email not found, retry.");
+	    	
+	    }
+	});
+});
