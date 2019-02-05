@@ -164,7 +164,7 @@
 												<div class="btn btn-light action-button" 
 													style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
-               										<input class="file" type="file" name="FILE" webkitdirectory directory multiple/>
+               										<input class="file" type="file" name="FILE" />
 					
 													<input id = "upload2" class="btn btn-light action-button" type="submit" value="+ Upload" role="button" action=""
                 											style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:8px;border-radius:20px;font-family:'Bungee Inline', cursive;">

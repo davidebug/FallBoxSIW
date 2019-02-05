@@ -41,7 +41,7 @@ public class Container {
 		if(main.getName()!="fallbox")
 			path = new String(main.getName());
 		
-		System.out.println("mi sposto su " + main.getName()); 
+		//System.out.println("mi sposto su " + main.getName()); 
 		ListObjectsRequest listObjectsRequest = 
                 new ListObjectsRequest()
                       .withBucketName("fallbox").withPrefix(path);
@@ -73,7 +73,7 @@ public class Container {
 				}
 				
 			
-			
+			if(!name.endsWith("//")) {
 			if(main.getName().equals(superior) || (main.getName().equals("fallbox") && name.equals(sharespace + "/"))) {
 				
 				Component f = null;
@@ -81,31 +81,34 @@ public class Container {
 					
 					f = new Folder(name,dimension,lastChange,owner);
 					main.add(f);
-					System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
+			//		System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 					refreshContainer(f);
 				}
 				else if(name.equals(owner + "/") && main.getName().equals("fallbox") && !name.equals(main.getName())){
 					
 					f = new Folder(name,dimension,lastChange,owner);
 					main.add(f);
-					System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
+		//			System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 					refreshContainer(f);
 					
 				}
-				else if(!(name.equals(owner + "/")) && !name.equals(main.getName()) ){
+				else if(!(name.endsWith(owner + "/")) && !name.equals(main.getName()) ){
 					f = new File(name,dimension,lastChange,owner);
 					main.add(f);
-					System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
+		//			System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 				}
 				
-				if(main.getName().equals("can_edit")) {
+				if(main.getName().contains("can_edit")) {
 					f.share(sharespace, true);
+					System.out.println(sharespace + " - > can edit" );
 				}
-				else if(main.getName().equals(owner) && !owner.equals(sharespace) && !f.getName().equals("can_edit")){
+				else if(main.getName().contains("_" + owner) && !owner.equals(sharespace) && !f.getName().equals("can_edit")){
 					f.share(sharespace,false);
+					System.out.println(sharespace + " - > can view");
 				}
-				System.out.println("\n");
+		//	System.out.println("\n");
 		
+			}
 			}
 		}
 		

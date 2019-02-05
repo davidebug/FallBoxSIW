@@ -72,7 +72,7 @@ public class ListObjects extends HttpServlet {
 		String json = new Gson().toJson(files);
 		
 		response.getWriter().println(json);
-		System.out.println(json);
+//		System.out.println(json);
 		response.setContentType("text/plain; charset=UTF-8");
 	}
 	

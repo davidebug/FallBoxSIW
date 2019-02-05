@@ -53,11 +53,12 @@ public class ServerHandler {
     {
     	String filePath = folderName + file.getName();
     	boolean permission = true;
-    	
+    	boolean external = false;
     	if(folderName.contains(user + "_")) {
     		permission = false;
     		if(folderName.contains("can_edit")) {
     			try {
+    					external = true;
 	    				S3Object object = s3.getObject("fallbox", filePath);
 	    			}
     			catch(AmazonServiceException e) {
@@ -69,39 +70,60 @@ public class ServerHandler {
     			permission = true;
 	    	}
     	}
-    		if(permission) {
-    			List<String> details = getListOfDetails(filePath,user);
+    	List<String> details = getListOfDetails(filePath,user);
+		String owner = details.get(3);
+    		if(permission && !external) {
     			
-    			
+    			System.out.println("owner " + owner);
+    			System.out.println("inserisco in " + filePath);
 		    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
 		    	s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
+		    	
 		    	for(int i= 4; i<details.size();i++) {
     				String otherUser = details.get(i);
+    				System.out.println(otherUser);
     				if(otherUser.contains("_canEdit")) {
     					String other = otherUser.substring(0,otherUser.indexOf('_'));
-    					System.out.println(other);
-    					shareFile(filePath,other + "/" + other+"_"+user+"/"+"can_edit/" + file.getName(),other);
+    					System.out.println("condivido a" + other);
+    					shareFile(filePath,other + "/" + other+"_"+owner+"/"+"can_edit/" + file.getName(),other,owner);
     				}
     				else {
-    					shareFile(filePath,otherUser + "/" + otherUser+"_"+user+"/" + file.getName(),otherUser);
+    					System.out.println("condivido a " + otherUser);
+    					shareFile(filePath,otherUser + "/" + otherUser+"_"+owner+"/" + file.getName(),otherUser,owner);
     				}
     			}
+		    	 
+		    	
 		    	return true;
     		}
-    		else {
-    			return false;
+    		else if(external) {
+    			System.out.println("condivido a " + owner);
+    			shareFile(filePath, owner +"/" + file.getName(),owner,user);
+    			
+    			s3.putObject(new PutObjectRequest("fallbox", filePath, file));
+    			s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
+    			return true;
     		}
+    		return false;
     }
     
     
-    public static boolean shareFile(String filePath, String destinationPath, String otherUser)
+    public static boolean shareFile(String filePath, String destinationPath, String otherUser,String user)
     {
     	try {    	
     		S3Object object = s3.getObject("fallbox", otherUser + "/");
-    	
-    	
+    		
+    		try {
+    			S3Object objectDes = s3.getObject("fallbox", otherUser + "/" + otherUser+"_"+ user+"/");
+    		}
+    		catch(AmazonServiceException e){
+    			createFolder(otherUser + "/" + otherUser+"_"+ user);
+    			createFolder(otherUser + "/" + otherUser+"_"+ user+"/"+"can_edit");
+    			System.out.println("CARTELLA CREATA");
+    		}
 	    	try {
 	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
+	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
 	    	    return true;
 	    	} 
 	    	catch (AmazonServiceException e) 

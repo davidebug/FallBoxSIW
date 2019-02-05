@@ -115,7 +115,6 @@ function setCurrentDirectory(fileSelected){
 
 function setStartDirectory(){
 	var currDirectory = username + "/";
-
 		$.ajax({
 			type: "POST",
 			url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
