@@ -69,12 +69,6 @@ function get_details(selected) {
 	$('#permissionsBody').html('<tr></tr>');
 	
 	
-	$("'#" + selected +  " ' ").click(function() {
-	   var  choose = $(this).hasClass("highlight");
-	   $("'#" + selected +  " ' ").removeClass("highlight");
-	    if(!choose)
-	            $(this).addClass("highlight");
-	});
 	
 	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
 	$.ajax({
