@@ -69,9 +69,23 @@ public class ServerHandler {
     			permission = true;
 	    	}
     	}
-    		if(permission) {		
+    		if(permission) {
+    			List<String> details = getListOfDetails(filePath,user);
+    			
+    			
 		    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
 		    	s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
+		    	for(int i= 4; i<details.size();i++) {
+    				String otherUser = details.get(i);
+    				if(otherUser.contains("_canEdit")) {
+    					String other = otherUser.substring(0,otherUser.indexOf('_'));
+    					System.out.println(other);
+    					shareFile(filePath,other + "/" + other+"_"+user+"/"+"can_edit/" + file.getName(),other);
+    				}
+    				else {
+    					shareFile(filePath,otherUser + "/" + otherUser+"_"+user+"/" + file.getName(),otherUser);
+    				}
+    			}
 		    	return true;
     		}
     		else {
@@ -150,9 +164,11 @@ public class ServerHandler {
 						details.add(file.getDimension().toString());
 						details.add(file.getLastChange().toString());
 						details.add(file.getOwner());
-						details.addAll(file.getCan_edit());
+						for(String s : file.getCan_edit()) {
+							details.add(s + "_canEdit");
+						}
 						details.addAll(file.getCan_view());
-						System.out.println(file.getName());
+						//System.out.println(file.getName());
 						break;
 						//out.flush();
 					}
@@ -183,6 +199,10 @@ public class ServerHandler {
 				list.add(file.getDimension().toString());
 				list.add(file.getLastChange().toString());
 				list.add(file.getOwner());
+				for(String s : file.getCan_edit()) {
+					list.add(s + "_canEdit");
+				}
+				list.addAll(file.getCan_view());
 				System.out.println(file.getName());
 				break;
 			}
