@@ -33,6 +33,7 @@ public class DetailsServlet extends HttpServlet {
 	{
 		List<String> details = new ArrayList<String>();
 		String fileName = request.getParameter("FILE");
+		
 		String user = (String)request.getSession(false).getAttribute("User");
 		
 		details = ServerHandler.getListOfDetails(fileName, user);		

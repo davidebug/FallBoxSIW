@@ -70,40 +70,14 @@ public class ServerHandler {
     			permission = true;
 	    	}
     	}
-    	List<String> details = getListOfDetails(filePath,user);
-		String owner = details.get(3);
-    		if(permission && !external) {
+
+    		if(permission) {
     			
-    			System.out.println("owner " + owner);
-    			System.out.println("inserisco in " + filePath);
 		    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
 		    	s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
-		    	
-		    	for(int i= 4; i<details.size();i++) {
-    				String otherUser = details.get(i);
-    				System.out.println(otherUser);
-    				if(otherUser.contains("_canEdit")) {
-    					String other = otherUser.substring(0,otherUser.indexOf('_'));
-    					System.out.println("condivido a" + other);
-    					shareFile(filePath,other + "/" + other+"_"+owner+"/"+"can_edit/" + file.getName(),other,owner);
-    				}
-    				else {
-    					System.out.println("condivido a " + otherUser);
-    					shareFile(filePath,otherUser + "/" + otherUser+"_"+owner+"/" + file.getName(),otherUser,owner);
-    				}
-    			}
-		    	 
-		    	
 		    	return true;
     		}
-    		else if(external) {
-    			System.out.println("condivido a " + owner);
-    			shareFile(filePath, owner +"/" + file.getName(),owner,user);
-    			
-    			s3.putObject(new PutObjectRequest("fallbox", filePath, file));
-    			s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
-    			return true;
-    		}
+		    	 
     		return false;
     }
     
@@ -117,12 +91,13 @@ public class ServerHandler {
     			S3Object objectDes = s3.getObject("fallbox", otherUser + "/" + otherUser+"_"+ user+"/");
     		}
     		catch(AmazonServiceException e){
-    			createFolder(otherUser + "/" + otherUser+"_"+ user);
-    			createFolder(otherUser + "/" + otherUser+"_"+ user+"/"+"can_edit");
+    			createFolder(user+"_"+ otherUser);
+    			createFolder(user+"_"+ otherUser+"/"+"can_edit");
     			System.out.println("CARTELLA CREATA");
     		}
 	    	try {
 	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
+	    	    deleteFile(filePath);
 	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
 	    	    return true;
 	    	} 
@@ -172,12 +147,13 @@ public class ServerHandler {
     	
     	for (Component dir : mainFolder)
 		{
-			if (dir.getName().equals(user + "/") && dir instanceof Folder)	 
+			if (dir.getName().contains(user) && dir instanceof Folder)	 
 			{
 				List<Component> userFiles = (dir.getContent());
 				
 				for (Component file : userFiles)
 				{	
+					
 					//HO TROVATO IL FILE CHE CERCAVO
 					if (file.getName().equals(fileName))
 					{
@@ -191,12 +167,13 @@ public class ServerHandler {
 						}
 						details.addAll(file.getCan_view());
 						//System.out.println(file.getName());
-						break;
+						return details;
 						//out.flush();
 					}
 					else if(file instanceof Folder) {
 						details = getDetails(fileName,file);
-						
+						if(details.get(0).equals(fileName));
+							return details;
 					}
 					
 					//aggiungere condizione per l'uscita dal for
@@ -213,11 +190,13 @@ public class ServerHandler {
 		List<String> list = new ArrayList<String>();
 		for (Component file : c.getContent())
 		{	
+			
 			//HO TROVATO IL FILE CHE CERCAVO
 			if (file.getName().equals(fileName))
 			{
-				
+				System.out.println("trovato");
 				list.add(file.getName());
+				
 				list.add(file.getDimension().toString());
 				list.add(file.getLastChange().toString());
 				list.add(file.getOwner());
@@ -225,8 +204,11 @@ public class ServerHandler {
 					list.add(s + "_canEdit");
 				}
 				list.addAll(file.getCan_view());
-				System.out.println(file.getName());
-				break;
+				
+				for(String s : list) {
+					System.out.println(s);;
+				}
+				return list;
 			}
 			else if(file instanceof Folder) {
 				list = getDetails(fileName,file);

@@ -58,10 +58,11 @@ public class Container {
 			
 				String sharespace = name.substring(0,name.indexOf('/'));
 				owner = sharespace;
-				if(name.contains(sharespace + "_")) {
-					String t = name.substring(name.indexOf('_')+1);
+//				System.out.println("Owner ->"+ owner);
+//				System.out.println("File - >" + name);
+				if(sharespace.contains("_")) {
 
-					owner = t.substring(0,t.indexOf('/'));
+					owner = sharespace.substring(0,sharespace.indexOf('_'));
 				}
 
 			
@@ -98,14 +99,18 @@ public class Container {
 		//			System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 				}
 				
-				if(main.getName().contains("can_edit")) {
-					f.share(sharespace, true);
-					System.out.println(sharespace + " - > can edit" );
+				if(f!=null) {
+					if(main.getName().contains("can_edit")) {
+						f.share(sharespace, true);
+						
+					//	System.out.println(sharespace + " - > can edit" );
+					}
+					else if(sharespace.contains("_" + owner) && !owner.equals(sharespace) && !f.getName().equals("can_edit")){
+						f.share(sharespace,false);
+						//System.out.println(sharespace + " - > can view");
+					}
 				}
-				else if(main.getName().contains("_" + owner) && !owner.equals(sharespace) && !f.getName().equals("can_edit")){
-					f.share(sharespace,false);
-					System.out.println(sharespace + " - > can view");
-				}
+				
 		//	System.out.println("\n");
 		
 			}

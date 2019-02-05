@@ -50,7 +50,7 @@ public class ListObjects extends HttpServlet {
 		
 		for (Component c : fallBox)
 		{
-			if (c.getName().equals(user + "/"))
+			if (c.getName().contains(user))
 			{
 				if (kindOfFiles.equals("mySharedSpace"))
 				{
@@ -86,11 +86,11 @@ public class ListObjects extends HttpServlet {
 		{
 			if (c instanceof File)
 			{
-				if (owner == true && (c.getOwner()).equals(user))
+				if (owner == true && (c.getName()).contains(user + "/") && !(c.getName()).contains("_"))
 				{
 					userFiles.add( c);
 				}
-				else if (owner == false && !(c.getOwner().equals(user)))
+				else if (owner == false && (c.getName()).contains("_"))
 				{
 					userFiles.add( c);
 				}
@@ -99,11 +99,11 @@ public class ListObjects extends HttpServlet {
 			{
 				
 				getFiles(user, c, owner);
-				if (owner == true && (c.getOwner()).equals(user))
+				if (owner == true && (c.getName()).contains(user + "/") && !(c.getName()).contains("_"))
 				{
 					userFiles.add( c);
 				}
-				else if (owner == false && !(c.getOwner().equals(user)))
+				else if (owner == false && (c.getName()).contains("_"))
 				{
 					userFiles.add( c);
 				}

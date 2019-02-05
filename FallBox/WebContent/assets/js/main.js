@@ -42,7 +42,7 @@ function get_files(currentFolder) {
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
 				
-					currentFile = file_list[i].replace(username+"/","");
+					currentFile = file_list[i].replace(username,"");
 					var row = "<tr >";
 						row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
 						row += "</tr>";

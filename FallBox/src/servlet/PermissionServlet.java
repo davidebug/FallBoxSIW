@@ -39,9 +39,9 @@ public class PermissionServlet extends HttpServlet {
 		boolean done = false;
 		
 		if (canEdit.equals("true"))
-			done = ServerHandler.shareFile(user+ "/" + path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/" + path, otherUser,user);
+			done = ServerHandler.shareFile(user+ "/" + path, user+"_"+otherUser+"/"+"can_edit/" + path, otherUser,user);
 		else
-			done = ServerHandler.shareFile(user +"/" +  path, otherUser + "/" + otherUser+"_"+user+"/" + path, otherUser,user);
+			done = ServerHandler.shareFile(user +"/" +  path, user+"_"+otherUser+"/" + path, otherUser,user);
 		
 		if(!done) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
