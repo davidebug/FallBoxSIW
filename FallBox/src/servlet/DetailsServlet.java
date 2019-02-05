@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import model.Component;
+import model.Container;
+
 @WebServlet(urlPatterns={"/DetailsServlet/*"})
 public class DetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,7 +39,9 @@ public class DetailsServlet extends HttpServlet {
 		
 		String user = (String)request.getSession(false).getAttribute("User");
 		
-		details = ServerHandler.getListOfDetails(fileName, user);		
+		List<Component> mainFolder = Container.getContainer().getContent(); //AGGIUNTO QUA
+		
+		ServerHandler.getListOfDetails(details, mainFolder, fileName, user);
 		
 		String json = new Gson().toJson(details);
 		response.getWriter().println(json);

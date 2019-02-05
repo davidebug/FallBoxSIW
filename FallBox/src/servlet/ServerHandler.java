@@ -140,81 +140,33 @@ public class ServerHandler {
 		}
     }
     
-    public static List<String> getListOfDetails (String fileName, String user)
+    public static void getListOfDetails (List<String> list, List<Component> mainFolder, String fileName, String user)
     {
-		List<Component> mainFolder = Container.getContainer().getContent();
-		List<String> details = new ArrayList<String>();
+    	List<String> dettagli = new ArrayList<String>();
     	
-    	for (Component dir : mainFolder)
-		{
-			if (dir.getName().contains(user) && dir instanceof Folder)	 
-			{
-				List<Component> userFiles = (dir.getContent());
-				
-				for (Component file : userFiles)
-				{	
-					
-					//HO TROVATO IL FILE CHE CERCAVO
-					if (file.getName().equals(fileName))
-					{
-						
-						details.add(file.getName());
-						details.add(file.getDimension().toString());
-						details.add(file.getLastChange().toString());
-						details.add(file.getOwner());
-						for(String s : file.getCan_edit()) {
-							details.add(s + "_canEdit");
-						}
-						details.addAll(file.getCan_view());
-						//System.out.println(file.getName());
-						return details;
-						//out.flush();
-					}
-					else if(file instanceof Folder) {
-						details = getDetails(fileName,file);
-						if(details.get(0).equals(fileName));
-							return details;
-					}
-					
-					//aggiungere condizione per l'uscita dal for
-					
+    	System.out.println("DATROVARE --> " + fileName);
+    	
+    	
+		for (Component c : mainFolder)
+		{	
+			if (c.getName().contains(user))
+			{	
+				if (c instanceof model.File && c.getName().equals(fileName))
+				{
+					System.out.println("SONO IN --> " + c.getName());
+					System.out.println("TROVATO -->" + c.getName());
+					dettagli.add("TROVATO");
+					list.add(c.getName());
+					list.add(c.getDimension().toString());
+					list.add(c.getLastChange().toString());
+					list.add(c.getOwner());
+				}
+				else if (c instanceof model.Folder)
+				{
+					getListOfDetails(list, c.getContent(), fileName, user);
 				}
 			}
-			
 		}
-    	return details;
     }
     
-    public static List<String> getDetails(String fileName,Component c)
-    {
-		List<String> list = new ArrayList<String>();
-		for (Component file : c.getContent())
-		{	
-			
-			//HO TROVATO IL FILE CHE CERCAVO
-			if (file.getName().equals(fileName))
-			{
-				System.out.println("trovato");
-				list.add(file.getName());
-				
-				list.add(file.getDimension().toString());
-				list.add(file.getLastChange().toString());
-				list.add(file.getOwner());
-				for(String s : file.getCan_edit()) {
-					list.add(s + "_canEdit");
-				}
-				list.addAll(file.getCan_view());
-				
-				for(String s : list) {
-					System.out.println(s);;
-				}
-				return list;
-			}
-			else if(file instanceof Folder) {
-				list = getDetails(fileName,file);
-				
-			}
-		}
-		return list;
-	}
 }
