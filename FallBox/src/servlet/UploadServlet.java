@@ -72,10 +72,15 @@ public class UploadServlet extends HttpServlet {
 			
 			 file.createFile(filePath, items);
 			 
+			 boolean done = false;
+			 done = ServerHandler.uploadFile(file.getFile(), currDirectory,(String) request.getSession(false).getAttribute("User"));
 			 
-				 ServerHandler.uploadFile(file.getFile(), currDirectory);
-			 
+			 if(!done) {
+				 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			 }
+			 else {
 			 response.sendRedirect(request.getContextPath() + "/main.jsp");
+			 }
 		}
         
 		

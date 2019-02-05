@@ -9,8 +9,10 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 
 public class ServerHandler {
 
@@ -40,23 +42,57 @@ public class ServerHandler {
     }
     
 
-    public static void uploadFile(File file, String folderName)
+    public static boolean uploadFile(File file, String folderName, String user)
     {
     	String filePath = folderName + file.getName();
+    	boolean permission = true;
     	
-    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
-    }
-    
-    
-    public static void shareFile(String filePath, String destinationPath)
-    {
-    	try {
-    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
-    	} 
-    	catch (AmazonServiceException e) 
-    	{
-    	    System.err.println(e.getErrorMessage());
-    	    System.exit(1);
+    	if(folderName.contains(user + "_")) {
+    		permission = false;
+    		if(folderName.contains("can_edit")) {
+    			try {
+	    				S3Object object = s3.getObject("fallbox", filePath);
+	    			}
+    			catch(AmazonServiceException e) {
+    		    	    System.err.println(e.getErrorMessage());
+    		    	    permission = false;
+    		    	    return false;
+    				
+    			}
+    			permission = true;
+	    	}
     	}
+    		if(permission) {		
+		    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
+		    	s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
+		    	return true;
+    		}
+    		else {
+    			return false;
+    		}
     }
+    
+    
+    public static boolean shareFile(String filePath, String destinationPath, String otherUser)
+    {
+    	try {    	
+    		S3Object object = s3.getObject("fallbox", otherUser + "/");
+    	
+    	
+	    	try {
+	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
+	    	    return true;
+	    	} 
+	    	catch (AmazonServiceException e) 
+	    	{
+	    	    System.err.println(e.getErrorMessage());
+	    	    return false;
+	    	}
+    	}
+    	catch(AmazonServiceException e) {
+    	    System.err.println(e.getErrorMessage());
+    	    return false;
+    	
+    	}
+    }	
 }

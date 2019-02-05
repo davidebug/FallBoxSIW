@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.amazonaws.services.s3.model.S3Object;
+
 
 @WebServlet(urlPatterns={"/PermissionServlet/*"})
 public class PermissionServlet extends HttpServlet {
@@ -33,11 +35,17 @@ public class PermissionServlet extends HttpServlet {
 		String path = request.getParameter("filePath"); //FILE DA CONDIVIDERE
 		String canEdit = request.getParameter("canEdit");
 		
-		System.out.println(otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/"+path);
+		
+		boolean done = false;
+		
 		if (canEdit.equals("true"))
-			ServerHandler.shareFile(user+ "/" + path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/" + path);
+			done = ServerHandler.shareFile(user+ "/" + path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/" + path, otherUser);
 		else
-			ServerHandler.shareFile(user +"/" +  path, otherUser + "/" + otherUser+"_"+user+"/" + path);
+			done = ServerHandler.shareFile(user +"/" +  path, otherUser + "/" + otherUser+"_"+user+"/" + path, otherUser);
+		
+		if(!done) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 		
 	}
 
