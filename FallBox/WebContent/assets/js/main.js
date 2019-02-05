@@ -205,7 +205,7 @@ $('#createFolder').on('submit', function(event){
 	});
 
 $('#shareForm').on('submit', function(event){
-	var filePath = fileSelected;
+	var filePath = fileSelected.replace(username+"/","");;
 	alert(filePath);
 	if ($('#canEdit').is(":checked"))
 	{

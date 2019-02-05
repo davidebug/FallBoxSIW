@@ -33,10 +33,11 @@ public class PermissionServlet extends HttpServlet {
 		String path = request.getParameter("filePath"); //FILE DA CONDIVIDERE
 		String canEdit = request.getParameter("canEdit");
 		
+		System.out.println(otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/"+path);
 		if (canEdit.equals("true"))
-			ServerHandler.shareFile(path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/");
+			ServerHandler.shareFile(user+ "/" + path, otherUser + "/" + otherUser+"_"+user+"/"+"can_edit/" + path);
 		else
-			ServerHandler.shareFile(path, otherUser + "/" + otherUser+"_"+user+"/");
+			ServerHandler.shareFile(user +"/" +  path, otherUser + "/" + otherUser+"_"+user+"/" + path);
 		
 	}
 
