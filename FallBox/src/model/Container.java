@@ -99,7 +99,7 @@ public class Container {
 		//			System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 				}
 				
-				if(f!=null) {
+				if(f!=null && sharespace.contains("_")) {
 					if(main.getName().contains("can_edit")) {
 						f.share(sharespace, true);
 						

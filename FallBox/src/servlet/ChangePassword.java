@@ -47,6 +47,7 @@ public class ChangePassword extends HttpServlet {
 		
 		if (UserDao.updatePassword(user))
 		{
+			response.sendRedirect("passwordSucess.html");
 			sendEmail(email, newPassword);
 		}
 		else
@@ -93,6 +94,7 @@ public class ChangePassword extends HttpServlet {
 			message.setText("Your new password is " + newPassword);
 
 			Transport.send(message);
+			
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

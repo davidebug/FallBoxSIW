@@ -150,6 +150,18 @@
                                         <p id="dimensions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-dice-d6" aria-hidden="true" style="margin:6px"></i> size :  </p>
                                         <p id="permissions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-users" aria-hidden="true" style="margin:6px"></i> permissions :
                                         	
+                                        	   <table class="table" id="permissionsList">
+                       
+                                        		 <tbody id="permissionsBody">
+                                        	
+                                         			 <tr>
+                                          			</tr>
+                                          
+                                                                      
+                                        		</tbody>
+                                       
+                                    </table>
+                                        	
                                         </p>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-plus" style="margin:6px"></i>Share with : </p>
                                         <form id="shareForm" class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
