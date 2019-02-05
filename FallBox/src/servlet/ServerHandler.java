@@ -151,7 +151,7 @@ public class ServerHandler {
 		{	
 			if (c.getName().contains(user))
 			{	
-				if (c instanceof model.File && c.getName().equals(fileName))
+				if (c.getName().equals(fileName))
 				{
 					System.out.println("SONO IN --> " + c.getName());
 					System.out.println("TROVATO -->" + c.getName());
