@@ -42,7 +42,10 @@ function get_files(currentFolder) {
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
 				
-					currentFile = file_list[i].replace(username,"");
+					currentFile = file_list[i].replace(username+"/","- ");
+					if(currentFile.includes("_"))
+						currentFile = file_list[i].replace(username+"_","- ");
+					
 					var row = "<tr >";
 						row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
 						row += "</tr>";
@@ -63,6 +66,9 @@ function get_details(selected) {
 	
 	fileSelected = selected;
 	setCurrentDirectory(fileSelected);
+	$('#permissionsBody').html('<tr></tr>');
+	
+	
 	
 	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
 	$.ajax({
@@ -76,13 +82,25 @@ function get_details(selected) {
 			if(file_details[0].endsWith("/"))
 				type = "folder";
 			else{
-				type = file_details[0].substring(file_details[0].lastIndexOf("."));
+				type = file_details[0].split('.').pop();
 			}
 			$('#owner').html('<i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i> Owner: &nbsp;' + file_details[3]);
 			$('#type').html('<i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type : &nbsp;'+ type);
 			$('#lastChange').html('<i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change : &nbsp;' + file_details[2]);
 			$('#dimensions').html('<i class="fa fa-dice-d6" aria-hidden="true" style="margin:6px"></i> Size : &nbsp;' + file_details[1]+' &nbsp; Bytes');
-	//		var file_list = ["Saab", "Volvo", "BMW"];
+			
+			if(section == "sharedWithMe"){
+			for (var i = 4; i < file_details.length; i++) {
+					
+						currentPermission = file_details[i].replace(username+"_","- ");
+					
+					var row = "<tr >";
+						row += "<td  >" + file_details[i] +"</td>";				
+						row += "</tr>";
+						
+						$('#fileList tr:last').after(row);
+				}
+			}
 			
 			
 		},
