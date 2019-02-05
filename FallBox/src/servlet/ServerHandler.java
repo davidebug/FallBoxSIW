@@ -160,6 +160,14 @@ public class ServerHandler {
 					list.add(c.getDimension().toString());
 					list.add(c.getLastChange().toString());
 					list.add(c.getOwner());
+					for (String s : c.getCan_edit())
+					{
+						list.add(s + " - Can Edit -");
+					}
+				    for (String s : c.getCan_view())
+				    {
+				    	list.add(s + " - Can View -");
+				    }
 				}
 				else if (c instanceof model.Folder)
 				{
