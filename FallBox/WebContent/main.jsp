@@ -147,7 +147,7 @@
                                         <p id="owner" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i>  Owner :</p>
                                         <p  id="type" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type :</p>
                                         <p id="lastChange" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change :</p>
-                                        <p id="dimensions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-dice-d6" aria-hidden="true" style="margin:6px"></i> size :  </p>
+                                        <p id="dimensions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-th-large" aria-hidden="true" style="margin:6px"></i> size :  </p>
                                         <p id="permissions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-users" aria-hidden="true" style="margin:6px"></i> permissions :
                                         	
                                         	   <table class="table" id="permissionsList">

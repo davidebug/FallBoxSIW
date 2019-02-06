@@ -213,6 +213,7 @@ $('#createFolder').on('submit', function(event){
 		    },
 		    success: function(response){
 		        alert("Folder successfully created.")
+		        window.location.replace("/FallBox/main.jsp");
 		    },
 		    error: function(response){
 		    	alert("ERROR");

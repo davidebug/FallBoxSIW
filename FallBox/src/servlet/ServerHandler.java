@@ -14,9 +14,12 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ListObjectsRequest;
+import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.transfer.MultipleFileDownload;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
@@ -96,9 +99,30 @@ public class ServerHandler {
     			System.out.println("CARTELLA CREATA");
     		}
 	    	try {
+	    		
+	    		if(filePath.endsWith("/")) {
+	    			s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
+		    	    deleteFile(filePath);
+		    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
+		    	    ListObjectsRequest listObjectsRequest = 
+	    	                new ListObjectsRequest()
+	    	                      .withBucketName("fallbox").withPrefix(filePath);
+	    			
+	    			ObjectListing objects = s3.listObjects(listObjectsRequest);
+	    			List<S3ObjectSummary> summaries = objects.getObjectSummaries();
+	    			
+	    			for(S3ObjectSummary s : summaries) {
+	    				String name = s.getKey();
+	    				s3.copyObject("fallbox", name, "fallbox", destinationPath);
+	    	    	    deleteFile(name);
+	    	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
+	    			}	
+	    		}
+	    		else {
 	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
 	    	    deleteFile(filePath);
 	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
+	    		}
 	    	    return true;
 	    	} 
 	    	catch (AmazonServiceException e) 
