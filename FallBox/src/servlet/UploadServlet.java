@@ -44,7 +44,7 @@ public class UploadServlet extends HttpServlet {
 		if(request.getParameter("currDirectory")!= null)
 			currDirectory = request.getParameter("currDirectory");
 		
-		else if (currDirectory != null && !currDirectory.equals("") && currDirectory.endsWith("/"))
+		else if (currDirectory != null && !currDirectory.equals(""))
 		{
 			List<FileItem> items = null;
 			try {
@@ -54,7 +54,7 @@ public class UploadServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-	    	//filePath = "/Users/davide/Desktop/FallBoxFiles/" + request.getSession(false).getAttribute("User") + "/";
+	    	
 			
 			filePath = System.getProperty("user.home") + "/Desktop";
 			
@@ -71,6 +71,8 @@ public class UploadServlet extends HttpServlet {
 		      }
 			
 			 file.createFile(filePath, items);
+		
+			 
 			 
 			 boolean done = false;
 			 done = ServerHandler.uploadFile(file.getFile(), currDirectory,(String) request.getSession(false).getAttribute("User"));

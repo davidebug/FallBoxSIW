@@ -78,15 +78,6 @@
                 <li style="font-family:'Bungee Inline', cursive; "> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-size:18px;padding:0px;margin:8px">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
                
                 <li> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
-            	<li> 
-            		<form id = "createFolder">
-						<div class="btn btn-light action-button" style="border-radius:30px;">
-						<input id = "folderName" class="form-control" style="border-radius:15px;font-size:14px" type="text" placeholder="Folder name"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true">
-                		<input  type="submit" onclick="setStartDirectory();" value="+ Create Folder"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
-                					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;margin:8px;font-family:'Bungee Inline', cursive;">
-                		</div>
-                	</form>	
-                </li>
             </ul>
         </div>
         <div class="page-content-wrapper">
@@ -95,7 +86,7 @@
                 	<form id = "uploadMain" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data">
 						<div class="btn btn-light action-button" style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:10px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
-               				<input id="inputFile1" type="file" name = "FILE" webkitdirectory directory multiple> 
+               				<input id="inputFile1" type="file" name = "FILE" > 
 				
 							<input  id = "upload" type="submit" value="+ Upload"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 					style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;">
@@ -144,11 +135,11 @@
                 						<input id="delete" class="btn btn-light action-button" type="submit" value="Delete X" role="button"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                 							style="background-color:rgb(255, 102, 102);color:rgb(255,255,255);font-size:12px;border-radius:20px;font-family:'Bungee Inline', cursive;margin:10px">
                 						</input>
-                                        <p id="owner" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i>  Owner :</p>
-                                        <p  id="type" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type :</p>
+                                        <p id="owner" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i>  Owner :</p>
+                                        <p  id="type" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type :</p>
                                         <p id="lastChange" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change :</p>
-                                        <p id="dimensions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-th-large" aria-hidden="true" style="margin:6px"></i> size :  </p>
-                                        <p id="permissions" style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-users" aria-hidden="true" style="margin:6px"></i> permissions :
+                                        <p id="dimensions" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-cube" aria-hidden="true" style="margin:6px"></i> size :</p>
+                                        <p id="permissions" style="font-family:'Bungee Inline', cursive;font-size:15px;"> <i class="fa fa-users" aria-hidden="true" style="margin:6px"></i> permissions :
                                         	
                                         	   <table class="table" id="permissionsList">
                        
@@ -162,29 +153,26 @@
                                        
                                     </table>
                                         	
-                                        </p>
                                         <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-plus" style="margin:6px"></i>Share with : </p>
                                         <form id="shareForm" class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
                                             <input id="canEdit" style="margin:4px" type="checkbox" /> 
-                                            <input type="submit" id="share" class="btn btn-light action-button" role="button" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+                                            <button type="submit" id="share" class="btn btn-light action-button" role="button" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
                                             	style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i>
-                                            </input>
+                                            </button>	
                                         </p></form>
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Upload Inside : </p>
+                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Update this file : </p>
                                         <p>
                                         	<form id="uploadInside" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
 												<div class="btn btn-light action-button" 
 													style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
 
-               										<input class="file" type="file" name="FILE" />
+               										<input id ="fileUp" class="file" type="file" name="FILE" />
 					
 													<input id = "upload2" class="btn btn-light action-button" type="submit" value="+ Upload" role="button" action=""
                 											style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:8px;border-radius:20px;font-family:'Bungee Inline', cursive;">
-                									</input>
 												</div>
 						
 											</form>
-                                        </p>
 
                                     </div>
                                 </div>

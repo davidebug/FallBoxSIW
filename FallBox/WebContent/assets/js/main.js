@@ -5,9 +5,11 @@ var section = "";
 
 $(document).ready(function(){
 
+	$("html,body").animate({scrollTop: 0}, 100);
 	get_files("mySharedSpace");
 	section = "mySharedSpace";
 	setStartDirectory();
+		  
 	
 });
 
@@ -25,8 +27,9 @@ $('#sharedWithMe').on('click', function(){
 });
 
 function get_files(currentFolder) {
-	$('#fileBody').html('<tr></tr>');
 	
+	$('#fileBody').html('<tr></tr>');
+	$('#sidebar-wrapper2').css('visibility','hidden');
 
 	$.ajax({
 		type: "GET",
@@ -42,15 +45,15 @@ function get_files(currentFolder) {
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
 				
-					currentFile = file_list[i].replace(username+"/","- ");
-					if(currentFile.includes("_"))
-						currentFile = file_list[i].replace(username+"_","- ");
-					
-					var row = "<tr >";
-						row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
-						row += "</tr>";
-						
-						$('#fileList tr:last').after(row);
+					currentFile = file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),"");
+
+					if(currentFile != ""){
+						var row = "<tr >";
+							row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'> - " + currentFile + "</td>";				
+							row += "</tr>";
+							
+							$('#fileList tr:last').after(row);
+					}		
 				}
 			
 		},
@@ -69,14 +72,17 @@ function get_details(selected) {
 	$('#permissionsBody').html('<tr></tr>');
 	
 	
-	
-	//$("'#"+selected+"'").css('background-color','rgb(0,0,0)')
+//	$("#" + fileSelected).css("background-color","green");
 	$.ajax({
 		type: "GET",
 		url: "/FallBox/DetailsServlet/*", //servlet per la lista dei file
 		data: {FILE: selected},
 		success: function(response) {
-			$('#sidebar-wrapper2').css('visibility','visible')
+			
+			
+		//	$( "#sidebar-wrapper2" ).toggle( "slide" );
+			$('#sidebar-wrapper2').css('visibility','visible');
+			
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_details = files.trim().split(",");
 			if(file_details[0].endsWith("/"))
@@ -87,20 +93,19 @@ function get_details(selected) {
 			$('#owner').html('<i class="fa fa-user-circle" aria-hidden="true" style="margin:6px"></i> Owner: &nbsp;' + file_details[3]);
 			$('#type').html('<i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type : &nbsp;'+ type);
 			$('#lastChange').html('<i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change : &nbsp;' + file_details[2]);
-			$('#dimensions').html('<i class="fa fa-dice-d6" aria-hidden="true" style="margin:6px"></i> Size : &nbsp;' + file_details[1]+' &nbsp; Bytes');
+			$('#dimensions').html('<i class="fa fa-cube" aria-hidden="true" style="margin:6px"></i> Size : &nbsp;' + file_details[1]+' &nbsp; Bytes');
 			
-			if(section == "sharedWithMe"){
 			for (var i = 4; i < file_details.length; i++) {
 					
-						currentPermission = file_details[i].replace(username+"_","- ");
+						var tmp = file_details[i].replace(file_details[3],"");
+						var currentPermission = tmp.replace("_","");
 					
 					var row = "<tr >";
-						row += "<td  >" + file_details[i] +"</td>";				
+						row += "<td  >" + currentPermission +"</td>";				
 						row += "</tr>";
 						
-						$('#fileList tr:last').after(row);
+						$('#permissionsList tr:last').after(row);
 				}
-			}
 			
 			
 		},
@@ -113,7 +118,6 @@ function get_details(selected) {
 function setCurrentDirectory(fileSelected){
 	
 	var currDirectory = fileSelected;
-	if(fileSelected.endsWith("/")){
 		$.ajax({
 			type: "POST",
 			url: "/FallBox/UploadServlet/*", //servlet per la lista dei file
@@ -123,12 +127,12 @@ function setCurrentDirectory(fileSelected){
 				},
 			success: function(response) {
 				//get_files(section);
+				
 			},
 			error: function(response) {
 				console.log("Error");
 			}
-		});
-	}	
+		});	
 }	
 
 function setStartDirectory(){
@@ -189,7 +193,7 @@ $('#delete').on('click',function(){
 				},
 			success: function(response) {
 				alert(filePath + " deleted !")
-				
+				window.location.replace("/FallBox/main.jsp");
 			},
 			error: function(response) {
 				console.log("Error");
@@ -244,7 +248,8 @@ $('#shareForm').on('submit', function(event){
 	        
 	    },
 	    success: function(response){
-	        alert("Content successfully shared.")
+	        alert("Content successfully shared.");
+	        $("#emailShared").val("");
 	    },
 	    error: function(response){
 	    	alert("Email not found, retry.");

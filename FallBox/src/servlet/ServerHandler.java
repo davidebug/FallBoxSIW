@@ -54,10 +54,15 @@ public class ServerHandler {
 
     public static boolean uploadFile(File file, String folderName, String user)
     {
-    	String filePath = folderName + file.getName();
+    	String filePath = null;
+    	if(folderName.contains("_"))
+    		filePath = folderName;
+    	else	
+    		filePath = folderName + file.getName();
+    	
     	boolean permission = true;
     	boolean external = false;
-    	if(folderName.contains(user + "_")) {
+    	if(folderName.contains("_" + user)) {
     		permission = false;
     		if(folderName.contains("can_edit")) {
     			try {
@@ -99,30 +104,30 @@ public class ServerHandler {
     			System.out.println("CARTELLA CREATA");
     		}
 	    	try {
-	    		
-	    		if(filePath.endsWith("/")) {
-	    			s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
-		    	    deleteFile(filePath);
-		    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
-		    	    ListObjectsRequest listObjectsRequest = 
-	    	                new ListObjectsRequest()
-	    	                      .withBucketName("fallbox").withPrefix(filePath);
-	    			
-	    			ObjectListing objects = s3.listObjects(listObjectsRequest);
-	    			List<S3ObjectSummary> summaries = objects.getObjectSummaries();
-	    			
-	    			for(S3ObjectSummary s : summaries) {
-	    				String name = s.getKey();
-	    				s3.copyObject("fallbox", name, "fallbox", destinationPath);
-	    	    	    deleteFile(name);
-	    	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
-	    			}	
-	    		}
-	    		else {
+//	    		
+//	    		if(filePath.endsWith("/")) {
+//	    			s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
+//		    	    deleteFile(filePath);
+//		    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
+//		    	    ListObjectsRequest listObjectsRequest = 
+//	    	                new ListObjectsRequest()
+//	    	                      .withBucketName("fallbox").withPrefix(filePath);
+//	    			
+//	    			ObjectListing objects = s3.listObjects(listObjectsRequest);
+//	    			List<S3ObjectSummary> summaries = objects.getObjectSummaries();
+//	    			
+//	    			for(S3ObjectSummary s : summaries) {
+//	    				String name = s.getKey();
+//	    				s3.copyObject("fallbox", name, "fallbox", destinationPath);
+//	    	    	    deleteFile(name);
+//	    	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
+//	    			}	
+//	    		}
+//	    		else {
 	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
 	    	    deleteFile(filePath);
 	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
-	    		}
+//	    		}
 	    	    return true;
 	    	} 
 	    	catch (AmazonServiceException e) 
@@ -136,6 +141,7 @@ public class ServerHandler {
     	    return false;
     	
     	}
+    	
     }
     
     public static void downloadFile(String path)
@@ -190,6 +196,7 @@ public class ServerHandler {
 					}
 				    for (String s : c.getCan_view())
 				    {
+				    	System.out.println(s);
 				    	list.add(s + " - Can View -");
 				    }
 				}
