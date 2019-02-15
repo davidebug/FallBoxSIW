@@ -160,20 +160,21 @@
                                             	style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i>
                                             </button>	
                                         </p></form>
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Update this file : </p>
-                                        <p>
-                                        	<form id="uploadInside" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
-												<div class="btn btn-light action-button" 
-													style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
-
-               										<input id ="fileUp" class="file" type="file" name="FILE" />
-					
-													<input id = "upload2" class="btn btn-light action-button" type="submit" value="+ Upload" role="button" action=""
-                											style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:8px;border-radius:20px;font-family:'Bungee Inline', cursive;">
-												</div>
+	                                        <div id="update">
+	                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Update this file : </p>
+	                                        <p>
+	                                        	<form id="uploadInside" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
+													<div class="btn btn-light action-button" 
+														style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:6px;border-radius:25px;font-family:'Bungee Inline', cursive;">
+	
+	               										<input id ="fileUp" class="file" type="file" name="FILE" />
 						
-											</form>
-
+														<input id = "upload2" class="btn btn-light action-button" type="submit" value="+ Upload" role="button" action=""
+	                											style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-size:8px;border-radius:20px;font-family:'Bungee Inline', cursive;">
+													</div>
+							
+												</form>
+											</div>
                                     </div>
                                 </div>
                             </div>

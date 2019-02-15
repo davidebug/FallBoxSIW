@@ -9,7 +9,8 @@ $(document).ready(function(){
 	get_files("mySharedSpace");
 	section = "mySharedSpace";
 	setStartDirectory();
-		  
+	$('#update').css('visibility','hidden');
+	
 	
 });
 
@@ -17,12 +18,14 @@ $('#mySharedSpace').on('click', function(){
 
     get_files("mySharedSpace");
     section= "mySharedSpace";
+    $('#update').css('visibility','hidden');
 	
 });
 
 $('#sharedWithMe').on('click', function(){
     get_files("sharedWithMe");
     section= "mySharedSpace";
+    $('#update').css('visibility','visible');
     
 });
 
@@ -70,7 +73,6 @@ function get_details(selected) {
 	fileSelected = selected;
 	setCurrentDirectory(fileSelected);
 	$('#permissionsBody').html('<tr></tr>');
-	
 	
 //	$("#" + fileSelected).css("background-color","green");
 	$.ajax({
@@ -182,14 +184,14 @@ $('#download').on('click',function(){
 })	;
 
 $('#delete').on('click',function(){
-	var filePath = fileSelected;
-	if(confirm("Do you want to delete" + filePath + "?")){
+	var filePath = fileSelected.substring(fileSelected.lastIndexOf("/")+1);
+	if(confirm("Do you want to delete " + filePath + " ?")){
 		$.ajax({
 			type: "POST",
 			url: "/FallBox/DeleteServlet/*", //servlet per la lista dei file
 			
 			data: {
-					filePath : filePath,
+					filePath : fileSelected,
 				},
 			success: function(response) {
 				alert(filePath + " deleted !")
@@ -197,7 +199,7 @@ $('#delete').on('click',function(){
 			},
 			error: function(response) {
 				console.log("Error");
-				alert("Not found, please reload.")
+				alert("You are not allowed to delete this shared file.")
 			}
 		});
 	}

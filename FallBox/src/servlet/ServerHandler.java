@@ -104,28 +104,9 @@ public class ServerHandler {
     			System.out.println("CARTELLA CREATA");
     		}
 	    	try {
-//	    		
-//	    		if(filePath.endsWith("/")) {
-//	    			s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
-//		    	    deleteFile(filePath);
-//		    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
-//		    	    ListObjectsRequest listObjectsRequest = 
-//	    	                new ListObjectsRequest()
-//	    	                      .withBucketName("fallbox").withPrefix(filePath);
-//	    			
-//	    			ObjectListing objects = s3.listObjects(listObjectsRequest);
-//	    			List<S3ObjectSummary> summaries = objects.getObjectSummaries();
-//	    			
-//	    			for(S3ObjectSummary s : summaries) {
-//	    				String name = s.getKey();
-//	    				s3.copyObject("fallbox", name, "fallbox", destinationPath);
-//	    	    	    deleteFile(name);
-//	    	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
-//	    			}	
-//	    		}
-//	    		else {
+
 	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
-	    	    deleteFile(filePath);
+	    	    deleteFile(filePath,user);
 	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
 //	    		}
 	    	    return true;
@@ -159,15 +140,37 @@ public class ServerHandler {
 		}
     }
     
-    public static void deleteFile(String path)
+    public static boolean deleteFile(String path,String user)
     {
     	try {
-		    s3.deleteObject("fallbox", path);
+    		boolean permission = true;
+        	boolean external = false;
+        	if(path.contains("_" + user)) {
+        		permission = false;
+        		if(path.contains("can_edit")) {
+        			try {
+        					external = true;
+    	    				S3Object object = s3.getObject("fallbox", path);
+    	    			}
+        			catch(AmazonServiceException e) {
+        		    	    System.err.println(e.getErrorMessage());
+        		    	    permission = false;
+        		    	    return false;
+        				
+        			}
+        			permission = true;
+    	    	}
+        	}
+        	if(permission) {
+        		s3.deleteObject("fallbox", path);
+        		return true;
+        	}	
 		} catch (AmazonServiceException e) {
 		    System.err.println(e.getErrorMessage());
-
-		    System.exit(1);
+		    return false;
+		    
 		}
+    	return false;
     }
     
     public static void getListOfDetails (List<String> list, List<Component> mainFolder, String fileName, String user)

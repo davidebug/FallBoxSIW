@@ -27,7 +27,9 @@ public class DeleteServlet extends HttpServlet {
 	{
 		String path = request.getParameter("filePath");
 		
-		ServerHandler.deleteFile(path);
+		boolean done = ServerHandler.deleteFile(path,(String) request.getSession(false).getAttribute("User"));
+		if(!done)
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 
 }
