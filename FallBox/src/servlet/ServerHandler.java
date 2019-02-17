@@ -52,13 +52,13 @@ public class ServerHandler {
     }
     
 
-    public static boolean uploadFile(File file, String folderName, String user)
+    public static boolean uploadFile(InputStream toLoad, String fileName, String folderName, String user)
     {
     	String filePath = null;
     	if(folderName.contains("_"))
     		filePath = folderName;
     	else	
-    		filePath = folderName + file.getName();
+    		filePath = folderName + fileName;
     	
     	boolean permission = true;
     	boolean external = false;
@@ -81,7 +81,7 @@ public class ServerHandler {
 
     		if(permission) {
     			
-		    	s3.putObject(new PutObjectRequest("fallbox", filePath, file));
+		    	s3.putObject(new PutObjectRequest("fallbox", filePath, toLoad, null));
 		    	s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
 		    	return true;
     		}

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,12 +14,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import org.apache.commons.io.FilenameUtils;
 
 @WebServlet(urlPatterns={"/UploadServlet/*"})
 public class UploadServlet extends HttpServlet {
@@ -54,13 +50,17 @@ public class UploadServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+	    	InputStream toLoad = items.get(0).getInputStream();
+		
+	    	String fileName = items.get(0).getName();
+	    	fileName = FilenameUtils.getName(fileName);
 	    	
+	    	
+//			filePath = System.getProperty("user.home") + "/Desktop";
 			
-			filePath = System.getProperty("user.home") + "/Desktop";
+//	    	FileCreator file;
 			
-	    	FileCreator file;
-			
-			file = new FileCreator();
+//			file = new FileCreator();
 			
 			//se non c'è un file da caricare
 			if( !ServletFileUpload.isMultipartContent(request) ) {
@@ -70,12 +70,12 @@ public class UploadServlet extends HttpServlet {
 		         return;
 		      }
 			
-			 file.createFile(filePath, items);
+//			 file.createFile(filePath, items);
 		
-			 
+			
 			 
 			 boolean done = false;
-			 done = ServerHandler.uploadFile(file.getFile(), currDirectory,(String) request.getSession(false).getAttribute("User"));
+			 done = ServerHandler.uploadFile(toLoad, fileName, currDirectory,(String) request.getSession(false).getAttribute("User"));
 			 
 			 if(!done) {
 				 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
