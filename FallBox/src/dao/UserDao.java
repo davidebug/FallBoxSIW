@@ -14,6 +14,7 @@ public class UserDao {
 	private static String logInString = "select * from User where Email = ? and Password = ?";
 	private static String updatePasswordString = "update User set Password = ? where Email = ?";
 	private static String updateEmailString = "update User set Email = ? where Email = ? and Password = ?";
+	private static String deleteUser = "delete from User where Email = ?";
 	
 	private static void initConnection()
 	{
@@ -121,11 +122,38 @@ public class UserDao {
 		return 0;
 	}
 	
+	public static boolean deleteUser(User user)
+	{
+		initConnection();
+		String email = user.getEmail();
+		
+		if (!checkEmail(email))
+		{
+			return false;
+		}
+		
+		try
+		{
+			PreparedStatement pStatement = connection.prepareStatement(deleteUser);
+			pStatement.setString(1, email);
+			ResultSet result = pStatement.executeQuery();
+			
+			if (result.next())
+			{
+				return true;	//ELIMINAZIONE AVVENUTA CON SUCCESSO
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 	
 	//
 	//METODO DI UTILITA'
 	//
-	public static boolean checkEmail(String email) 
+	private static boolean checkEmail(String email) 
 	{
 		
 		String getStatement = "select * from User where Email = ?";
