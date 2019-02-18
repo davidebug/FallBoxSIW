@@ -73,7 +73,7 @@
 	        </div>    
     	</nav>
     <div id="wrapper" style="margin:10px;">
-        <div id="sidebar-wrapper" style="background-color:rgba(255,255,255,0); ">
+        <div id="sidebar-wrapper" style="background-color:rgb(255,255,255); ">
             <ul class="sidebar-nav" >
                 <li id="sharedSpace" style="border-radius:8px"> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive; font-size:18px;padding:0px;margin:8px;border-radius:8px;">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
                
