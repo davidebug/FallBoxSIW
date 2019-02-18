@@ -150,27 +150,18 @@ public class ServerHandler {
     {
     	try {
     		boolean permission = true;
-        	boolean external = false;
         	if(path.contains("_" + user)) {
         		permission = false;
-        		if(path.contains("can_edit")) {
-        			try {
-        					external = true;
-    	    				S3Object object = s3.getObject("fallbox", path);
-    	    			}
-        			catch(AmazonServiceException e) {
-        		    	    System.err.println(e.getErrorMessage());
-        		    	    permission = false;
-        		    	    return false;
-        				
-        			}
-        			permission = true;
-    	    	}
+        		
         	}
+        	else
+        		permission = true;
+        	
         	if(permission) {
         		s3.deleteObject("fallbox", path);
         		return true;
         	}	
+        	
 		} catch (AmazonServiceException e) {
 		    System.err.println(e.getErrorMessage());
 		    return false;
