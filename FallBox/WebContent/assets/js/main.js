@@ -2,6 +2,7 @@
 var username = $('#username').text();
 var fileSelected = username + "/";
 var section = "";
+var ownerSelected = "";
 
 $(document).ready(function(){
 
@@ -10,7 +11,7 @@ $(document).ready(function(){
 	section = "mySharedSpace";
 	setStartDirectory();
 	$('#update').css('visibility','hidden');
-	
+	$('#editable').css('visibility','hidden');
 	
 });
 
@@ -19,14 +20,14 @@ $('#mySharedSpace').on('click', function(){
     get_files("mySharedSpace");
     section= "mySharedSpace";
     $('#update').css('visibility','hidden');
-	
+    $('#editable').css('visibility','hidden');
 });
 
 $('#sharedWithMe').on('click', function(){
     get_files("sharedWithMe");
     section= "mySharedSpace";
-    $('#update').css('visibility','visible');
-    
+    $('#editable').css('visibility','hidden');
+    $('#update').css('visibility','hidden');
 });
 
 function get_files(currentFolder) {
@@ -84,6 +85,7 @@ function get_details(selected) {
 			
 		//	$( "#sidebar-wrapper2" ).toggle( "slide" );
 			$('#sidebar-wrapper2').css('visibility','visible');
+			$('#editable').css('visibility','visible');
 			
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_details = files.trim().split(",");
@@ -96,6 +98,10 @@ function get_details(selected) {
 			$('#type').html('<i class="fa fa-file" aria-hidden="true" style="margin:6px"></i> Type : &nbsp;'+ type);
 			$('#lastChange').html('<i class="fa fa-clock-o" aria-hidden="true" style="margin:6px"></i> last change : &nbsp;' + file_details[2]);
 			$('#dimensions').html('<i class="fa fa-cube" aria-hidden="true" style="margin:6px"></i> Size : &nbsp;' + file_details[1]+' &nbsp; Bytes');
+			$('#editable').css('visibility','visible');
+			$('#update').css('visibility','visible');
+			
+			ownerSelected = file_details[3];
 			
 			for (var i = 4; i < file_details.length; i++) {
 					
@@ -107,6 +113,15 @@ function get_details(selected) {
 						row += "</tr>";
 						
 						$('#permissionsList tr:last').after(row);
+						
+						
+						if (currentPermission === (username + " - Can View -") ){
+							$('#editable').css('visibility','hidden');
+							$('#update').css('visibility','hidden');
+						}
+						if(username != ownerSelected){
+							$('#editable').css('visibility','hidden');
+						}
 				}
 			
 			
@@ -115,6 +130,7 @@ function get_details(selected) {
 			console.log("Error");
 		}
 	});
+	
 }
 
 function setCurrentDirectory(fileSelected){
@@ -229,7 +245,7 @@ $('#createFolder').on('submit', function(event){
 	});
 
 $('#shareForm').on('submit', function(event){
-	var filePath = fileSelected.replace(username+"/","");;
+	var filePath = fileSelected;
 
 	if ($('#canEdit').is(":checked"))
 	{
@@ -238,26 +254,33 @@ $('#shareForm').on('submit', function(event){
 	else{
 		var canEdit = "false";
 	}
-	event.preventDefault();
-	event.stopPropagation();
-	$.ajax({
-	    url: "/FallBox/PermissionServlet/*",
-	    type: "POST",
-	    data: {
-	        otherUser: $("#emailShared").val(),
-	        canEdit : canEdit,
-	        filePath: filePath
-	        
-	    },
-	    success: function(response){
-	        alert("Content successfully shared.");
-	        $("#emailShared").val("");
-	    },
-	    error: function(response){
-	    	alert("Email not found, retry.");
-	    	
-	    }
-	});
+	if(ownerSelected != $("#emailShared").val()){
+		event.preventDefault();
+		event.stopPropagation();
+		$.ajax({
+		    url: "/FallBox/PermissionServlet/*",
+		    type: "POST",
+		    data: {
+		        otherUser: $("#emailShared").val(),
+		        canEdit : canEdit,
+		        filePath: filePath,
+		        owner : ownerSelected
+		        
+		    },
+		    success: function(response){
+		        alert("Content successfully shared.");
+		        $("#emailShared").val("");
+		    },
+		    error: function(response){
+		    	alert("Email not found, retry.");
+		    	
+		    }
+		});
+	}
+	else{
+		alert("You selected the current owner, please retry.");
+		return false;
+	}	
 });
 
 

@@ -64,6 +64,8 @@ public class ServerHandler {
     	boolean external = false;
     	if(folderName.contains("_" + user)) {
     		permission = false;
+    		System.out.println("FILENAME -- >" + fileName);
+    		System.out.println("FILEPATH -- >" + filePath);
     		if(folderName.contains("can_edit")) {
     			try {
     					external = true;
@@ -79,7 +81,7 @@ public class ServerHandler {
 	    	}
     	}
 
-    		if(permission) {
+    		if(permission && fileName.equals(filePath.substring(filePath.lastIndexOf("/")+1))) {
     			
 		    	s3.putObject(new PutObjectRequest("fallbox", filePath, toLoad, null));
 		    	s3.setObjectAcl("fallbox", filePath, CannedAccessControlList.PublicRead);
@@ -96,7 +98,7 @@ public class ServerHandler {
     		S3Object object = s3.getObject("fallbox", otherUser + "/");
     		
     		try {
-    			S3Object objectDes = s3.getObject("fallbox", otherUser + "/" + otherUser+"_"+ user+"/");
+    			S3Object objectDes = s3.getObject("fallbox", user+"_"+ otherUser+"/");
     		}
     		catch(AmazonServiceException e){
     			createFolder(user+"_"+ otherUser);
@@ -104,10 +106,14 @@ public class ServerHandler {
     			System.out.println("CARTELLA CREATA");
     		}
 	    	try {
-
+	    		
+	    		
+	    		
 	    	    s3.copyObject("fallbox", filePath, "fallbox", destinationPath);
-	    	    deleteFile(filePath,user);
+	    	    
 	    	    s3.setObjectAcl("fallbox", destinationPath, CannedAccessControlList.PublicRead);
+	    	    if(filePath.contains(user+"/") || filePath.contains(user+"_"+otherUser + "/"))
+	    	    	deleteFile(filePath,user);
 //	    		}
 	    	    return true;
 	    	} 

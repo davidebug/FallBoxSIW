@@ -151,16 +151,9 @@
                                                                       
                                         		</tbody>
                                        
-                                    </table>
-                                        	
-                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-user-plus" style="margin:6px"></i>Share with : </p>
-                                        <form id="shareForm" class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" ><p style="font-size:16px; margin:4px"  > Can edit
-                                            <input id="canEdit" style="margin:4px" type="checkbox" /> 
-                                            <button type="submit" id="share" class="btn btn-light action-button" role="button" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
-                                            	style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i>
-                                            </button>	
-                                        </p></form>
-	                                        <div id="update">
+                                    			</table>
+                                    	
+                                    	<div id="update">
 	                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;"><i class="fa fa-arrow-up" style="margin:6px"></i>Update this file : </p>
 	                                        <p>
 	                                        	<form id="uploadInside" action = "/FallBox/UploadServlet/*" method = "POST" enctype = "multipart/form-data" >
@@ -175,6 +168,20 @@
 							
 												</form>
 											</div>
+												
+                                        <div id="editable">	
+                                        <p style="font-family:'Bungee Inline', cursive;font-size:15px;margin:10px;"><i class="fa fa-user-plus" style="margin:6px"></i>Share with : </p>
+                                        <form id="shareForm" class="form-group"><input class="form-control" id="emailShared" type="email" name="email" placeholder="Email" style="border-radius:15px" >
+	                                        <p style="font-size:16px; margin:4px"  > Can edit
+	                                            <input id="canEdit" style="margin:4px" type="checkbox" /> 
+	                                            <button type="submit" id="share" class="btn btn-light action-button" role="button" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
+	                                            	style="background-color:rgb(59,158,64);color:rgb(255,255,255);font-family:'Bungee Inline';font-size:13px;border-radius:20px;margin:10px">&nbsp;Share&nbsp;<i class="fa fa-arrow-right" aria-hidden="true" style="margin:6px"></i>
+	                                            </button>	
+	                                        </p>
+                                        </form>
+                                        </div>
+	                                        
+											
                                     </div>
                                 </div>
                             </div>
