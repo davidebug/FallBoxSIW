@@ -62,22 +62,22 @@
      
 </head>
 
-<body>
+<body style="/*background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20%2848%29.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;*/">
 
 		
-	    <nav class="navbar fixed-top navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;height:93px">
-	        <div class="container"><a class="navbar-brand" href="index.jsp" style="font-size:25px;font-family:'Bungee Shade', cursive;padding:0px;"><img class="img-fluid" src="assets/img/officialIcona2018Best.png" data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="/*display:block;*/width:56px;/*margin:0px;*//*margin-left:auto;*//*margin-right:auto;*//*height:37px;*//*padding:0px;*/font-size:30px;">&nbsp; Fall Box</a>
+	    <nav class="navbar fixed-top navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;height:93px;">
+	        <div class="container"><a class="navbar-brand" href="index.jsp" style="font-size:25px;font-family:'Bungee Shade', cursive;padding:0px;"><img class="img-fluid" src="assets/img/officialIcona2018Best.png" data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="width:56px;/*margin:0px;*//*margin-left:auto;*//*margin-right:auto;*//*height:37px;*//*padding:0px;*/font-size:30px;">&nbsp; Fall Box</a>
 	            <button
 	                class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 	                <div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"><a href="LogoutServlet" id = "logout "class="login">Log out</a> <a class="btn btn-light action-button" id="username" role="button" href="userPage.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);"><%=username%></a>  &nbsp;<i class="fa fa-cog"></i> &nbsp;</span> </div>
 	        </div>    
     	</nav>
-    <div id="wrapper">
-        <div id="sidebar-wrapper" style="background-color:rgb(255,255,255);">
-            <ul class="sidebar-nav">
-                <li style="font-family:'Bungee Inline', cursive; "> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-size:18px;padding:0px;margin:8px">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
+    <div id="wrapper" style="margin:10px;">
+        <div id="sidebar-wrapper" style="background-color:rgba(255,255,255,0); ">
+            <ul class="sidebar-nav" >
+                <li id="sharedSpace" style="border-radius:8px"> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive; font-size:18px;padding:0px;margin:8px;border-radius:8px;">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
                
-                <li> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
+                <li id="withMe" style="border-radius:8px"> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px;border-radius:8px;">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
             </ul>
         </div>
         <div class="page-content-wrapper">
@@ -98,7 +98,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="table-responsive">
-                                    <table class="table" id="fileList">
+                                    <table class="table" id="fileList" >
                                         <thead>
                                             <tr>
                                                 <th>Name</th>

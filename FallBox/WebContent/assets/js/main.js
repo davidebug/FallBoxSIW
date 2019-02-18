@@ -12,22 +12,34 @@ $(document).ready(function(){
 	setStartDirectory();
 	$('#update').css('visibility','hidden');
 	$('#editable').css('visibility','hidden');
-	
+	$('#sharedSpace').css('background-color', 'rgb(59,158,64)');
+	$('#mySharedSpace').css('color','white');
 });
 
 $('#mySharedSpace').on('click', function(){
-
-    get_files("mySharedSpace");
-    section= "mySharedSpace";
-    $('#update').css('visibility','hidden');
-    $('#editable').css('visibility','hidden');
+	if(!$('#loader').hasClass('loading')){
+	    get_files("mySharedSpace");
+	    section= "mySharedSpace";
+	    $('#update').css('visibility','hidden');
+	    $('#editable').css('visibility','hidden');
+	    $('#sharedSpace').css('background-color', 'rgb(59,158,64)');
+	    $('#sharedWithMe').css('color','rgb(59,158,64)');
+	    $('#withMe').css('background-color', 'rgb(255,255,255)');
+	    $('#mySharedSpace').css('color','white');
+	}
 });
 
 $('#sharedWithMe').on('click', function(){
-    get_files("sharedWithMe");
-    section= "mySharedSpace";
-    $('#editable').css('visibility','hidden');
-    $('#update').css('visibility','hidden');
+	if(!$('#loader').hasClass('loading')){
+	    get_files("sharedWithMe");
+	    section= "mySharedSpace";
+	    $('#editable').css('visibility','hidden');
+	    $('#update').css('visibility','hidden');
+	    $('#withMe').css('background-color', 'rgb(59,158,64)');
+	    $('#mySharedSpace').css('color','rgb(59,158,64)');
+	    $('#sharedSpace').css('background-color', 'rgb(255,255,255)');
+	    $('#sharedWithMe').css('color','white');
+	}    
 });
 
 function get_files(currentFolder) {
@@ -42,18 +54,21 @@ function get_files(currentFolder) {
 		data: {currentFolder: currentFolder},
 		beforeSend: function(){
 			$('#loader').css('visibility','visible');
+			$('#loader').addClass('loading');
 		},
 		success: function(response) {
+			$('#loader').removeClass('loading');
 			$('#loader').css('visibility','hidden');
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
 				
 					currentFile = file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),"");
-
+					tmp = file_list[i].replace(/\//g,'');
+					id= tmp.replace(/@/g,'');
 					if(currentFile != ""){
 						var row = "<tr >";
-							row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'> - " + currentFile + "</td>";				
+							row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "','"+ id+"')  class='btn primary-btn'>" + currentFile + "</td>";				
 							row += "</tr>";
 							
 							$('#fileList tr:last').after(row);
@@ -69,16 +84,25 @@ function get_files(currentFolder) {
 	
 }
 
-function get_details(selected) {
+function get_details(selected,id) {
+	
+	if(fileSelected != username + "/"){
+		var current = document.getElementById(fileSelected);
+		current.style.background = "white";
+		current.style.color = "black";
+	}
 	
 	fileSelected = selected;
 	setCurrentDirectory(fileSelected);
 	$('#permissionsBody').html('<tr></tr>');
 	
-//	$("#" + fileSelected).css("background-color","green");
+	current = document.getElementById(fileSelected);
+	current.style.background = "rgb(102, 153, 102)";
+	current.style.color = "white";
+	
 	$.ajax({
 		type: "GET",
-		url: "/FallBox/DetailsServlet/*", //servlet per la lista dei file
+		url: "/FallBox/DetailsServlet/*", 
 		data: {FILE: selected},
 		success: function(response) {
 			
