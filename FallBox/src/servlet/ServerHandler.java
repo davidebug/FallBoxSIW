@@ -170,6 +170,25 @@ public class ServerHandler {
     	return false;
     }
     
+//   
+//    ELIMINA TUTTE LE CARTELLE DI CUI user E' PROPRIETARIO
+//    
+    public static boolean deleteAll (String user)
+    {
+    	ListObjectsRequest listObjectsRequest = 
+                new ListObjectsRequest()
+                      .withBucketName("fallbox").withPrefix(user);
+		
+		ObjectListing objects = s3.listObjects(listObjectsRequest);
+		List<S3ObjectSummary> summaries = objects.getObjectSummaries();
+
+		for (S3ObjectSummary obj : summaries)
+		{
+			s3.deleteObject("fallbox", obj.getKey());
+		}
+    	return false;
+    }
+    
     public static void getListOfDetails (List<String> list, List<Component> mainFolder, String fileName, String user)
     {
     	List<String> dettagli = new ArrayList<String>();

@@ -122,10 +122,9 @@ public class UserDao {
 		return 0;
 	}
 	
-	public static boolean deleteUser(User user)
+	public static boolean deleteUser(String email)
 	{
 		initConnection();
-		String email = user.getEmail();
 		
 		if (!checkEmail(email))
 		{
