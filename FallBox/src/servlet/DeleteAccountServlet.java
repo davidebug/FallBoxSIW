@@ -36,6 +36,8 @@ public class DeleteAccountServlet extends HttpServlet {
 		ServerHandler.deleteAll(user);
 		
 		UserDao.deleteUser(user);
+		
+		request.getSession(false).invalidate();
 	}
 
 }
