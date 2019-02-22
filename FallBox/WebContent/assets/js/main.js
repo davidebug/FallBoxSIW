@@ -2,7 +2,10 @@
 var username = $('#username').text();
 var fileSelected = username + "/";
 var section = "";
-var ownerSelected = "";
+var ownerSelected = ""; 
+var file_names= [];
+var all_files = [];
+
 
 $(document).ready(function(){
 
@@ -13,7 +16,11 @@ $(document).ready(function(){
 	$('#update').css('visibility','hidden');
 	$('#editable').css('visibility','hidden');
 	$('#sharedSpace').css('background-color', 'rgb(59,158,64)');
-	$('#mySharedSpace').css('color','white');
+	$('#mySharedSpace').css('color','white'); 
+	
+	get_allFiles();
+	
+	
 });
 
 $('#mySharedSpace').on('click', function(){
@@ -45,6 +52,56 @@ $('#sharedWithMe').on('click', function(){
 	}    
 });
 
+$( function() {
+
+	
+  $('#tags').autocomplete({
+      source: file_names, //lista di tutti i file dell'utente
+      select: function (event, ui) { 
+    	  
+    	  for(var i = 0; i<all_files.length;i++){  
+    		  if(all_files[i].includes(ui.item.value)){
+    			  var current = all_files[i];
+    			  break;
+    		  }
+    	  }  
+    	  get_details(current);        
+          return false;
+      },
+    }); 
+} );
+
+
+function get_allFiles(){
+	
+
+	$.ajax({
+		type: "GET",
+		url: "/FallBox/ListObjects/*", //servlet per la lista dei file
+		contentType: "json",
+		data: {currentFolder: "getAllFiles"},
+		
+		success: function(response){
+			
+			files = response.replace(/[\[\]"]/g,'' );
+			var file_list = files.trim().split(",");
+			for (var i = 0; i < file_list.length; i++) {
+				all_files.push(file_list[i]);
+				currentFile = file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),"");
+				file_names.push(file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),""));
+			} 
+			
+		},
+		
+		error: function(error) {
+			console.log("Error: ", error);
+		}
+		
+	});
+
+}
+
+
 function get_files(currentFolder) {
 	
 	$('#fileBody').html('<tr></tr>');
@@ -71,7 +128,7 @@ function get_files(currentFolder) {
 					id= tmp.replace(/@/g,'');
 					if(currentFile != ""){
 						var row = "<tr >";
-							row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "','"+ id+"')  class='btn primary-btn'>" + currentFile + "</td>";				
+							row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
 							row += "</tr>";
 							
 							$('#fileList tr:last').after(row);
@@ -87,21 +144,31 @@ function get_files(currentFolder) {
 	
 }
 
-function get_details(selected,id) {
+function get_details(selected) {
 	
-	if(fileSelected != username + "/"){
+	$('#pinco').html('<p></p>');
+	if(fileSelected != username + "/" ){
 		var current = document.getElementById(fileSelected);
-		current.style.background = "white";
-		current.style.color = "black";
+		if(current != null){
+			current.style.background = "white";
+			current.style.color = "black";
+		}
 	}
 	
 	fileSelected = selected;
 	setCurrentDirectory(fileSelected);
 	$('#permissionsBody').html('<tr></tr>');
 	
+	
 	current = document.getElementById(fileSelected);
-	current.style.background = "rgb(102, 153, 102)";
-	current.style.color = "white";
+	if(current == null){
+		var tmp = fileSelected.replace(fileSelected.substring(0,fileSelected.lastIndexOf("/")+1),"")
+		$('#pinco').html('<p style="background-color:rgb(102, 153, 102); color:white;border-radius:7px; margin:7px">'+tmp+'</p>');
+	}
+	else{
+		current.style.background = "rgb(102, 153, 102)";
+		current.style.color = "white";
+	}
 	
 	$.ajax({
 		type: "GET",

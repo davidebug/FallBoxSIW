@@ -52,6 +52,7 @@
     <div>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;">
             <div class="container"><a class="navbar-brand" href="#" style="font-size:30px;font-family:'Bungee Shade', cursive;">Fall Box</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                
                 <div
                     class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href="login.html" class="login"> Log In </a><a class="btn btn-light action-button" role="button" href="registrationForm.html" style="background-color:rgb(59,158,64);">Sign Up</a></span></div>
     </div>

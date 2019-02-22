@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="assets/css/sidebar1.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/User-Information-Panel---Lite--Secondary-User-Panel-Footer.css">
      <script src="assets/js/jquery.min.js"></script>
      <script src="assets/js/jquery-ui.js"></script>
@@ -66,18 +67,35 @@
 
 		
 	    <nav class="navbar fixed-top navbar-light navbar-expand-md navigation-clean-button" style="margin:0px;height:93px;">
-	        <div class="container"><a class="navbar-brand" href="index.jsp" style="font-size:25px;font-family:'Bungee Shade', cursive;padding:0px;"><img class="img-fluid" src="assets/img/officialIcona2018Best.png" data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="width:56px;/*margin:0px;*//*margin-left:auto;*//*margin-right:auto;*//*height:37px;*//*padding:0px;*/font-size:30px;">&nbsp; Fall Box</a>
-	            <button
-	                class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-	                <div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"><a href="LogoutServlet" id = "logout "class="login">Log out</a> <a class="btn btn-light action-button" id="username" role="button" href="userPage.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);"><%=username%></a>  &nbsp;<i class="fa fa-cog"></i> &nbsp;</span> </div>
-	        </div>    
+	        <div class="container">
+	        	<a class="navbar-brand" href="index.jsp" style="font-size:25px;font-family:'Bungee Shade', cursive;padding:0px;"><img class="img-fluid" src="assets/img/officialIcona2018Best.png" data-aos="zoom-in" data-aos-delay="400" data-aos-once="true" style="width:56px;font-size:30px;">&nbsp; Fall Box</a>
+	         	
+	        
+	        
+	        	<button
+	                class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+	            </button>
+	                <div class="collapse navbar-collapse" id="navcol-1">
+	                	<span class="ml-auto navbar-text actions"><a href="LogoutServlet" id = "logout "class="login">Log out</a> <a class="btn btn-light action-button" id="username" role="button" href="userPage.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);"><%=username%></a>  &nbsp;<i class="fa fa-cog"></i> &nbsp;</span> 
+	                </div>   
+	        </div>
+	                 
     	</nav>
+    	
     <div id="wrapper" style="margin:10px;">
         <div id="sidebar-wrapper" style="background-color:rgb(255,255,255); ">
             <ul class="sidebar-nav" >
-                <li id="sharedSpace" style="border-radius:8px"> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive; font-size:18px;padding:0px;margin:8px;border-radius:8px;">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
+                <li id="sharedSpace" style="border-radius:8px;"> <a id="mySharedSpace" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive; font-size:18px;padding:0px;margin:8px;border-radius:8px;">&nbsp; my sharedspace<i class="fa fa-home"></i></a></li>
                
-                <li id="withMe" style="border-radius:8px"> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px;border-radius:8px;">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
+                <li id="withMe" style="border-radius:8px;"> <a id="sharedWithMe" href='#' style="color:rgb(59,158,64);font-family:'Bungee Inline', cursive;font-size:18px;;padding:0px;margin:8px;border-radius:8px;">&nbsp; shared with me&nbsp;<i class="fa fa-share-alt"></i></a></li>
+                <div class="ui-widget nav navbar-nav" id="search-wrapper">
+      				<div class="input-group" >
+
+        				<input class="form-control form-control-sm ml-3 w-75" id="tags" placeholder="Search" autocomplete=off style="border-radius:15px">
+        				
+      				</div>
+   				 </div>
+   				 <li id="pinco" ></li>
             </ul>
         </div>
         <div class="page-content-wrapper">

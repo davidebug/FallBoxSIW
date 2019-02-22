@@ -56,10 +56,16 @@ public class ListObjects extends HttpServlet {
 				{
 					getFiles(user,c, true);
 				}
-				else
+				else if(kindOfFiles.equals("getAllFiles")){
+					getFiles(user,c, true);
+					getFiles(user,c, false);
+				}
+				else 
 				{
 					getFiles(user, c, false);
 				}
+				
+				
 			}
 		}
 		
