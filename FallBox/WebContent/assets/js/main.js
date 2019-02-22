@@ -26,7 +26,9 @@ $('#mySharedSpace').on('click', function(){
 	    $('#sharedWithMe').css('color','rgb(59,158,64)');
 	    $('#withMe').css('background-color', 'rgb(255,255,255)');
 	    $('#mySharedSpace').css('color','white');
+	    fileSelected = username + "/";
 	}
+	
 });
 
 $('#sharedWithMe').on('click', function(){
