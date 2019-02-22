@@ -9,8 +9,9 @@ var all_files = [];
 
 $(document).ready(function(){
 
+	get_allFiles();
 	$("html,body").animate({scrollTop: 0}, 100);
-	get_files("mySharedSpace");
+	
 	section = "mySharedSpace";
 	setStartDirectory();
 	$('#update').css('visibility','hidden');
@@ -18,7 +19,7 @@ $(document).ready(function(){
 	$('#sharedSpace').css('background-color', 'rgb(59,158,64)');
 	$('#mySharedSpace').css('color','white'); 
 	
-	get_allFiles();
+	
 	
 	
 });
@@ -65,7 +66,8 @@ $( function() {
     			  break;
     		  }
     	  }  
-    	  get_details(current);        
+    	  get_details(current);  
+    	  $('#tags').val('');
           return false;
       },
     }); 
@@ -80,9 +82,13 @@ function get_allFiles(){
 		url: "/FallBox/ListObjects/*", //servlet per la lista dei file
 		contentType: "json",
 		data: {currentFolder: "getAllFiles"},
-		
+		beforeSend: function(){
+			$('#loader').css('visibility','visible');
+			$('#loader').addClass('loading');
+		},
 		success: function(response){
-			
+			$('#loader').removeClass('loading');
+			$('#loader').css('visibility','hidden');
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
@@ -90,7 +96,7 @@ function get_allFiles(){
 				currentFile = file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),"");
 				file_names.push(file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),""));
 			} 
-			
+			get_files("mySharedSpace");
 		},
 		
 		error: function(error) {
@@ -107,40 +113,37 @@ function get_files(currentFolder) {
 	$('#fileBody').html('<tr></tr>');
 	$('#sidebar-wrapper2').css('visibility','hidden');
 
-	$.ajax({
-		type: "GET",
-		url: "/FallBox/ListObjects/*", //servlet per la lista dei file
-		contentType: "json",
-		data: {currentFolder: currentFolder},
-		beforeSend: function(){
-			$('#loader').css('visibility','visible');
-			$('#loader').addClass('loading');
-		},
-		success: function(response) {
-			$('#loader').removeClass('loading');
-			$('#loader').css('visibility','hidden');
-			files = response.replace(/[\[\]"]/g,'' );
-			var file_list = files.trim().split(",");
-			for (var i = 0; i < file_list.length; i++) {
+			for (var i = 0; i < all_files.length; i++) {
 				
-					currentFile = file_list[i].replace(file_list[i].substring(0,file_list[i].lastIndexOf("/")+1),"");
-					tmp = file_list[i].replace(/\//g,'');
-					id= tmp.replace(/@/g,'');
-					if(currentFile != ""){
-						var row = "<tr >";
-							row += "<td  ><a id='"+file_list[i]+"'  onclick=get_details('" + file_list[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
-							row += "</tr>";
-							
-							$('#fileList tr:last').after(row);
-					}		
+				if(currentFolder === "sharedWithMe"){
+					if(all_files[i].includes("_" + username) || all_files[i].includes(username + "_")){
+							currentFile = all_files[i].replace(all_files[i].substring(0,all_files[i].lastIndexOf("/")+1),"");
+							tmp = all_files[i].replace(/\//g,'');
+							id= tmp.replace(/@/g,'');
+							if(currentFile != ""){
+								var row = "<tr >";
+									row += "<td  ><a id='"+all_files[i]+"'  onclick=get_details('" + all_files[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
+									row += "</tr>";
+									
+									$('#fileList tr:last').after(row);
+							}	
+						}
 				}
-			
-		},
-		error: function(error) {
-			console.log("Error: ", error);
-		}
-		
-	});
+				else if(currentFolder === "mySharedSpace"){
+					if(!(all_files[i].includes("_" + username) || all_files[i].includes(username + "_"))){
+						currentFile = all_files[i].replace(all_files[i].substring(0,all_files[i].lastIndexOf("/")+1),"");
+						tmp = all_files[i].replace(/\//g,'');
+						id= tmp.replace(/@/g,'');
+						if(currentFile != ""){
+							var row = "<tr >";
+								row += "<td  ><a id='"+all_files[i]+"'  onclick=get_details('" + all_files[i] + "')  class='btn primary-btn'>" + currentFile + "</td>";				
+								row += "</tr>";
+								
+								$('#fileList tr:last').after(row);
+						}	
+					}
+				}
+			}	
 	
 }
 
