@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="assets/css/User-Information-Panel---Lite--Secondary-User-Panel-Footer.css">
      <script src="assets/js/jquery.min.js"></script>
      <script src="assets/js/jquery-ui.js"></script>
+     <link href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
      <meta name="viewport" content="width=device-width, initial-scale=1">
      
 </head>
@@ -91,7 +92,7 @@
                 <div class="ui-widget nav navbar-nav" id="search-wrapper">
       				<div class="input-group" >
 
-        				<input class="form-control form-control-sm ml-3 w-75" id="tags" placeholder="Search" autocomplete=off style="border-radius:15px">
+        				<input class="form-control form-control-sm ml-3 w-75" id="tags" placeholder="Search" autocomplete=off style="border-radius:15px;font-size:14px;">
         				
       				</div>
    				 </div>
