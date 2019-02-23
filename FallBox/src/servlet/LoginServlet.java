@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		if (UserDao.logIn(user)) 					//SE LE CREDENZIALI SONO OK
 		{   
 			 session = request.getSession();			//CREO UNA NUOVA SESSIONE;
-			session.setAttribute("User", user.getEmail());
+			 session.setAttribute("User", user.getEmail());
 		}
 		else 
 		{

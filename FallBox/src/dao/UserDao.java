@@ -57,11 +57,12 @@ public class UserDao {
 			PreparedStatement pStatement = connection.prepareStatement(logInString);
 			pStatement.setString(1, user.getEmail());
 			pStatement.setString(2, user.getPassword());
-						
+			
+//			System.out.println("La query --> " + pStatement.toString());
+			
 			ResultSet result = pStatement.executeQuery();
 			if (result.next()) 
 			{
-				System.out.println("TROVATO");
 				return true;
 			}
 			
@@ -126,7 +127,7 @@ public class UserDao {
 	{
 		initConnection();
 		
-		if (!checkEmail(email))
+		if (checkEmail(email))
 		{
 			return false;
 		}
@@ -135,17 +136,18 @@ public class UserDao {
 		{
 			PreparedStatement pStatement = connection.prepareStatement(deleteUser);
 			pStatement.setString(1, email);
-			ResultSet result = pStatement.executeQuery();
+			int status = pStatement.executeUpdate();
 			
-			if (result.next())
+			if (status != 0)
 			{
+				System.out.println("OK");
 				return true;	//ELIMINAZIONE AVVENUTA CON SUCCESSO
 			}
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("NON OK");
 		return false;
 	}
 	

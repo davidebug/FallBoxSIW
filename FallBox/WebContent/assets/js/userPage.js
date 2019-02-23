@@ -42,7 +42,7 @@
  $('#deleteAccount').on('click', function(event){
 	 if(confirm("Do you want to delete your account ? All your files, shared or not, will be deleted.")){
 		 $.ajax({
-			    url: "/FallBox/DeleteAccount/*", //servlet per la rimozione dell'account
+			    url: "/FallBox/DeleteAccountServlet/*", //servlet per la rimozione dell'account
 			    type: "POST",
 			    data: {
 			        currentPassword: $("#currentPassword").val()
