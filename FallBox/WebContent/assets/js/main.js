@@ -88,7 +88,7 @@ function get_allFiles(){
 		},
 		success: function(response){
 			$('#loader').removeClass('loading');
-			$('#loader').css('visibility','hidden');
+			$('#loader').replaceWith("<hr>");
 			files = response.replace(/[\[\]"]/g,'' );
 			var file_list = files.trim().split(",");
 			for (var i = 0; i < file_list.length; i++) {
@@ -112,7 +112,7 @@ function get_files(currentFolder) {
 	
 	$('#fileBody').html('<tr></tr>');
 	$('#sidebar-wrapper2').css('visibility','hidden');
-
+	$('#viewer').html('');
 			for (var i = 0; i < all_files.length; i++) {
 				
 				if(currentFolder === "sharedWithMe"){
@@ -149,6 +149,7 @@ function get_files(currentFolder) {
 
 function get_details(selected) {
 	
+	$('#viewer').html('');
 	$('#pinco').html('<p></p>');
 	if(fileSelected != username + "/" ){
 		var current = document.getElementById(fileSelected);
@@ -197,6 +198,7 @@ function get_details(selected) {
 			$('#dimensions').html('<i class="fa fa-cube" aria-hidden="true" style="margin:6px"></i> Size : &nbsp;' + file_details[1]+' &nbsp; Bytes');
 			$('#editable').css('visibility','visible');
 			$('#update').css('visibility','visible');
+			get_viewer(fileSelected);
 			
 			ownerSelected = file_details[3];
 			
@@ -380,4 +382,16 @@ $('#shareForm').on('submit', function(event){
 	}	
 });
 
+function get_viewer(fileSelected){
+	var extension = fileSelected.substring(fileSelected.lastIndexOf('.')+1);
+	if(extension === "jpeg" || extension === "png")
+		$('#viewer').html('<img  class="embed-responsive-item" src="http://fallbox.s3.amazonaws.com/'+fileSelected +'"></img>');
+	else if(extension === "mp3" || extension === "wma" || extension === "wav"){
+		$('#viewer').html('<audio  controls class="embed-responsive-item" src="http://fallbox.s3.amazonaws.com/'+fileSelected +'" style="height:40px"></audio>');
+	}	
+	else{
+		$('#viewer').html('<iframe  class="embed-responsive-item" src="https://drive.google.com/viewerng/viewer?url=http://fallbox.s3.amazonaws.com/'+fileSelected + 
+		'&hl=en&pid=explorer&efh=false&a=v&chrome=false&embedded=true" frameborder="" st></iframe>');
+	}
+}
 

@@ -137,15 +137,23 @@
                                           
                                                                       
                                         </tbody>
+                                     
                                     </table>
-                                     <div id='loader' class="loader"></div>
+                                    
+                                    <div id='loader' class="loader"></div>
+                                   
+                                    <div class="embed-responsive embed-responsive-16by9" id="viewer">
+                                       	
+                                        
+        							</div>
+                                     
                                 </div>
                             </div>
                             <div class="col-md-4">
+                         
                                 <div id="sidebar-wrapper2" style="background-color:rgba(0,0,0,0);right:0px;left:auto;visibility:hidden;width:300px;margin:30px;">
                                     <div>
-                                        <p style="font-family:'Bungee Inline', cursive;color:rgb(59,158,64);font-size:22px;margin:10px">Details</p>
-                                        <p></p>
+                                        <p style="font-family:'Bungee Inline', cursive;color:rgb(59,158,64);font-size:22px;margin:10px">Details</p>                         
                                        
                                        <form  action="" method = "post">
                                        <input  id="download" class="btn btn-light action-button" type="submit" value="Download ->" role="button"  data-aos="fade-right" data-aos-delay="600" data-aos-once="true" 
@@ -205,10 +213,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>   
             </div>
+         
         </div>
+         
     </div>
    
    
