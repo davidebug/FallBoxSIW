@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="model.User"%>
-<%@ page import="java.util.List" %>
-<%
-	String username = new String();
-	if (request != null && request.getSession().getAttribute("User") != null) {
-		username = (String) request.getSession().getAttribute("User");
-	} else {
-		username = "";
-	}
-	
-	
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -77,11 +70,19 @@
 	                class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
 	            </button>
 	                <div class="collapse navbar-collapse" id="navcol-1">
-	                	<span class="ml-auto navbar-text actions"><a href="LogoutServlet" id = "logout "class="login">Log out</a> <a class="btn btn-light action-button" id="username" role="button" href="userPage.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);"><%=username%></a>  &nbsp;<i class="fa fa-cog"></i> &nbsp;</span> 
+	                	<span class="ml-auto navbar-text actions"><a href="LogoutServlet" id = "logout "class="login">Log out</a> <a class="btn btn-light action-button" id="username" role="button" href="userPage.jsp" data-aos="fade-right" data-aos-delay="600" data-aos-once="true" style="background-color:rgb(59,158,64);">${User}</a>   &nbsp;<i class="fa fa-cog"></i>  &nbsp;</span> 
 	                </div>   
 	        </div>
 	                 
     	</nav>
+    	
+    	 <c:if test="${empty User}">
+	<script>
+	
+		$('#navcol-1').replaceWith('<div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href = "LogoutServlet" class="login" > Log Out </a> <a class="btn btn-light action-button" role="button" href="login.html" style="background-color:rgb(59,158,64);">Log in</a></span></div>');
+	
+		</script>
+	</c:if>
     	
     <div id="wrapper" style="margin:10px;">
         <div id="sidebar-wrapper" style="background-color:rgb(255,255,255); ">

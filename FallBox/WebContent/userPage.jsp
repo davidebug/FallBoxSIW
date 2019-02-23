@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ page import="model.User"%>
-<%
-	String username = new String();
-	if (request != null && request.getSession().getAttribute("User") != null) {
-		username = (String) request.getSession().getAttribute("User");
-	} else {
-		username = "";
-	}
-%>
 
 <!DOCTYPE html>
 <html>
@@ -57,7 +48,7 @@
         </div>
     </nav>
     <div class="container profile profile-view" id="profile" style="background-color:transparent; margin:50px">
-        <h1 data-aos="fade" data-aos-delay="450" data-aos-once="true" style="font-size:29px;font-family:Aldrich, sans-serif;padding:0px;margin:8px;"><i class="icon ion-android-settings" style="margin:14px;width:0px;height:0px;"></i><%=username%></h1>
+        <h1 data-aos="fade" data-aos-delay="450" data-aos-once="true" style="font-size:29px;font-family:Aldrich, sans-serif;padding:0px;margin:8px;"><i class="icon ion-android-settings" style="margin:14px;width:0px;height:0px;"></i>${User}</h1>
         <hr>
         <form id ="userForm">
             <div class="form-row profile-row" data-aos="fade-up" data-aos-delay="600" data-aos-once="true" style="background-color:transparent;margin:3px;">

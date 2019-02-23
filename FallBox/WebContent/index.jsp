@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%
-	String username = new String();
-	if (request != null && request.getSession().getAttribute("User") != null) {
-		username = (String) request.getSession().getAttribute("User");
-	} else {
-		username = "";
-	}
+	pageEncoding="utf-8"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+	
+
 
 
 
@@ -38,15 +37,6 @@
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
 </head>
 
-  <script>
-     $(function(){
-    	 	var username = "<%=username%>";
-    		if(username != ""){
-    			$('#navcol-1').replaceWith('<div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href = "LogoutServlet" class="login" > Log Out </a> <a class="btn btn-light action-button" role="button" href="main.jsp" style="background-color:rgb(59,158,64);">${User}</a></span></div>');
-    		}	
-    	});
-    </script>
-
 
 <body>
     <div>
@@ -57,7 +47,13 @@
                     class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href="login.html" class="login"> Log In </a><a class="btn btn-light action-button" role="button" href="registrationForm.html" style="background-color:rgb(59,158,64);">Sign Up</a></span></div>
     </div>
     
-   
+   <c:if test="${not empty User}">
+	<script>
+	
+		$('#navcol-1').replaceWith('<div class="collapse navbar-collapse" id="navcol-1"><span class="ml-auto navbar-text actions"> <a href = "LogoutServlet" class="login" > Log Out </a> <a class="btn btn-light action-button" role="button" href="main.jsp" style="background-color:rgb(59,158,64);">${User}</a></span></div>');
+	
+		</script>
+	</c:if>
     
     </nav>
     </div>
