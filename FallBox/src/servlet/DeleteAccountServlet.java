@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DAOFactory;
 import dao.UserDao;
 import model.User;
 
@@ -32,7 +33,6 @@ public class DeleteAccountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-		System.out.println("SONO NELLA DELETE SERVLET");
 		
 		String email = (String) request.getSession(false).getAttribute("User");
 		String currPassword = request.getParameter("currentPassword");
@@ -41,13 +41,19 @@ public class DeleteAccountServlet extends HttpServlet {
 		user.setEmail(email);
 		user.setPassword(currPassword);
 		
-		if (UserDao.logIn(user))
+		UserDao userDao = DAOFactory.getUserDao();
+		
+		if (userDao.logIn(user))
 		{	
 			ServerHandler.deleteAll(email);
-			
-			UserDao.deleteUser(email);
-			
+			userDao.deleteUser(email);
 			request.getSession(false).invalidate();
+		}
+		else 
+		{
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			response.getWriter().println("Wrong Email or Password");
+			response.setContentType("text/plain; charset=UTF-8");
 		}
 	}
 

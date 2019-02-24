@@ -9,24 +9,30 @@ import model.User;
 
 public class UserDao {
 
-	private static Connection connection;
+	private DBConn dbConn;
 	private static String registrationString = "insert into User values(?,?)";
 	private static String logInString = "select * from User where Email = ? and Password = ?";
 	private static String updatePasswordString = "update User set Password = ? where Email = ?";
 	private static String updateEmailString = "update User set Email = ? where Email = ? and Password = ?";
 	private static String deleteUser = "delete from User where Email = ?";
 	
-	private static void initConnection()
+	public UserDao(DBConn dbConn)
 	{
-		connection = DBConn.getConnection();
+		this.dbConn = dbConn;
 	}
 	
-	public static int register(User user) 
+	private Connection initConnection()
+	{
+		Connection connection = dbConn.getConnection();
+		return connection;
+	}
+	
+	public int register(User user) 
 	{
 		
-		initConnection();
+		Connection connection = initConnection();
 		
-		if (!checkEmail(user.getEmail())) 
+		if (!checkEmail(connection, user.getEmail())) 
 		{   //SE LO USERNAME E' GIA' IN USO
 			return -1;
 		}
@@ -47,10 +53,10 @@ public class UserDao {
 	}
 
 	
-	public static boolean logIn(User user) 
+	public boolean logIn(User user) 
 	{
 		
-		initConnection();
+		Connection connection = initConnection();
 		
 		try 
 		{
@@ -73,9 +79,9 @@ public class UserDao {
 		return false;
 	}
 	
-	public static boolean updatePassword(User user)
+	public boolean updatePassword(User user)
 	{
-		initConnection();
+		Connection connection = initConnection();
 		
 		try 
 		{
@@ -95,11 +101,11 @@ public class UserDao {
 		return false;
 	}
 	
-	public static int updateEmail(User user, String newEmail)
+	public int updateEmail(User user, String newEmail)
 	{
-		initConnection();
+		Connection connection = initConnection();
 					
-		if (!checkEmail(newEmail)) 
+		if (!checkEmail(connection, newEmail)) 
 		{   //SE LO USERNAME E' GIA' IN USO
 			return -1;
 		}
@@ -123,11 +129,11 @@ public class UserDao {
 		return 0;
 	}
 	
-	public static boolean deleteUser(String email)
+	public boolean deleteUser(String email)
 	{
-		initConnection();
+		Connection connection = initConnection();
 		
-		if (checkEmail(email))
+		if (checkEmail(connection, email))
 		{
 			return false;
 		}
@@ -140,21 +146,20 @@ public class UserDao {
 			
 			if (status != 0)
 			{
-				System.out.println("OK");
 				return true;	//ELIMINAZIONE AVVENUTA CON SUCCESSO
 			}
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("NON OK");
+
 		return false;
 	}
 	
 	//
 	//METODO DI UTILITA'
 	//
-	private static boolean checkEmail(String email) 
+	private boolean checkEmail(Connection connection, String email) 
 	{
 		
 		String getStatement = "select * from User where Email = ?";

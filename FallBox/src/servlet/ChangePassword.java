@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import dao.DAOFactory;
 import dao.UserDao;
 import model.User;
 
@@ -45,14 +46,16 @@ public class ChangePassword extends HttpServlet {
 		user.setEmail(email);
 		user.setPassword(newPassword);
 		
-		if (UserDao.updatePassword(user))
+		if (DAOFactory.getUserDao().updatePassword(user))
 		{
 			response.sendRedirect("passwordSucess.html");
 			sendEmail(email, newPassword);
 		}
-		else
+		else 
 		{
-			//PAGINA DI ERRORE
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			response.getWriter().println("Wrong Email or Password");
+			response.setContentType("text/plain; charset=UTF-8");
 		}
 	}
 	

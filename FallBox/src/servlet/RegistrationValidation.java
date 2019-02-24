@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DAOFactory;
 import dao.UserDao;
 import model.User;
 
@@ -45,7 +46,7 @@ public class RegistrationValidation extends HttpServlet {
 			user.setEmail((String) request.getParameter("email"));
 			user.setPassword((String) request.getParameter("password"));
 						
-			int regStatus = UserDao.register(user);
+			int regStatus = DAOFactory.getUserDao().register(user);
 			
 			//SE LA REGISTRAZIONE E' OK MANDO ALLA PAGINA DI SUCCESSO
 			if (regStatus > 0) {

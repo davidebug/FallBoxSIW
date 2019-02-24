@@ -13,11 +13,11 @@ public class DBConn {  //Classe che crea la connessione con il database
 	
 	private final static String password = "cadiscatola";
 	
-	private DBConn() 
+	DBConn() 
 	{	
 	}
 	
-	public static Connection getConnection()  
+	public Connection getConnection()  
 	{
 		
 		if (con != null)
@@ -27,7 +27,6 @@ public class DBConn {  //Classe che crea la connessione con il database
 		
 		try 
 		{
-			Class.forName("com.mysql.jdbc.Driver"); 
 			con = DriverManager.getConnection(url, user, password);
 		} 
 		catch (SQLException e) 
@@ -35,11 +34,7 @@ public class DBConn {  //Classe che crea la connessione con il database
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		catch (ClassNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return con;
 	}
 	

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import dao.DAOFactory;
 import dao.UserDao;
 import model.User;
 
@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		user.setEmail((String) request.getParameter("email"));
 		user.setPassword((String) request.getParameter("password"));
 		HttpSession session = null;
-		if (UserDao.logIn(user)) 					//SE LE CREDENZIALI SONO OK
+		if (DAOFactory.getUserDao().logIn(user)) 					//SE LE CREDENZIALI SONO OK
 		{   
 			 session = request.getSession();			//CREO UNA NUOVA SESSIONE;
 			 session.setAttribute("User", user.getEmail());

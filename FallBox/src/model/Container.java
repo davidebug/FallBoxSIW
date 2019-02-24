@@ -103,11 +103,9 @@ public class Container {
 					if(main.getName().contains("can_edit")) {
 						f.share(sharespace, true);
 						
-						System.out.println(sharespace + " - > can edit" );
 					}
 					else if(!owner.equals(sharespace)){
 						f.share(sharespace,false);
-						System.out.println(sharespace + " - > can view");
 					}
 				}
 				

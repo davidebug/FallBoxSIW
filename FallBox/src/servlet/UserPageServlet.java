@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DAOFactory;
+import dao.UserDao;
 import model.User;
 
 @WebServlet(urlPatterns={"/UserPageServlet/*"})
@@ -31,14 +33,16 @@ public class UserPageServlet extends HttpServlet {
 	{
 		String newEmail = null;
 		String newPassword = null;
-				
+		UserDao userDao = DAOFactory.getUserDao();
+		
+		
 		if ((newEmail = request.getParameter("email")) != null && newEmail != "")
 		{	
 				User user = new User();
 				user.setEmail((String)request.getSession().getAttribute("User"));
 				user.setPassword(request.getParameter("currentPassword"));
 				
-				int updateStatus = dao.UserDao.updateEmail(user, newEmail);	
+				int updateStatus = userDao.updateEmail(user, newEmail);	
 				
 				if (updateStatus == -1)
 				{
@@ -69,10 +73,10 @@ public class UserPageServlet extends HttpServlet {
 			user.setPassword(request.getParameter("currentPassword"));
 
 			
-			if (dao.UserDao.logIn(user))
+			if (userDao.logIn(user))
 			{
 				user.setPassword(newPassword);
-				if (!dao.UserDao.updatePassword(user))
+				if (!userDao.updatePassword(user))
 				{
 					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 					response.getWriter().println("Wrong password");

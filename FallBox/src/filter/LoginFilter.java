@@ -28,14 +28,12 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
 			throws IOException, ServletException 
 	{
-		System.out.println("SONO QUI NEL FILTORO");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		//SE NON C'E' UNA SESSIONE ATTIVA E NON C'E' IL MIO COOKIE DI SESSIONE
 		//CREI UNA NUOVA SESSIONE, AGGIUNGI IL COOKIE --> QUESTO VA FATTO NELLA SERVLET!!
 		if (req.getSession(false) == null) 
 		{
-			System.out.println("Entrato nell'if");
 			res.sendRedirect("login.html");
 		}
 		//SE C'E' UNA SESSIONE
