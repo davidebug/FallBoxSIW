@@ -78,9 +78,9 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="zoom-in" data-aos-delay="1000" data-aos-once="true">
-                    <div class="box" style="height:280px"><i class="fa fa-clock-o icon" style="color:rgb(52,140,56);"></i>
-                        <h3 class="name">Versioning system</h3>
-                        <p class="text-center">Manage versions of your data, keep control of your team's uploads. </p>
+                    <div class="box" style="height:280px"><i class="fa fa-align-left icon" style="color:rgb(52,140,56);"></i>
+                        <h3 class="name">Live preview</h3>
+                        <p class="text-center">Get a live preview of your files content: support for Google Docs, PDF, music and more! </p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="zoom-in" data-aos-delay="800" data-aos-once="true">
@@ -117,36 +117,21 @@
                         <p class="description">Programmer quandu capita, Davide would to open his business in the sujaca market. Now his trading sujaca for Casado Cola.</p>
                         <div class="social"><a href="https://www.facebook.com/davide.bagnato97"><i class="fa fa-facebook-official"></i></a><a href="#"></a><a href="https://instagram.com/davide.bug"><i class="fa fa-instagram"></i></a></div>
                     </div>
-                    <div class="box" style="height:430px"><img class="rounded-circle img-fluid" src="assets/img/dass.jpg" style="width:161px;height:161px;">
-                        <h3 class="name">Riccardo Giordano</h3>
-                        <p class="title">Musician - Programmer</p>
-                        <p class="description">Born in a rich Sicilian family, Riccardo left his country for his passions : Music and Mafia</p>
-                    </div>
                 </div>
-                <div class="col-md-6 col-lg-4 item">
-                    <div class="box" style="height:430px"><img class="rounded-circle" src="assets/img/pp (1).jpg">
-                        <h3 class="name">Gaetano Sapia</h3>
-                        <p class="title">mushroom collector</p>
-                        <p class="description">Gaetano trains everyday to became the best Mushroom collector in the world, his dream is to Catch'em all.</p>
-                        <div class="social"><a href="https://www.facebook.com/gaetano.sapia.5"><i class="fa fa-facebook-official"></i></a><a href="#"></a><a href="https://www.instagram.com/gaetanosapia/"><i class="fa fa-instagram"></i></a></div>
-                    </div>
-                    <div class="box" style="height:430px"><img class="rounded-circle" src="assets/img/dad.jpg">
-                        <h3 class="name">Antonio Ielo</h3>
-                        <p class="title">best student</p>
-                        <p class="description">His life changed drastically when he won the Best Student Award in Cosenza.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 item">
+                <div class="col-md-6 col-lg-4 col-xl-4 offset-xl-0 item">    
                     <div class="box" style="height:430px"><img class="rounded-circle" src="assets/img/pp.jpg">
                         <h3 class="name">Daniele Filice</h3>
                         <p class="title">Brawler - programmer</p>
                         <p class="description">Daniele is becoming the first man programming with his high skilled kicks, destroyed keyboards count: 78.</p>
                         <div class="social"><a href="https://www.facebook.com/profile.php?id=100011407497142"><i class="fa fa-facebook-official"></i></a><a href="#"></a><a href="https://instagram.com/____daniele___"><i class="fa fa-instagram"></i></a></div>
                     </div>
-                    <div class="box" style="height:430px"><img class="rounded-circle" src="assets/img/you.jpg">
-                        <h3 class="name">You</h3>
-                        <p class="title">What you want</p>
-                        <p class="description">Do you want to join the team? Sorry you can't.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-4 offset-xl-0 item">    
+                    <div class="box" style="height:430px"><img class="rounded-circle" src="assets/img/pp (1).jpg">
+                        <h3 class="name">Gaetano Sapia</h3>
+                        <p class="title">mushroom collector</p>
+                        <p class="description">Gaetano trains everyday to became the best Mushroom collector in the world, his dream is to Catch'em all.</p>
+                        <div class="social"><a href="https://www.facebook.com/gaetano.sapia.5"><i class="fa fa-facebook-official"></i></a><a href="#"></a><a href="https://www.instagram.com/gaetanosapia/"><i class="fa fa-instagram"></i></a></div>
                     </div>
                 </div>
             </div>

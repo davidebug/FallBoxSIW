@@ -369,6 +369,7 @@ $('#shareForm').on('submit', function(event){
 		    success: function(response){
 		        alert("Content successfully shared.");
 		        $("#emailShared").val("");
+		        window.location.replace("/FallBox/main.jsp");
 		    },
 		    error: function(response){
 		    	alert("Email not found, retry.");

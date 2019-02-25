@@ -16,7 +16,9 @@
   	<meta http-equiv="expires" content="0" />
   	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
   	<meta http-equiv="pragma" content="no-cache" />
+  	
     <title>FallBoxPage</title>
+    
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -26,17 +28,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Black+Ops+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee+Inline">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee+Shade">
-    <link rel="stylesheet" href="assets/css/Data-Table.css">
-    <link rel="stylesheet" href="assets/css/Data-Table2.css">
-    <link rel="stylesheet" href="assets/css/Dynamic-Table.css">
+
+
     <link rel="stylesheet" href="assets/css/Features-Boxed.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
     <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Table.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Table1.css">
+
     <link rel="stylesheet" href="assets/css/Profile-Edit-Form.css">
     <link rel="stylesheet" href="assets/css/Profile-Edit-Form1.css">
     <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
@@ -44,12 +44,12 @@
     <link rel="stylesheet" href="assets/css/Sidebar-Menu1.css">
     <link rel="stylesheet" href="assets/css/SIdebar-Responsive-2.css">
     <link rel="stylesheet" href="assets/css/SIdebar-Responsive-21.css">
-    <link rel="stylesheet" href="assets/css/sidebar.css">
-    <link rel="stylesheet" href="assets/css/sidebar1.css">
+
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/User-Information-Panel---Lite--Secondary-User-Panel-Footer.css">
+    
      <script src="assets/js/jquery.min.js"></script>
      <script src="assets/js/jquery-ui.js"></script>
      <link href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -230,7 +230,6 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
-    <script src="assets/js/Dynamic-Table.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     <script src="assets/js/Profile-Edit-Form.js"></script>
     <script src="assets/js/Sidebar-Menu.js"></script>
