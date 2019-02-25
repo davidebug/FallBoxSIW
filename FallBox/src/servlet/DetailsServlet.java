@@ -46,7 +46,7 @@ public class DetailsServlet extends HttpServlet {
 		String json = new Gson().toJson(details);
 		response.getWriter().println(json);
 		response.setContentType("text/plain; charset=UTF-8");
-		System.out.println(json);
+		//System.out.println(json);
 	}
 		
 }

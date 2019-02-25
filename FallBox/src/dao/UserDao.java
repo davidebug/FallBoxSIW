@@ -64,7 +64,7 @@ public class UserDao {
 			pStatement.setString(1, user.getEmail());
 			pStatement.setString(2, user.getPassword());
 			
-//			System.out.println("La query --> " + pStatement.toString());
+//			//System.out.println("La query --> " + pStatement.toString());
 			
 			ResultSet result = pStatement.executeQuery();
 			if (result.next()) 

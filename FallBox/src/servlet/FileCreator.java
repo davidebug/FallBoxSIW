@@ -32,7 +32,7 @@ public class FileCreator
 	        	 //SE L'ELEMENTO MANDATO E' UN FILE
 	        	 if ( !fi.isFormField() ) 
 	        	 {
-	        		 System.out.println("ITEM-->"+ fi.getName());
+	        		 //System.out.println("ITEM-->"+ fi.getName());
 	        		 String fileName = fi.getName();
 
 	        		 if (fileName.lastIndexOf("\\") >= 0) 
@@ -50,7 +50,7 @@ public class FileCreator
 		}  
 		catch(Exception ex) 
 		{
-            System.out.println(ex);
+            //System.out.println(ex);
          }
 	}
 

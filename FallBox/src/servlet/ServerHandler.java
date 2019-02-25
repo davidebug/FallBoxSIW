@@ -65,8 +65,8 @@ public class ServerHandler {
     	boolean external = false;
     	if(folderName.contains("_" + user)) {
     		permission = false;
-    		System.out.println("FILENAME -- >" + fileName);
-    		System.out.println("FILEPATH -- >" + filePath);
+    		//System.out.println("FILENAME -- >" + fileName);
+    		//System.out.println("FILEPATH -- >" + filePath);
     		if(folderName.contains("can_edit")) {
     			try {
     					external = true;
@@ -104,7 +104,7 @@ public class ServerHandler {
     		catch(AmazonServiceException e){
     			createFolder(user+"_"+ otherUser);
     			createFolder(user+"_"+ otherUser+"/"+"can_edit");
-    			System.out.println("CARTELLA CREATA");
+    			//System.out.println("CARTELLA CREATA");
     		}
 	    	try {
 	    		
@@ -194,7 +194,7 @@ public class ServerHandler {
     {
     	List<String> dettagli = new ArrayList<String>();
     	
-    	System.out.println("DATROVARE --> " + fileName);
+    	//System.out.println("DATROVARE --> " + fileName);
     	
     	
 		for (Component c : mainFolder)
@@ -203,8 +203,8 @@ public class ServerHandler {
 			{	
 				if (c.getName().equals(fileName))
 				{
-					System.out.println("SONO IN --> " + c.getName());
-					System.out.println("TROVATO -->" + c.getName());
+					//System.out.println("SONO IN --> " + c.getName());
+					//System.out.println("TROVATO -->" + c.getName());
 					dettagli.add("TROVATO");
 					list.add(c.getName());
 					list.add(c.getDimension().toString());
@@ -216,7 +216,7 @@ public class ServerHandler {
 					}
 				    for (String s : c.getCan_view())
 				    {
-				    	System.out.println(s);
+				    	//System.out.println(s);
 				    	list.add(s + " - Can View -");
 				    }
 				}

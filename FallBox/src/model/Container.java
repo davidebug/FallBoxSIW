@@ -41,7 +41,7 @@ public class Container {
 		if(main.getName()!="fallbox")
 			path = new String(main.getName());
 		
-		//System.out.println("mi sposto su " + main.getName()); 
+		////System.out.println("mi sposto su " + main.getName()); 
 		ListObjectsRequest listObjectsRequest = 
                 new ListObjectsRequest()
                       .withBucketName("fallbox").withPrefix(path);
@@ -58,8 +58,8 @@ public class Container {
 			
 				String sharespace = name.substring(0,name.indexOf('/'));
 				owner = sharespace;
-//				System.out.println("Owner ->"+ owner);
-//				System.out.println("File - >" + name);
+//				//System.out.println("Owner ->"+ owner);
+//				//System.out.println("File - >" + name);
 				if(sharespace.contains("_")) {
 
 					owner = sharespace.substring(0,sharespace.indexOf('_'));
@@ -82,21 +82,21 @@ public class Container {
 					
 					f = new Folder(name,dimension,lastChange,owner);
 					main.add(f);
-			//		System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
+			//		//System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 					refreshContainer(f);
 				}
 				else if(name.equals(owner + "/") && main.getName().equals("fallbox") && !name.equals(main.getName())){
 					
 					f = new Folder(name,dimension,lastChange,owner);
 					main.add(f);
-		//			System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
+		//			//System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 					refreshContainer(f);
 					
 				}
 				else if(!(name.endsWith(owner + "/")) && !name.equals(main.getName()) ){
 					f = new File(name,dimension,lastChange,owner);
 					main.add(f);
-		//			System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
+		//			//System.out.println("aggiungo "+ f.getName() + " a " + main.getName()+"  date: "+ lastChange + "  dimension: "+ dimension);
 				}
 				
 				if(f!=null && sharespace.contains("_")) {
@@ -109,7 +109,7 @@ public class Container {
 					}
 				}
 				
-		//	System.out.println("\n");
+		//	//System.out.println("\n");
 		
 				}
 			}

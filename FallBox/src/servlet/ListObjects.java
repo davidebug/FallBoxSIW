@@ -41,7 +41,7 @@ public class ListObjects extends HttpServlet {
 	{		
 		//RICEVE MYSHAREDSPACE O SHARED WITH ME
 		String kindOfFiles = request.getParameter("currentFolder");
-		System.out.println(kindOfFiles);
+		//System.out.println(kindOfFiles);
 		userFiles = new ArrayList<Component>();
 	
 		String user = (String)request.getSession(false).getAttribute("User");
@@ -78,7 +78,7 @@ public class ListObjects extends HttpServlet {
 		String json = new Gson().toJson(files);
 		
 		response.getWriter().println(json);
-//		System.out.println(json);
+//		//System.out.println(json);
 		response.setContentType("text/plain; charset=UTF-8");
 	}
 	
