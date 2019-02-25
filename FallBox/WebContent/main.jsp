@@ -121,7 +121,7 @@
                                     <table class="table" id="fileList" >
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th id="name">Name &nbsp;<i class="fa fa-sort" aria-hidden="true"></i></th>
                                                 
                                             </tr>
                                             <tr>
