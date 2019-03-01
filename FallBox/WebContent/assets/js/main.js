@@ -385,7 +385,7 @@ $('#shareForm').on('submit', function(event){
 
 function get_viewer(fileSelected){
 	var extension = fileSelected.substring(fileSelected.lastIndexOf('.')+1);
-	if(extension === "jpeg" || extension === "png")
+	if(extension === "jpeg" || extension === "png" || extension === "jpg")
 		$('#viewer').html('<img  class="embed-responsive-item" src="http://fallbox.s3.amazonaws.com/'+fileSelected +'"></img>');
 	else if(extension === "mp3" || extension === "wma" || extension === "wav"){
 		$('#viewer').html('<audio  controls class="embed-responsive-item" src="http://fallbox.s3.amazonaws.com/'+fileSelected +'" style="height:40px"></audio>');

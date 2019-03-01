@@ -48,7 +48,7 @@ public class ChangePassword extends HttpServlet {
 		
 		if (DAOFactory.getUserDao().updatePassword(user))
 		{
-			response.sendRedirect("passwordSucess.html");
+			response.sendRedirect(request.getContextPath() + "/passwordSuccess.html");
 			sendEmail(email, newPassword);
 		}
 		else 
@@ -72,7 +72,7 @@ public class ChangePassword extends HttpServlet {
 	private void sendEmail(String email, String newPassword)
 	{
 		String username = "cadiscatola@virgilio.it";
-		String password = "fallboxcadiscatola";
+		String password = "cadiscatolafallbox";
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

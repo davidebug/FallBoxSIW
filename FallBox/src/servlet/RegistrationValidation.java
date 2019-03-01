@@ -74,7 +74,7 @@ public class RegistrationValidation extends HttpServlet {
 	private void sendEmail (String email)
 	{
 		String username = "cadiscatola@virgilio.it";
-		String password = "fallboxcadiscatola";
+		String password = "cadiscatolafallbox";
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
